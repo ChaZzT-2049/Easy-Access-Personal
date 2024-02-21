@@ -145,22 +145,6 @@ export const LSlogan = styled(FlexColum)`
     }
 `;
 
-export const CenterContent = styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column-reverse;
-    padding: 2.5rem 0;
-    @media screen and (min-width: 0px) and (max-width: 480px) {padding: 1rem; flex-direction: column;}
-`;
-
-export const DescriptionContent = styled(FlexColum)`
-    width: 60%;
-    text-align: center;
-    gap: .5rem;
-    @media screen and (min-width: 0px) and (max-width: 480px) {width: 100%;}
-`;
-
 export const SectionBg = styled.section`
     background: ${props => props.bg};
     color: ${props => props.txt};

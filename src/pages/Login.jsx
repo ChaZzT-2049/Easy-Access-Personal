@@ -5,16 +5,13 @@ import Input from "../components/Form/Input";
 import InputPass from "../components/Form/InputPass";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
-
 import { Link } from "react-router-dom";
-
 import { validateEmail, validatePass } from "../validations";
 import signInUp from "../assets/img/landing/signInUp.jpeg"
-
 import useAppContext from "../hooks/useAppContext"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
-
+import { authErrors } from "../firebase.errors";
 const Login = () => {
     const {login, loginWithGoogle, toggleTheme, tema} = useAppContext();
 
@@ -47,7 +44,8 @@ const Login = () => {
                     pass.validate(pass.value)
                     if(email.valid && pass.valid){
                         login(email.value, pass.value).catch((error)=>{
-                            showResponseError(error.code)
+                            console.log(error.code)
+                            showResponseError(authErrors[error.code])
                         })
                     }
                 }}>
@@ -64,7 +62,7 @@ const Login = () => {
                 <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login" 
                     click={() => {
                         loginWithGoogle().catch((error)=>{
-                            showResponseError(error.code)
+                            showResponseError(authErrors[error.code])
                         })
                     }}
                 />

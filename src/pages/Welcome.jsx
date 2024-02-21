@@ -1,5 +1,5 @@
 import styled, { useTheme } from "styled-components";
-import { Header, NavHeader, FlexColum, Banner, CenterContent, DescriptionContent, SectionBg, Container } from "../UI";
+import { Header, NavHeader, Banner, SectionBg, Container } from "../UI";
 import Logo from "../components/Logo/Index";
 import LogoSlogan from "../components/Logo/LogoSlogan";
 import qrScan from "../assets/img/landing/qrscan-anim-min.png"
@@ -11,47 +11,77 @@ import Slider from "../components/Slider/Index";
 
 import { clients, features, planes } from "../datoswelcome";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
 
-import { AppContext } from "../context";
+import useToggle from "../hooks/useToggle";
+import useAppContext from "../hooks/useAppContext";
 
-const Clientes = styled.ul`
+const PageContainer = styled(Container)`
+    & .center{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column-reverse;
+        padding: 2.5rem 0;
+    }
+    & .flex-column{
+        display: flex;
+        flex-direction: column;
+    }
+    & .description{
+        width: 60%;
+        text-align: center;
+        gap: .5rem;
+    }
+    @media screen and (min-width: 0px) and (max-width: 480px) {
+        & .center{ padding: 1rem; flex-direction: column; }
+        & .description{ width: 100%; }
+    }
+`;
+
+const List = styled.ul`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-`;
-const ClienteCard = styled.li`
-    flex: 0 1 270px;
-    border: 1px solid ${({theme}) => theme.outline};
-    border-radius: 1rem;
-    transition: all 300ms ease;
-    background: ${({theme}) => theme.surfacev};
-    color: ${({theme}) => theme.onsecondarycont};
-    & div.cover{
-        background: url(${props => props.cover}) center / cover;
-        height: 10rem;
-        position: relative;
-        border-radius: .5rem .5rem 0 0;
-        & img{
-            width: 4rem;
-            position: absolute;
-            bottom: -1rem;
-            right: -1rem;
-            background: white;
-            border-radius: 100%;
+
+    & li.clientes{
+        flex: 0 1 270px;
+        border: 1px solid ${({theme}) => theme.outline};
+        border-radius: 1rem;
+        transition: all 300ms ease;
+        background: ${({theme}) => theme.surfacev};
+        color: ${({theme}) => theme.onsecondarycont};
+        & .head{
+            height: 10rem;
+            position: relative;
+            & img.cover{
+                border-radius: 1rem 1rem 0 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            & img.icon{
+                width: 4rem;
+                position: absolute;
+                bottom: -1rem;
+                right: -1rem;
+                background: white;
+                border-radius: 100%;
+            }
+        }
+        & div.text{
+            padding: 1rem;
+            gap: .5rem;
+        }
+
+        &:hover{
+            background: ${({theme}) => theme.secondarycont};
+            transform: translateY(-.5rem);
         }
     }
-    & div.text{
-        padding: 1rem;
-        gap: .5rem;
-    }
-
-    &:hover{
-        background: ${({theme}) => theme.secondarycont};
-        transform: translateY(-.5rem);
-    }
 `;
+
 const SelectorSuscription = styled.ul`
     display: flex;
     justify-content: center;
@@ -75,80 +105,80 @@ const SelectorSuscription = styled.ul`
     }
     @media screen and (min-width: 0px) and (max-width: 480px) {top: 3.7rem;}
 `;
-const Planes = styled(Clientes)`
+const Planes = styled(List)`
     gap: 1rem;
     padding: 2rem 0;
-`;
-const Plan = styled.div`
-    flex: 0 1 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 3rem 1rem 1rem 1rem;
-    background: ${({theme}) => theme.surfacev};
-    position: relative;
-    & h2{
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: 700;
-        background: ${({theme}) => theme.secondary};
-        color: ${({theme}) => theme.onsecondary};
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 1rem;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    & h1{
-        margin-top: 1.5rem;
-        text-align: center;
-        &::before{
-            content: "$";
-        }
-        & small::before{
-            content: ".00 ";
-        }
-    }
-    & span.message{
-        font-size: 1rem;
-        display: flex;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 200ms ease;
-        color: ${({theme}) => theme.primary};
-        &.visible{
-            opacity: 1;
-            font-weight: 700;
-        }
-    }
-    & img{
-        width: 5rem;
-        align-self: center;
-        height: 5rem;
-        border-radius: .5rem;
-        outline: 2px solid ${({theme}) => theme.secondary};
-    }
-    & ul{
+    & .plan{
+        flex: 0 1 280px;
         display: flex;
         flex-direction: column;
-        & li{
-            border-top: 1px solid ${({theme}) => theme.outline};
-            padding: 1rem 0;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 3rem 1rem 1rem 1rem;
+        background: ${({theme}) => theme.surfacev};
+        position: relative;
+        & h2{
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            background: ${({theme}) => theme.secondary};
+            color: ${({theme}) => theme.onsecondary};
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        & h1{
+            margin-top: 1.5rem;
+            text-align: center;
+            &::before{
+                content: "$";
+            }
+            & small::before{
+                content: ".00 ";
+            }
+        }
+        & span.message{
+            font-size: 1rem;
             display: flex;
-            align-items: center;
-            & i{
-                margin-right: .25rem;
-                color: ${({theme}) => theme.ok};
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 200ms ease;
+            color: ${({theme}) => theme.primary};
+            &.visible{
+                opacity: 1;
                 font-weight: 700;
-                cursor: default;
             }
-            & span::first-letter{
-                text-transform: uppercase;
-            }
-            & span::after{
-                content: ".";
+        }
+        & img{
+            width: 5rem;
+            align-self: center;
+            height: 5rem;
+            border-radius: .5rem;
+            outline: 2px solid ${({theme}) => theme.secondary};
+        }
+        & ul{
+            display: flex;
+            flex-direction: column;
+            & li{
+                border-top: 1px solid ${({theme}) => theme.outline};
+                padding: 1rem 0;
+                display: flex;
+                align-items: center;
+                & i{
+                    margin-right: .25rem;
+                    color: ${({theme}) => theme.ok};
+                    font-weight: 700;
+                    cursor: default;
+                }
+                & span::first-letter{
+                    text-transform: uppercase;
+                }
+                & span::after{
+                    content: ".";
+                }
             }
         }
     }
@@ -221,8 +251,8 @@ const Footer = styled.footer`
 const Welcome = () => {
     const navigate = useNavigate()
     const colors = useTheme()
-    const [planActive, setPlanActive] = useState(false)
-    const {auth, tema, toggleTheme} = useContext(AppContext)
+    const {toggle, trigger} = useToggle()
+    const {auth, tema, toggleTheme} = useAppContext()
     return <>
         <Header>
             <Logo/>
@@ -236,81 +266,82 @@ const Welcome = () => {
                 <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
             </NavHeader>
         </Header>
-        <Container>
+        <PageContainer>
             <Banner className={tema ? "light" : "dark"} url={banner}>
                 <div className="info">
-                    <FlexColum className="text">
+                    <div className="text flex-column">
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
                         <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Easy Access el acceso es facil y seguro.</h3>
                         <div>
                             <Btn click={() => {navigate("/register")}} colors="primary" action="Comenzar" />
                         </div>
-                    </FlexColum>
+                    </div>
                     <div className="img">
                         <img src={qrScan} alt="qr code" />
                     </div>
                 </div>
             </Banner>
-            <CenterContent>
-                <DescriptionContent>
+            <section className="center">
+                <div className="flex-column description">
                     <h1>Administra tus accesos con nosotros.</h1>
                     <p>Easy Access es un sistema de gestión y control de acceso mediante el registro de codigo QR. Desarrollado por estudiantes de la UT Riviera Maya para facilitar el acceso a diversas instalaciones, manteniento la seguridad y brindando herramientas para saber quien entra y sale en todo momento.</p>
-                </DescriptionContent>
+                </div>
                 <LogoSlogan />
-            </CenterContent>
+            </section>
             <SectionBg bg={colors.secondary} txt={colors.onsecondary}>
-                <CenterContent>
-                    <DescriptionContent>
+                <section className="center">
+                    <div className="flex-column description">
                         <h1>Diferentes casos, una solución.</h1>
                         <p>Nos ajustamos a las necesidades de cada cliente, no necesitas pagar por un sistema caro y complejo, nosotros tenemos la solucion definitiva. Administra usuarios, puntos de acceso, encargados para tu instalación y muchos beneficios más.</p>
-                    </DescriptionContent>
-                </CenterContent>
-                <Clientes>
+                    </div>
+                </section>
+                <List>
                     {clients.map(client => 
-                        <ClienteCard key={client.id} cover={client.cover}>
-                            <div className="cover">
-                                <img src={client.icon} alt="" />
+                        <li className="clientes" key={client.id}>
+                            <div className="head">
+                                <img className="cover" src={client.cover} alt="" />
+                                <img className="icon" src={client.icon} alt="" />
                             </div>
-                            <FlexColum className="text">
+                            <div className="text flex-column">
                                 <h3><b>{client.titulo}</b></h3>
                                 <span>{client.descripcion}</span>
-                            </FlexColum>
-                        </ClienteCard>
+                            </div>
+                        </li>
                     )}
-                </Clientes>
-                <CenterContent>
-                    <DescriptionContent>
+                </List>
+                <section className="center">
+                    <div className="description">
                         <h3>Y muchos otros lugares.</h3>
-                    </DescriptionContent>
-                </CenterContent>
+                    </div>
+                </section>
             </SectionBg>
             <section>
-                <CenterContent>
-                    <DescriptionContent>
+                <section className="center">
+                    <div className="flex-column description">
                         <h1>¡Registrate Ya!</h1>
                         <p>Crea ahora una cuenta en Easy Access y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
-                    </DescriptionContent>
-                </CenterContent>
+                    </div>
+                </section>
                 <Slider datos={features}/>
             </section>
             <section>
-                <CenterContent>
-                    <DescriptionContent>
+                <section className="center">
+                    <div className="flex-column description">
                         <h1>Gestiona tus instalaciones con Easy Access hoy mismo.</h1>
                         <span>Contrata uno de nuestros planes que más se ajusten a tus necesidades.</span>
-                    </DescriptionContent>
-                </CenterContent>
+                    </div>
+                </section>
                 <SelectorSuscription>
-                    <li className={!planActive ? "selected" : ""} onClick={() => {setPlanActive(false)}}>Mensual</li>
-                    <li className={planActive ? "selected" : ""} onClick={() => {setPlanActive(true)}}>Anual</li>
+                    <li className={!toggle ? "selected" : ""} onClick={() => {trigger()}}>Mensual</li>
+                    <li className={toggle ? "selected" : ""} onClick={() => {trigger()}}>Anual</li>
                 </SelectorSuscription>
                 <Planes>
                     {planes.map(plan => 
-                        <Plan key={plan.id}>
+                        <li className="plan" key={plan.id}>
                             <h2>{plan.titulo}</h2>
                             <div>
-                                <h1>{planActive ? plan.anual : plan.mensual}<small>{plan.moneda}</small></h1>
-                                <span className={`message ${planActive && plan.anual > 0 && "visible"}`}>Ahorra un 15%</span>
+                                <h1>{toggle ? plan.anual : plan.mensual}<small>{plan.moneda}</small></h1>
+                                <span className={`message ${toggle && plan.anual > 0 && "visible"}`}>Ahorra un 15%</span>
                             </div>
                             <img src={plan.img} alt="suscripcion icon" />
                             <ul>
@@ -319,11 +350,11 @@ const Welcome = () => {
                                 )}
                             </ul>
                             <Btn click={() => {navigate("/register")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
-                        </Plan>
+                        </li>
                     )}
                 </Planes>
             </section>
-        </Container>
+        </PageContainer>
         <Footer className={tema ? "light" : "dark"}>
             <section className="head">
                 <img src={logo} alt="" />

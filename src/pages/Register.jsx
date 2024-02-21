@@ -14,6 +14,7 @@ import { validateNameApellidos, validateEmail, validatePass, validatePassconf, v
 import useAppContext from "../hooks/useAppContext"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
+import { authErrors } from "../firebase.errors";
 
 const Register = () => {
     const {SignUp, loginWithGoogle, toggleTheme, tema} = useAppContext();
@@ -23,7 +24,7 @@ const Register = () => {
     const pass = useInput("password", validatePass)
     const passconf = useInput("password", validatePassconf)
     const terms = useInput("checkbox", validateTerms)
-    const {response, type, showResponse} = useFormResponse();
+    const {response, type, showResponseError} = useFormResponse();
 
     return <SignIUContainer>
         <Header>
@@ -54,7 +55,7 @@ const Register = () => {
                     terms.validate(terms.value)
                     if(name.valid && apellidos.valid && email.valid && pass.valid && passconf.valid && terms.valid){
                         SignUp(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
-                            showResponse("error", error.code)
+                            showResponseError(authErrors[error.code])
                         })
                     }
                 }}>
@@ -76,7 +77,7 @@ const Register = () => {
                 <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login"
                     click={() => {
                         loginWithGoogle().catch((error)=>{
-                            showResponse("error", error.code)
+                            showResponseError("error", error.code)
                         })
                     }}
                 />

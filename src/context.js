@@ -29,10 +29,11 @@ export const AppProvider = ({children}) => {
     }
     const SignUp = async(name, apellidos, email, password)=>{
         setLoader("Creando Cuenta")
-        return createUserWithEmailAndPassword(firebaseAuth, email, password).finally(()=>{
+        return createUserWithEmailAndPassword(firebaseAuth, email, password).then(()=>{
             updateProfile(firebaseAuth.currentUser, {displayName: `${name} ${apellidos}`}).catch((error) => {
                 console.log(error)
             });
+        }).finally(()=>{
             setLoader("")
         });
     }
