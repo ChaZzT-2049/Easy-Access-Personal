@@ -3,7 +3,6 @@ import Icon from "../Icon/Index";
 import logohorizontal from "../../assets/img/logo_horizontal.png"
 
 import { NavLink } from "react-router-dom";
-import { useRef, useLayoutEffect } from "react";
 import useAppContext from "../../hooks/useAppContext";
 const AsideContainer = styled.dialog`
     background: ${({theme}) => theme.bg};
@@ -165,35 +164,14 @@ const Logo = styled.div`
         width: 8rem;
     }
 `;
-
-const Sidebar = ({handleSidebar, show}) => {
-    const sidebarRef = useRef(null)
+ 
+const Sidebar = ({controls}) => {
+    const {closeOutside, trigger, ref} = controls
     const {user, logout} = useAppContext()
-
-    useLayoutEffect(()=>{
-        const handle = () =>{
-            show ? sidebarRef.current.showModal() : sidebarRef.current.close();
-            sidebarRef.current.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                  handleSidebar()
-                }
-            });
-        }
-        handle();
-        sidebarRef.current.removeEventListener("keydown", handle)
-    },[show, handleSidebar])
-    const closeOutside = (e) => {
-        const rect = sidebarRef.current.getBoundingClientRect();
-        const isInDialog=(rect.top <= e.clientY && e.clientY <= rect.top + rect.height
-        && rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-        if (!isInDialog) {
-            handleSidebar();
-        }
-    };
-    return <AsideContainer onClick={(e) =>{closeOutside(e)}} ref={sidebarRef}>
+    return <AsideContainer onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <Aside>
             <Head>
-                <Icon onClick={handleSidebar} icon="close" />
+                <Icon onClick={trigger} icon="close" />
                 <h2>Menú</h2>
             </Head>
             <Content>
@@ -218,7 +196,7 @@ const Sidebar = ({handleSidebar, show}) => {
                     <NavTab to="/" > Perfil de Usuario <Icon icon="account_circle" /></NavTab>
                     <NavTab to="/" > Suscripción <Icon icon="credit_card" /></NavTab>
                     <NavBtn onClick={async() => {
-                        handleSidebar();
+                        trigger();
                         await logout();
                     }}>
                         Cerrar Sesión

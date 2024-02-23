@@ -3,15 +3,15 @@ import Sidebar from "./Sidebar";
 import Bottombar from "./Bottombar";
 import Options from "./Options";
 import {MainContainer} from "../../UI/index"
-import useToggle from "../../hooks/useToggle";
+import useDialog from "../../hooks/useDialog";
 
 const AppTemplate = ({children}) => {
-    const sidebar = useToggle()
-    const options = useToggle()
+    const options = useDialog()
+    const sidebar = useDialog()
     return <>
         <Topbar handleSidebar={sidebar.trigger} handleOptions={options.trigger}/>
-        <Options show={options.toggle} handleOptions={options.trigger}/>
-        <Sidebar show={sidebar.toggle} handleSidebar={sidebar.trigger} />
+        <Options controls={options}/>
+        <Sidebar controls={sidebar}/>
         <MainContainer>
             {children}
         </MainContainer>

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Icon from "../Icon/Index";
-import { useRef, useLayoutEffect } from "react";
 import useAppContext from "../../hooks/useAppContext";
 
 const Menu = styled.dialog`
@@ -89,42 +88,20 @@ const Menu = styled.dialog`
     }
 `;
 
-const Options = ({show, handleOptions}) =>{
+const Options = ({controls}) =>{
+    const {closeOutside, trigger, ref} = controls
     const {tema, toggleTheme} = useAppContext()
-    const optionsRef = useRef(null)
 
-    useLayoutEffect(()=>{
-        const handle = () => {
-            show ? optionsRef.current.showModal() : optionsRef.current.close();
-            optionsRef.current.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                  handleOptions()
-                }
-            });
-        }
-        optionsRef.current.removeEventListener("keydown", handle)
-        handle();
-    },[show, handleOptions])
-
-    const closeOutside = (e) => {
-        const rect = optionsRef.current.getBoundingClientRect();
-        const isInDialog=(rect.top <= e.clientY && e.clientY <= rect.top + rect.height
-        && rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-        if (!isInDialog) {
-            handleOptions();
-        }
-    };
-
-    return <Menu onClick={(e) =>{closeOutside(e)}} ref={optionsRef}>
+    return <Menu onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <div>
             <h3>Options</h3>
-            <Icon onClick={handleOptions} icon="close"/>
+            <Icon onClick={trigger} icon="close"/>
         </div>
         <ul>
             <li>Item</li>
             <li>Item</li>
             <li>Tema: {tema ? "Light" : "Dark"} 
-                <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"}/>
+                <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"}/>
             </li>
         </ul>
     </Menu>
