@@ -13,7 +13,7 @@ import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
 const Login = () => {
-    const {login, loginWithGoogle, loginWithFacebook, toggleTheme, tema} = useAppContext();
+    const {login, loginWithGoogle, loginWithFacebook, loginWithMicrosoft, toggleTheme, tema} = useAppContext();
 
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
@@ -69,6 +69,13 @@ const Login = () => {
                 <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
                     click={()=>{
                         loginWithFacebook().catch((error)=>{
+                            showResponseError(authErrors[error.code])
+                        })
+                    }}
+                />
+                <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
+                    click={()=>{
+                        loginWithMicrosoft().catch((error)=>{
                             showResponseError(authErrors[error.code])
                         })
                     }}

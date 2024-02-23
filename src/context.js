@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, sendEmailVerification,
     onAuthStateChanged, signOut, 
     GoogleAuthProvider, signInWithPopup,
     updateProfile, sendPasswordResetEmail, confirmPasswordReset,
-    FacebookAuthProvider
+    FacebookAuthProvider, OAuthProvider
 } from "firebase/auth";
 import { firebaseAuth } from "./firebase";
 
@@ -66,6 +66,13 @@ export const AppProvider = ({children}) => {
             setLoader("")
         });
     }
+    const loginWithMicrosoft = async() => {
+        setLoader("Iniciando Sesión")
+        const microsoftProvider = new OAuthProvider('microsoft.com')
+        return signInWithPopup(firebaseAuth, microsoftProvider).finally(()=>{
+            setLoader("")
+        });
+    }
     const logout = () => {
         setLoader("Cerrando Sesion")
         signOut(firebaseAuth).catch((e)=>{
@@ -108,6 +115,7 @@ export const AppProvider = ({children}) => {
         login,
         loginWithGoogle,
         loginWithFacebook,
+        loginWithMicrosoft,
         logout,
         forgotPassword,
         resetPassword,

@@ -15,7 +15,7 @@ import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
 
 const Register = () => {
-    const {SignUp, loginWithGoogle, loginWithFacebook, toggleTheme, tema} = useAppContext();
+    const {SignUp, loginWithGoogle, loginWithFacebook, loginWithMicrosoft, toggleTheme, tema} = useAppContext();
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -83,6 +83,13 @@ const Register = () => {
                     click={()=>{
                         loginWithFacebook().catch((error)=>{
                             console.log(error)
+                            showResponseError(authErrors[error.code])
+                        })
+                    }}
+                />
+                <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
+                    click={()=>{
+                        loginWithMicrosoft().catch((error)=>{
                             showResponseError(authErrors[error.code])
                         })
                     }}
