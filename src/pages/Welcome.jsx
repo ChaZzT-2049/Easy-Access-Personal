@@ -257,12 +257,11 @@ const Welcome = () => {
         <Header>
             <Logo/>
             <NavHeader>
-                {auth === false && <>
+                {auth === false ? <>
                     <Link to="/login">Login</Link>
                     <Link to="/register">Register</Link>
-                </>
+                </> : <Link to="/home">Home</Link>
                 }
-                {auth && <Link to="/home">Home</Link>}
                 <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
             </NavHeader>
         </Header>

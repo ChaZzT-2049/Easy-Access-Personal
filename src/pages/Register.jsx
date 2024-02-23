@@ -7,17 +7,15 @@ import InputCheck from "../components/Form/InputCheck";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
 import signInUp from "../assets/img/landing/signInUp.jpeg"
-
 import { Link } from "react-router-dom";
 import { validateNameApellidos, validateEmail, validatePass, validatePassconf, validateTerms } from "../validations";
-
 import useAppContext from "../hooks/useAppContext"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
 
 const Register = () => {
-    const {SignUp, loginWithGoogle, toggleTheme, tema} = useAppContext();
+    const {SignUp, loginWithGoogle, loginWithFacebook, toggleTheme, tema} = useAppContext();
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -78,6 +76,14 @@ const Register = () => {
                     click={() => {
                         loginWithGoogle().catch((error)=>{
                             showResponseError("error", error.code)
+                        })
+                    }}
+                />
+                <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
+                    click={()=>{
+                        loginWithFacebook().catch((error)=>{
+                            console.log(error)
+                            showResponseError(authErrors[error.code])
                         })
                     }}
                 />

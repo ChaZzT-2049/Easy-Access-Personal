@@ -8,5 +8,6 @@ export const authErrors = {
     "auth/quota-exceeded": "Se ha alcanzado la capacidad del sistema, intentalo mas tarde.",
     "auth/too-many-requests": "Demasiados intentos. Intenta cambiar tu contraseña o inicia sesion más tarde.",
     "web-storage-unsupported": "Tu navegador no soporta nuestras cookies.",
+    "auth/invalid-action-code": "Codigo de verificacion invalido, solicita uno nuevo.",
     defaulError: "Lo sentimos, hubo algun error. Intentalo mas tarde."
 }

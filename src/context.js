@@ -1,9 +1,10 @@
 import React, {createContext, useLayoutEffect, useState} from "react";
-import { createUserWithEmailAndPassword,
-    signInWithEmailAndPassword, 
+import { createUserWithEmailAndPassword, sendEmailVerification,
+    signInWithEmailAndPassword, applyActionCode,
     onAuthStateChanged, signOut, 
     GoogleAuthProvider, signInWithPopup,
-    updateProfile, sendPasswordResetEmail, confirmPasswordReset
+    updateProfile, sendPasswordResetEmail, confirmPasswordReset,
+    FacebookAuthProvider
 } from "firebase/auth";
 import { firebaseAuth } from "./firebase";
 
@@ -30,17 +31,38 @@ export const AppProvider = ({children}) => {
     const SignUp = async(name, apellidos, email, password)=>{
         setLoader("Creando Cuenta")
         return createUserWithEmailAndPassword(firebaseAuth, email, password).then(()=>{
-            updateProfile(firebaseAuth.currentUser, {displayName: `${name} ${apellidos}`}).catch((error) => {
-                console.log(error)
-            });
+            ChangeName(name, apellidos)
+            sendEmailToVerify()
         }).finally(()=>{
             setLoader("")
+        });
+    }
+    const sendEmailToVerify = async() => {
+        sendEmailVerification(firebaseAuth.currentUser).then(() => {
+            console.log("Te hemos enviado un correo de verificacion.")
+        }).catch((error) => {
+            console.log(error)
+        });
+    }
+    const verifyEmail = async(oobCode) => {
+        return applyActionCode(firebaseAuth, oobCode)
+    }
+    const ChangeName = async(name, apellidos) => {
+        updateProfile(firebaseAuth.currentUser, {displayName: `${name} ${apellidos}`}).catch((error) => {
+            console.log(error)
         });
     }
     const loginWithGoogle = async() => {
         setLoader("Iniciando Sesión")
         const googleProvider = new GoogleAuthProvider()
         return signInWithPopup(firebaseAuth, googleProvider).finally(()=>{
+            setLoader("")
+        });
+    }
+    const loginWithFacebook = async() => {
+        setLoader("Iniciando Sesión")
+        const facebookProvider = new FacebookAuthProvider()
+        return signInWithPopup(firebaseAuth, facebookProvider).finally(()=>{
             setLoader("")
         });
     }
@@ -85,9 +107,11 @@ export const AppProvider = ({children}) => {
         SignUp,
         login,
         loginWithGoogle,
+        loginWithFacebook,
         logout,
         forgotPassword,
-        resetPassword
+        resetPassword,
+        verifyEmail
     }
     return <AppContext.Provider value={values} >{children}</AppContext.Provider>
 }

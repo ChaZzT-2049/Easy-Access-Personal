@@ -5,6 +5,8 @@ import Asignaciones from "../../pages/Asignaciones";
 import Login from "../../pages/Login";
 import Register from "../../pages/Register";
 import ForgotPassword from "../../pages/ForgotPassword";
+import NotFound from "../../pages/NotFound";
+import AccountVerifyReset from "../../pages/AccountVerifyReset";
 
 import Loader from "../Loader/Index";
 
@@ -13,8 +15,6 @@ import {lightTheme, darkTheme} from "../../UI/themes";
 import useAppContext from "../../hooks/useAppContext";
 import Middleware from "../Middleware/Index";
 import useMiddleware from "../../hooks/useMiddleware";
-import NotFound from "../../pages/NotFound";
-import ResetPassword from "../../pages/ResetPassword";
 
 const RouteList = () => {
   const {tema, loader, auth, user} = useAppContext();
@@ -30,7 +30,7 @@ const RouteList = () => {
         <Route path="/login" element={<Middleware {...loginMiddleware}><Login/></Middleware>} />
         <Route path="/register" element={<Middleware {...loginMiddleware}><Register/></Middleware>}/>
         <Route path="/forgot-password" element={ <Middleware {...loginMiddleware}><ForgotPassword/></Middleware> }/>
-        <Route path="/reset-password" element={ <Middleware {...loginMiddleware}><ResetPassword/></Middleware> }/>
+        <Route path="/account-verify-reset" element={ <AccountVerifyReset/> }/>
         <Route path="/home" element={<Middleware {...authMiddleware}><Home/></Middleware> } />
         <Route path="/asignaciones" element={ <Middleware {...authMiddleware}><Asignaciones/></Middleware>}/>
         <Route path="*" element={<NotFound />}/> 
