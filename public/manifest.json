@@ -40,6 +40,64 @@
      "density": "4.0"
     }
   ],
+  "screenshots" : [
+    {
+      "src": "welcome_Mob.webp",
+      "sizes": "720x1600",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Welcome page of Easy-Access"
+    },
+    {
+      "src": "login_Mob.webp",
+      "sizes": "720x1600",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Login page of Easy-Access"
+    },
+    {
+      "src": "sidebar_Mob.webp",
+      "sizes": "720x1600",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Sidebar menu of Easy-Access"
+    },
+    {
+      "src": "themes_Mob.webp",
+      "sizes": "720x1600",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Themes selector of Easy-Access"
+    },
+    {
+      "src": "welcome_Des.webp",
+      "sizes": "1280x761",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Welcome page of Easy-Access"
+    },
+    {
+      "src": "login_Des.webp",
+      "sizes": "1280x762",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Login page of Easy-Access"
+    },
+    {
+      "src": "sidebar_Des.webp",
+      "sizes": "1280x761",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Sidebar menu of Easy-Access"
+    },
+    {
+      "src": "themes_Des.webp",
+      "sizes": "1280x761",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Themes selector of Easy-Access"
+    }
+  ],  
   "start_url": "/home",
   "display": "standalone",
   "theme_color": "#dee0ff",

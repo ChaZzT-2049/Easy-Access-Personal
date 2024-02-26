@@ -3,7 +3,7 @@ import { Header, NavHeader, Banner, SectionBg, Container } from "../UI";
 import Logo from "../components/Logo/Index";
 import LogoSlogan from "../components/Logo/LogoSlogan";
 import qrScan from "../assets/img/landing/qrscan-anim-min.png"
-import banner from "../assets/img/landing/places-cover-min.png"
+import banner from "../assets/img/landing/places-cover-min.webp"
 import logo from "../assets/img/logo.png"
 import Icon from "../components/Icon/Index";
 import Btn from "../components/Button/Index";
