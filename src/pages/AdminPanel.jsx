@@ -10,6 +10,7 @@ const AdminPanel = () => {
            <div>
                 Tus instalaciones:
                 <Btn type="icon" colors="primary" action="Crear Instalacion" icon="add" />
+                <div>Instalacion</div>
             </div> : <span>Activa tu suscripcion de nuevo</span>
         }
     </AppTemplate>
