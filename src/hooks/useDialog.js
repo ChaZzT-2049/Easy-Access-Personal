@@ -6,15 +6,17 @@ const useDialog = () => {
     
     useLayoutEffect(()=>{
         const handle = () => {
-            toggle ? ref.current.showModal() : ref.current.close();
-            ref.current.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                  trigger()
-                }
-            });
+            if(ref.current){
+                toggle ? ref.current.showModal() : ref.current.close();
+                ref.current.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                    trigger()
+                    }
+                });
+                ref.current.removeEventListener("keydown", handle)
+            }
         }
         handle();
-        ref.current.removeEventListener("keydown", handle)
     },[toggle, trigger])
 
     const closeOutside = (e) => {

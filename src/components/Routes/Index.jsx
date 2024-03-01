@@ -7,32 +7,37 @@ import Register from "../../pages/Register";
 import ForgotPassword from "../../pages/ForgotPassword";
 import NotFound from "../../pages/NotFound";
 import AccountVerifyReset from "../../pages/AccountVerifyReset";
-
+import UserProfile from "../../pages/UserProfile";
+import Suscription from "../../pages/Suscription";
+import AdminPanel from "../../pages/AdminPanel";
 import Loader from "../Loader/Index";
 
 import { ThemeProvider } from "styled-components";
 import {lightTheme, darkTheme} from "../../UI/themes";
 import useAppContext from "../../hooks/useAppContext";
-import Middleware from "../Middleware/Index";
 import useMiddleware from "../../hooks/useMiddleware";
+import Middleware from "../Middleware/Index";
+
+
 
 const RouteList = () => {
-  const {tema, loader, auth, user} = useAppContext();
-
-  const loginMiddleware = useMiddleware("/home", auth)
-  const authMiddleware = useMiddleware("/login", auth === false || user === null)
+  const {tema, loader} = useAppContext();
+  const {suscriptionM, authM} = useMiddleware()
 
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
     <Loader message={loader}/>
     <Router>
       <Routes>
         <Route path="/" element={ <Welcome/> }/>
-        <Route path="/login" element={<Middleware {...loginMiddleware}><Login/></Middleware>} />
-        <Route path="/register" element={<Middleware {...loginMiddleware}><Register/></Middleware>}/>
-        <Route path="/forgot-password" element={ <Middleware {...loginMiddleware}><ForgotPassword/></Middleware> }/>
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/forgot-password" element={ <ForgotPassword/> }/>
         <Route path="/account-verify-reset" element={ <AccountVerifyReset/> }/>
-        <Route path="/home" element={<Middleware {...authMiddleware}><Home/></Middleware> } />
-        <Route path="/asignaciones" element={ <Middleware {...authMiddleware}><Asignaciones/></Middleware>}/>
+        <Route path="/home" element={<Middleware {...authM} children={<Home/>}/>} />
+        <Route path="/admin-panel" element={<Middleware {...suscriptionM} children={<AdminPanel/>}/>} />
+        <Route path="/asignaciones" element={<Middleware {...authM} children={<Asignaciones/>}/>}/>
+        <Route path="/perfil" element={<Middleware {...authM} children={<UserProfile/>}/>}/>
+        <Route path="/suscription" element={<Middleware {...authM} children={<Suscription/>}/>}/>
         <Route path="*" element={<NotFound />}/> 
       </Routes>
     </Router>

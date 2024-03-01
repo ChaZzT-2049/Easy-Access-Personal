@@ -7,7 +7,6 @@ import useFormResponse from "../hooks/useFormResponse";
 import useAppContext from "../hooks/useAppContext";
 import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../UI";
 import useRouteParams from "../hooks/useRouteParams";
-import useMiddleware from "../hooks/useMiddleware";
 import Middleware from "../components/Middleware/Index";
 import { Link } from "react-router-dom";
 import { authErrors } from "../firebase.errors";
@@ -20,9 +19,8 @@ const AccountVerifyReset = () => {
     const getParam = useRouteParams();
     const oobCode = getParam("oobCode");
     const mode = getParam("mode");
-    const middleware = useMiddleware("/login", (oobCode === null || (mode === "resetPassword" && auth)))
 
-    return <Middleware {...middleware}>
+    return <Middleware redirect="/login" validacion={(oobCode === null || (mode === "resetPassword" && auth))}>
         <Container>
             <Header>
                 <Logo/>

@@ -2,7 +2,7 @@ import styled, { useTheme } from "styled-components";
 import { Header, NavHeader, Banner, SectionBg, Container } from "../UI";
 import Logo from "../components/Logo/Index";
 import LogoSlogan from "../components/Logo/LogoSlogan";
-import qrScan from "../assets/img/landing/qrscan-anim-min.png"
+import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
 import banner from "../assets/img/landing/places-cover-min.webp"
 import logo from "../assets/img/logo.png"
 import Icon from "../components/Icon/Index";

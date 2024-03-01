@@ -176,14 +176,14 @@ const Sidebar = ({controls}) => {
             </Head>
             <Content>
                 <ProfileSection>
-                    <img src={ user.photoURL || ""} alt="Profile" />
+                    <img src={ user.photoURL || ""} referrerPolicy="no-referrer" alt="Profile" />
                     <h4>{ user.displayName}</h4>
                     <small>{ user.email}</small>
                 </ProfileSection>
                 <Section>
                     <NavTab to="/home" > Home <Icon icon="home" />
                     </NavTab>
-                    <NavTab to="/" > Panel Administrador <Icon icon="dashboard" />
+                    <NavTab to="/admin-panel" > Panel Administrador <Icon icon="dashboard" />
                     </NavTab>
                     <NavTab to="/" > Mis Vehiculos <Icon icon="directions_car" />
                     </NavTab>
@@ -193,10 +193,9 @@ const Sidebar = ({controls}) => {
                     </NavTab>
                 </Section>
                 <Section>
-                    <NavTab to="/" > Perfil de Usuario <Icon icon="account_circle" /></NavTab>
-                    <NavTab to="/" > Suscripción <Icon icon="credit_card" /></NavTab>
+                    <NavTab to="/perfil" > Perfil de Usuario <Icon icon="account_circle" /></NavTab>
+                    <NavTab to="/suscription" > Suscripción <Icon icon="credit_card" /></NavTab>
                     <NavBtn onClick={async() => {
-                        trigger();
                         await logout();
                     }}>
                         Cerrar Sesión

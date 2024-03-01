@@ -1,24 +1,21 @@
 
-import {initializeApp} from "firebase/app"
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore"
 //import { getAnalytics } from "firebase/analytics";
-
 const firebaseConfig = {
-  apiKey: "AIzaSyBDBSlDgOhdWSgGw6JPCCtRUalNpmLYpPE",
-  authDomain: "easy-access-test.firebaseapp.com",
-  projectId: "easy-access-test",
-  storageBucket: "easy-access-test.appspot.com",
-  messagingSenderId: "545339943333",
-  appId: "1:545339943333:web:be95a0cf48acc94a07604c",
-  measurementId: "G-92WGNR4C4R"
+  apiKey: "AIzaSyAV4yOrha15E3tC2imheVj6jHrJlXkFiGU",
+  authDomain: "easy-access-test-c1f42.firebaseapp.com",
+  projectId: "easy-access-test-c1f42",
+  storageBucket: "easy-access-test-c1f42.appspot.com",
+  messagingSenderId: "724792281936",
+  appId: "1:724792281936:web:9e6d75b34818d344673a55"
 };
-
 // Initialize Firebase
-//const firebaseapp = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(firebaseapp);
-
 
 const app = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(app);
+const db = getFirestore(app)
 
-export {app, firebaseAuth}
+export {app, firebaseAuth, db}

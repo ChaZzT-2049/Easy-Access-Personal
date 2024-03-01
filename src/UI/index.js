@@ -297,7 +297,6 @@ export const FieldInput = styled.input`
     }
     &[type="checkbox"]{
         accent-color: ${({theme}) => theme.secondary};
-        outline: none;
     }
     &:-webkit-autofill{
         -webkit-box-shadow: 0 0 0px 1000px ${({theme}) => theme.bg} inset;
