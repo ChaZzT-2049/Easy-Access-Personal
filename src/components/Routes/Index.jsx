@@ -10,7 +10,9 @@ import AccountVerifyReset from "../../pages/AccountVerifyReset";
 import UserProfile from "../../pages/UserProfile";
 import Suscription from "../../pages/Suscription";
 import AdminPanel from "../../pages/AdminPanel";
+
 import Loader from "../Loader/Index";
+import Alerts from "../Alerts/Index";
 
 import { ThemeProvider } from "styled-components";
 import {lightTheme, darkTheme} from "../../UI/themes";
@@ -18,14 +20,13 @@ import useAppContext from "../../hooks/useAppContext";
 import useMiddleware from "../../hooks/useMiddleware";
 import Middleware from "../Middleware/Index";
 
-
-
 const RouteList = () => {
-  const {tema, loader} = useAppContext();
+  const {tema, loader, alerts} = useAppContext();
   const {suscriptionM, authM} = useMiddleware()
 
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
     <Loader message={loader}/>
+    <Alerts alerts={alerts} />
     <Router>
       <Routes>
         <Route path="/" element={ <Welcome/> }/>

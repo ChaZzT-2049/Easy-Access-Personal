@@ -19,6 +19,29 @@ export const AppProvider = ({children}) => {
     const [auth, setAuth] = useState(false)
     const [loader, setLoader] = useState("")
     const [tema, setTema] = useState(localStorage.getItem("theme") === "true")
+    const [alerts, setAlerts] = useState([]);
+
+    const createToast = (newAlert) => {
+        setAlerts([...alerts, newAlert]);
+        setTimeout(() => {
+          setAlerts((a) => a.slice(1));
+        }, 5000);
+    };
+
+    const toasts = {
+        info: (title, message) =>{
+            createToast({variant: "info",title, message})
+        },
+        success: (title, message) =>{
+            createToast({variant: "success",title, message})
+        },
+        warning: (title, message) =>{
+            createToast({variant: "error",title, message})
+        },
+        error: (title, message) =>{
+            createToast({variant: "error",title, message})
+        }
+    }
 
     const toggleTheme = () => {
         localStorage.theme = `${!tema}`
@@ -32,7 +55,7 @@ export const AppProvider = ({children}) => {
     }
     const sendEmailToVerify = async() => {
         sendEmailVerification(firebaseAuth.currentUser).then(() => {
-            console.log("Te hemos enviado un correo de verificacion.")
+            toasts.success("Verifica tu Correo","Hemos enviado un codigo de verificacion a tu correo.")
         }).catch((error) => {
             console.log(error)
         });
@@ -65,10 +88,12 @@ export const AppProvider = ({children}) => {
         await setDoc(doc(db, "suscriptions", user.uid), {
             active: true,
             type: "Business"
+        }).then(() => {
+            toasts.success("Operacion Exitosa", "Hemos actualizado tu plan.")
+            getUserData()
         }).catch((error) => {
             console.log(error)
         });
-        getUserData()
     }
     const SignUp = async(name, apellidos, email, password)=>{
         setLoader("Creando Cuenta")
@@ -140,6 +165,8 @@ export const AppProvider = ({children}) => {
         userData,
         loader,
         tema,
+        alerts,
+        toasts,
         setLoader,
         toggleTheme,
         SignUp,
