@@ -1,8 +1,10 @@
 import AppTemplate from "../components/Template/Index"
 import useAppContext from "../hooks/useAppContext"
+import useDoc from "../hooks/useDoc"
 
 const UserProfile = () =>{
-    const {user, userData} = useAppContext()
+    const {user} = useAppContext()
+    const {data, loading, error} = useDoc("users", user.uid)
     return <AppTemplate>
         <h1>Datos de la cuenta </h1>
         <img src={user.photoURL} alt="Foto de perfil" referrerPolicy="no-referrer" />
@@ -11,8 +13,14 @@ const UserProfile = () =>{
         <p>Numero de Telefono: {user.phoneNumber}</p>
         <hr />
         <h1>Datos Personales</h1>
-        <p>Nombre: {userData.nombre}</p>
-        <p>Apellidos: {userData.apellidos}</p>
+        {loading ? <li>Loading...</li> : <>
+            {error && <li>Error: {error}</li>}
+            {data ? <>
+                <p>Nombre: {data.nombre}</p>
+                <p>Apellidos: {data.apellidos}</p>
+            </> : <>No hay</>
+            }
+        </>}
 
     </AppTemplate>
 }

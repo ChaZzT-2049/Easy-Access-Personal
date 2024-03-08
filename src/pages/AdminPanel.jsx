@@ -1,12 +1,14 @@
 import AppTemplate from "../components/Template/Index"
 import Btn from "../components/Button/Index"
 import useAppContext from "../hooks/useAppContext"
+import useDoc from "../hooks/useDoc"
 
 const AdminPanel = () => {
-    const {userData} = useAppContext()
+    const {user} = useAppContext()
+    const susDoc = useDoc("suscriptions", user.uid)
     return <AppTemplate>
         <h1>Panel Administrador</h1>
-        {(userData.suscription && userData.suscription.active) ? 
+        {susDoc.data && susDoc.data.active ? 
            <div>
                 Tus instalaciones:
                 <Btn type="icon" colors="primary" action="Crear Instalacion" icon="add" />

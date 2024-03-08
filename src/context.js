@@ -1,4 +1,4 @@
-import React, {createContext, useLayoutEffect, useState} from "react";
+import {createContext, useLayoutEffect, useState} from "react";
 import { createUserWithEmailAndPassword, sendEmailVerification,
     signInWithEmailAndPassword, applyActionCode,
     onAuthStateChanged, signOut, 
@@ -6,8 +6,7 @@ import { createUserWithEmailAndPassword, sendEmailVerification,
     updateProfile, sendPasswordResetEmail, confirmPasswordReset,
     FacebookAuthProvider, OAuthProvider
 } from "firebase/auth";
-import { setDoc, doc, getDoc,  } from "firebase/firestore";
-import { firebaseAuth, db } from "./firebase";
+import { firebaseAuth} from "./firebase";
 
 export const AppContext = createContext()
 export const AppProvider = ({children}) => {
@@ -15,7 +14,6 @@ export const AppProvider = ({children}) => {
         localStorage.setItem("theme", true.toString())
     }
     const [user,setUser] = useState(null)
-    const [userData, setUserData] = useState([])
     const [auth, setAuth] = useState(false)
     const [loader, setLoader] = useState("")
     const [tema, setTema] = useState(localStorage.getItem("theme") === "true")
@@ -68,37 +66,9 @@ export const AppProvider = ({children}) => {
             console.log(error)
         });
     }
-    const updateUserData = async(name, apellidos) =>{
-        const  userID = firebaseAuth.currentUser.uid
-        await setDoc(doc(db, "users", userID), {
-            nombre: name,
-            apellidos: apellidos,
-        }).catch((error) => {
-            console.log(error)
-        });
-    }
-    const getUserData = async() => {
-        const docRef = doc(db, "users", firebaseAuth.currentUser.uid);
-        const suscriptionRef = doc(db, "suscriptions", firebaseAuth.currentUser.uid);
-        const docSnap = await getDoc(docRef)
-        const suscriptionSnap = await getDoc(suscriptionRef)
-        setUserData({...docSnap.data(), suscription: suscriptionSnap.data()})
-    }
-    const updateSuscription = async() => {
-        await setDoc(doc(db, "suscriptions", user.uid), {
-            active: true,
-            type: "Business"
-        }).then(() => {
-            toasts.success("Operacion Exitosa", "Hemos actualizado tu plan.")
-            getUserData()
-        }).catch((error) => {
-            console.log(error)
-        });
-    }
     const SignUp = async(name, apellidos, email, password)=>{
         setLoader("Creando Cuenta")
-        return createUserWithEmailAndPassword(firebaseAuth, email, password).then(()=>{
-            updateUserData(name, apellidos)
+        return createUserWithEmailAndPassword(firebaseAuth, email, password).then(async()=>{
             sendEmailToVerify()
         }).finally(()=>{
             setLoader("")
@@ -147,14 +117,12 @@ export const AppProvider = ({children}) => {
         });
     }
     useLayoutEffect(()=>{
-        const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
             setUser(currentUser)
             if(currentUser === null){
                 setAuth(false)
-                setUserData(null)
             }else{
                 setAuth(true)
-                getUserData()
             }
         });
         return () => unsubscribe();
@@ -162,7 +130,6 @@ export const AppProvider = ({children}) => {
     const values ={
         auth,
         user,
-        userData,
         loader,
         tema,
         alerts,
@@ -179,8 +146,6 @@ export const AppProvider = ({children}) => {
         resetPassword,
         verifyEmail,
         ChangeName,
-        updateUserData,
-        updateSuscription
     }
     return <AppContext.Provider value={values} >{children}</AppContext.Provider>
 }

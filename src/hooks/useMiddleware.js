@@ -1,7 +1,10 @@
 import useAppContext from "./useAppContext"
+import useDoc from "./useDoc"
 
 const useMiddleware = () => {
-  const {auth, user, userData} = useAppContext()
+  const {auth, user} = useAppContext()
+  const uid = user ? user.uid : null
+  const susDoc = useDoc("suscriptions", uid)
   const loginM = {
     redirect: "/home",
     validacion: auth
@@ -12,7 +15,7 @@ const useMiddleware = () => {
   }
   const suscriptionM = {
     redirect: "/suscription",
-    validacion: !(userData && userData.suscription)
+    validacion: (user === null || !susDoc.data)
   }
   return {
     loginM,
