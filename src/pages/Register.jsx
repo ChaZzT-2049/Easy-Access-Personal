@@ -8,16 +8,18 @@ import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
 import signInUp from "../assets/img/landing/signInUp.webp"
 import { Link } from "react-router-dom";
+import Middleware from "../components/Middleware/Index";
 import { validateNameApellidos, validateEmail, validatePass, validatePassconf, validateTerms } from "../validations";
 import useAppContext from "../hooks/useAppContext"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
-import { authErrors } from "../firebase.errors";
 import useMiddleware from "../hooks/useMiddleware";
-import Middleware from "../components/Middleware/Index";
+import useAuth from "../hooks/useAuth";
+import { authErrors } from "../firebase.errors";
 
 const Register = () => {
-    const {SignUp, loginWithGoogle, loginWithFacebook, loginWithMicrosoft, toggleTheme, tema} = useAppContext();
+    const { toggleTheme, tema } = useAppContext();
+    const {signUp, loginWithGoogle, loginWithFacebook, loginWithMicrosoft} = useAuth()
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -34,7 +36,7 @@ const Register = () => {
                 <Logo/>
                 <NavHeader>
                     <Link to="/login">Login</Link>
-                    <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
+                    <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
                 </NavHeader>
             </Header>
             <SignIUCard>
@@ -57,7 +59,7 @@ const Register = () => {
                         passconf.validate(passconf.value, pass.value)
                         terms.validate(terms.value)
                         if(name.valid && apellidos.valid && email.valid && pass.valid && passconf.valid && terms.valid){
-                            SignUp(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
+                            signUp(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
                                 showResponseError(authErrors[error.code])
                             })
                         }

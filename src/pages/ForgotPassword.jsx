@@ -5,13 +5,13 @@ import Btn from "../components/Button/Index";
 import Logo from "../components/Logo/Index";
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
-import useAppContext from "../hooks/useAppContext";
+import useAuth from "../hooks/useAuth";
 import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../UI";
 import useMiddleware from "../hooks/useMiddleware";
 import Middleware from "../components/Middleware/Index";
 
 const ForgotPassword = () => {
-    const {forgotPassword} = useAppContext()
+    const {forgotPassword} = useAuth()
     const email = useInput("email", validateEmail)
     const {response, type, showResponseMessage, showResponseError} = useFormResponse();
 

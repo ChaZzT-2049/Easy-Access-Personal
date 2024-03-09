@@ -6,16 +6,19 @@ import InputPass from "../components/Form/InputPass";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
 import { Link } from "react-router-dom";
+import Middleware from "../components/Middleware/Index";
 import { validateEmail, validatePass } from "../validations";
 import signInUp from "../assets/img/landing/signInUp.webp"
 import useAppContext from "../hooks/useAppContext"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
-import { authErrors } from "../firebase.errors";
 import useMiddleware from "../hooks/useMiddleware";
-import Middleware from "../components/Middleware/Index";
+import useAuth from "../hooks/useAuth";
+import { authErrors } from "../firebase.errors";
+
 const Login = () => {
-    const {login, loginWithGoogle, loginWithFacebook, loginWithMicrosoft, toggleTheme, tema} = useAppContext();
+    const { toggleTheme, tema } = useAppContext();
+    const {login, loginWithGoogle, loginWithFacebook, loginWithMicrosoft} = useAuth()
 
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
@@ -28,7 +31,7 @@ const Login = () => {
                 <Logo/>
                 <NavHeader>
                     <Link to="/register">Register</Link>
-                    <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
+                    <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
                 </NavHeader>
             </Header>
             <SignIUCard>

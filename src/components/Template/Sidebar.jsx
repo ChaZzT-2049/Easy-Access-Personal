@@ -4,6 +4,7 @@ import logohorizontal from "../../assets/img/logo_horizontal.png"
 
 import { NavLink } from "react-router-dom";
 import useAppContext from "../../hooks/useAppContext";
+import useAuth from "../../hooks/useAuth";
 const AsideContainer = styled.dialog`
     background: ${({theme}) => theme.bg};
     transition: all 300ms ease-in-out;
@@ -167,7 +168,8 @@ const Logo = styled.div`
  
 const Sidebar = ({controls}) => {
     const {closeOutside, trigger, ref} = controls
-    const {user, logout} = useAppContext()
+    const {user} = useAppContext()
+    const {logout} = useAuth()
     return <AsideContainer onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <Aside>
             <Head>

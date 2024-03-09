@@ -1,3 +1,4 @@
+import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../UI";
 import InputPass from "../components/Form/InputPass";
 import { validatePass } from "../validations";
 import Btn from "../components/Button/Index";
@@ -5,14 +6,15 @@ import Logo from "../components/Logo/Index";
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import useAppContext from "../hooks/useAppContext";
-import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../UI";
 import useRouteParams from "../hooks/useRouteParams";
+import useAuth from "../hooks/useAuth"
 import Middleware from "../components/Middleware/Index";
 import { Link } from "react-router-dom";
 import { authErrors } from "../firebase.errors";
 
 const AccountVerifyReset = () => {
-    const {resetPassword, verifyEmail, auth} = useAppContext()
+    const { auth } = useAppContext()
+    const { resetPassword, verifyEmail } = useAuth()
     const password = useInput("password", validatePass)
     const {response, type, showResponseMessage, showResponseError} = useFormResponse();
 
