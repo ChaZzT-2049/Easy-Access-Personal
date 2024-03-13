@@ -272,7 +272,7 @@ const Welcome = () => {
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
                         <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Easy Access el acceso es facil y seguro.</h3>
                         <div>
-                            <Btn click={() => {navigate("/register")}} colors="primary" action="Comenzar" />
+                            <Btn onClick={() => {navigate("/register")}} colors="primary" action="Comenzar" />
                         </div>
                     </div>
                     <div className="img">
@@ -348,7 +348,7 @@ const Welcome = () => {
                                     <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
                                 )}
                             </ul>
-                            <Btn click={() => {navigate("/register")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
+                            <Btn onClick={() => {navigate("/register")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
                         </li>
                     )}
                 </Planes>

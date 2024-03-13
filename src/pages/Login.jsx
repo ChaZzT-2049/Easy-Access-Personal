@@ -66,21 +66,21 @@ const Login = () => {
                         <span>¿No tienes cuenta? <Link to="/register">Registrate aquí</Link>.</span>
                     </form>
                     <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login" 
-                        click={() => {
+                        onClick={() => {
                             loginWithGoogle().catch((error)=>{
                                 showResponseError(authErrors[error.code])
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
-                        click={()=>{
+                        onClick={()=>{
                             loginWithFacebook().catch((error)=>{
                                 showResponseError(authErrors[error.code])
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
-                        click={()=>{
+                        onClick={()=>{
                             loginWithMicrosoft().catch((error)=>{
                                 showResponseError(authErrors[error.code])
                             })

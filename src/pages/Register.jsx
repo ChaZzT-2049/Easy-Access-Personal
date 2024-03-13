@@ -80,14 +80,14 @@ const Register = () => {
                         <span>¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>.</span>
                     </form>
                     <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login"
-                        click={() => {
+                        onClick={() => {
                             loginWithGoogle().catch((error)=>{
                                 showResponseError("error", error.code)
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
-                        click={()=>{
+                        onClick={()=>{
                             loginWithFacebook().catch((error)=>{
                                 console.log(error)
                                 showResponseError(authErrors[error.code])
@@ -95,7 +95,7 @@ const Register = () => {
                         }}
                     />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
-                        click={()=>{
+                        onClick={()=>{
                             loginWithMicrosoft().catch((error)=>{
                                 showResponseError(authErrors[error.code])
                             })
