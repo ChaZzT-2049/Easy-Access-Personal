@@ -1,4 +1,4 @@
-import { setDoc, doc, getDoc, deleteDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { useLayoutEffect, useState } from "react";
 
@@ -7,10 +7,6 @@ const useDoc = (collection, id) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const ref = id ? doc(db, collection, id) : null
-    const get = async() => {
-        const snap = await getDoc(ref)
-        setData(snap.data())
-    }
     useLayoutEffect(()=>{
         const ref = id ? doc(db, collection, id) : null
         if(ref){
@@ -24,27 +20,29 @@ const useDoc = (collection, id) => {
                 setLoading(false)
             }
             fetchDoc()
+            const unsubscribe = onSnapshot(ref, (snapshot) => {
+                setData(snapshot.data());
+            });
+            return () => unsubscribe();
         }
     },[collection, id])
 
-    const set = async (data) => {
+    const docUpdate = async (data) => {
         if(ref){
             await setDoc(ref, data);
-            get()
         }
     };
 
-    const deleteD = async () => {
+    const docDelete = async () => {
         await deleteDoc(ref);
-        get()
     };
 
     return {
         data,
         loading,
         error,
-        set,
-        deleteD,
+        docUpdate,
+        docDelete,
     };
 };
 

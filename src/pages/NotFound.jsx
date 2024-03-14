@@ -44,7 +44,7 @@ const NotFound = () => {
                 }}/>
             </Message>
         </MainContainer>
-        <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
+        <SignIUFooter><h4>Aditum Delta. © Derechos Reservados 2024</h4></SignIUFooter>
     </>
 }
 export default NotFound;

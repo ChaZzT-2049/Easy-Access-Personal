@@ -1,6 +1,5 @@
 import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, FormResponse } from "../UI";
 import Logo from "../components/Logo/Index";
-import LogoSlogan from "../components/Logo/LogoSlogan";
 import Input from "../components/Form/Input";
 import InputPass from "../components/Form/InputPass";
 import Btn from "../components/Button/Index";
@@ -39,9 +38,9 @@ const Login = () => {
                     <div id="backdrop" className={tema ? "light" : "dark"}>
                         <h2 className="message">¡Bienvenido!</h2>
                         <Link to="/">
-                            <LogoSlogan />
+                            <Logo slogan={true}/>
                         </Link>
-                        <span className="message">Inicia sesión para continuar usando la aplicación y disfrutar los beneficios que brinda Easy Access.</span>
+                        <span className="message">Inicia sesión para continuar usando la aplicación y disfrutar los beneficios que brinda Aditum Delta.</span>
                     </div>
                 </SignIUCardLeft>
                 <SignIUCardRight>
@@ -88,7 +87,7 @@ const Login = () => {
                     />
                 </SignIUCardRight>
             </SignIUCard>
-            <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
+            <SignIUFooter><h4>Aditum Delta. © Derechos Reservados 2024</h4></SignIUFooter>
         </SignIUContainer>
     </Middleware>
 }

@@ -1,7 +1,6 @@
 import styled, { useTheme } from "styled-components";
 import { Header, NavHeader, Banner, SectionBg, Container } from "../UI";
 import Logo from "../components/Logo/Index";
-import LogoSlogan from "../components/Logo/LogoSlogan";
 import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
 import banner from "../assets/img/landing/places-cover-min.webp"
 import logo from "../assets/img/logo.png"
@@ -255,7 +254,7 @@ const Welcome = () => {
     const {auth, tema, toggleTheme} = useAppContext()
     return <>
         <Header>
-            <Logo/>
+            <Logo />
             <NavHeader>
                 {auth === false ? <>
                     <Link to="/login">Login</Link>
@@ -270,7 +269,7 @@ const Welcome = () => {
                 <div className="info">
                     <div className="text flex-column">
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
-                        <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Easy Access el acceso es facil y seguro.</h3>
+                        <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Aditum Delta el acceso es facil y seguro.</h3>
                         <div>
                             <Btn onClick={() => {navigate("/register")}} colors="primary" action="Comenzar" />
                         </div>
@@ -283,9 +282,9 @@ const Welcome = () => {
             <section className="center">
                 <div className="flex-column description">
                     <h1>Administra tus accesos con nosotros.</h1>
-                    <p>Easy Access es un sistema de gestión y control de acceso mediante el registro de codigo QR. Desarrollado por estudiantes de la UT Riviera Maya para facilitar el acceso a diversas instalaciones, manteniento la seguridad y brindando herramientas para saber quien entra y sale en todo momento.</p>
+                    <p>Aditum Delta es un sistema de gestión y control de acceso mediante el registro de codigo QR. Desarrollado por estudiantes de la UT Riviera Maya para facilitar el acceso a diversas instalaciones, manteniento la seguridad y brindando herramientas para saber quien entra y sale en todo momento.</p>
                 </div>
-                <LogoSlogan />
+                <Logo redirect={false} slogan={true} />
             </section>
             <SectionBg bg={colors.secondary} txt={colors.onsecondary}>
                 <section className="center">
@@ -318,7 +317,7 @@ const Welcome = () => {
                 <section className="center">
                     <div className="flex-column description">
                         <h1>¡Registrate Ya!</h1>
-                        <p>Crea ahora una cuenta en Easy Access y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
+                        <p>Crea ahora una cuenta en Aditum Delta y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
                     </div>
                 </section>
                 <Slider datos={features}/>
@@ -326,7 +325,7 @@ const Welcome = () => {
             <section>
                 <section className="center">
                     <div className="flex-column description">
-                        <h1>Gestiona tus instalaciones con Easy Access hoy mismo.</h1>
+                        <h1>Gestiona tus instalaciones con Aditum Delta hoy mismo.</h1>
                         <span>Contrata uno de nuestros planes que más se ajusten a tus necesidades.</span>
                     </div>
                 </section>
@@ -357,7 +356,7 @@ const Welcome = () => {
         <Footer className={tema ? "light" : "dark"}>
             <section className="head">
                 <img src={logo} alt="" />
-                <h3><b>Easy-Access. © Derechos Reservados 2023</b></h3>
+                <h3><b>Aditum Delta. © Derechos Reservados 2023</b></h3>
             </section>
             <section className="content">
                 <div>

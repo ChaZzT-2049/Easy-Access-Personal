@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Icon from "../Icon/Index";
-import logohorizontal from "../../assets/img/logo_horizontal.png"
+import Logo from "../Logo/Index"
 
 import { NavLink } from "react-router-dom";
 import useAppContext from "../../hooks/useAppContext";
@@ -59,6 +59,10 @@ const Aside = styled.aside`
     justify-content: space-between;
     height: 100%;
     box-sizing: border-box;
+    & .logo{
+        padding: 1rem;
+        margin: 0 auto;
+    }
 `;
 const Head = styled.section`
     display: flex;
@@ -155,16 +159,6 @@ const ProfileSection = styled(Section)`
         text-align: center;
     }
 `;
-
-const Logo = styled.div`
-    text-align: center;
-    box-sizing: border-box;
-    padding: 1rem 0;
-
-    & img{
-        width: 8rem;
-    }
-`;
  
 const Sidebar = ({controls}) => {
     const {closeOutside, trigger, ref} = controls
@@ -197,8 +191,8 @@ const Sidebar = ({controls}) => {
                 <Section>
                     <NavTab to="/perfil" > Perfil de Usuario <Icon icon="account_circle" /></NavTab>
                     <NavTab to="/suscription" > Suscripción <Icon icon="credit_card" /></NavTab>
-                    <NavBtn onClick={async() => {
-                        await logout();
+                    <NavBtn onClick={() => {
+                        logout();
                     }}>
                         Cerrar Sesión
                         <Icon icon="logout" />
@@ -210,9 +204,9 @@ const Sidebar = ({controls}) => {
                     <NavTab to="/" > Soporte <Icon icon="question_answer" /></NavTab>
                 </Section>
             </Content>
-            <Logo>
-                <img src={logohorizontal} alt="Logo Horizontal" />
-            </Logo>
+            <div className="logo">
+                <Logo redirect={false}/>
+            </div>
         </Aside>
     </AsideContainer>
 }

@@ -1,6 +1,5 @@
 import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, InputColum, FormResponse } from "../UI";
 import Logo from "../components/Logo/Index";
-import LogoSlogan from "../components/Logo/LogoSlogan";
 import Input from "../components/Form/Input";
 import InputPass from "../components/Form/InputPass";
 import InputCheck from "../components/Form/InputCheck";
@@ -44,9 +43,9 @@ const Register = () => {
                     <div id="backdrop" className={tema ? "light" : "dark"}>
                         <h2 className="message">¡Bienvenido nuevo usuario!</h2>
                         <Link to="/">
-                            <LogoSlogan />
+                            <Logo slogan={true}/>
                         </Link>
-                        <span className="message">Descubre los beneficios de usar Easy Access, registra tus datos para crear tu cuenta.</span>
+                        <span className="message">Descubre los beneficios de usar Aditum Delta, registra tus datos para crear tu cuenta.</span>
                     </div>
                 </SignIUCardLeft>
                 <SignIUCardRight>
@@ -103,7 +102,7 @@ const Register = () => {
                     />
                 </SignIUCardRight>
             </SignIUCard>
-            <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
+            <SignIUFooter><h4>Aditum Delta. © Derechos Reservados 2024</h4></SignIUFooter>
         </SignIUContainer>
     </Middleware>
 }

@@ -1,22 +1,5 @@
 import styled from "styled-components";
 
-export const SLogo = styled.div`
-    display: flex;
-    align-items: center;
-
-    & img{width: 1.5rem;}
-    & h2{line-height: normal;}
-    & h2 a{
-        text-decoration: none;
-        color: inherit;
-    }
-    @media screen and (min-width: 0px) and (max-width: 480px) {
-        & h2{
-            font-size: 1.17rem;
-        }
-    }
-`;
-
 export const Header = styled.header`
     background: ${({theme}) => theme.bg};
     padding: 1rem 2rem;
@@ -127,20 +110,6 @@ export const Banner = styled.section`
             & img{
                 width: 100%;
             }
-        }
-    }
-`;
-
-export const LSlogan = styled(FlexColum)`
-    align-items: center;
-    justify-content: center;
-    & img{width: 25%;}
-    & div{
-        text-align: center;
-        color: ${({theme}) => theme.primary};
-        & small{
-            color: ${({theme}) => theme.outline};
-            font-weight: 700;
         }
     }
 `;

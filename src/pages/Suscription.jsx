@@ -4,11 +4,11 @@ import useDoc from "../hooks/useDoc";
 
 const Suscription = () =>{
     const {user, toasts} = useAppContext()
-    const {data, loading, error, set} = useDoc("suscriptions", user.uid)
+    const {data, loading, error, docUpdate} = useDoc("suscriptions", user.uid)
     const updateSuscription = async() => {
-        await set({
+        await docUpdate({
             active: true,
-            type: "Bussiness"
+            type: "Manager"
         }).then(() => {
             toasts.success("Operacion Exitosa", "Hemos actualizado tu plan.")
         }).catch((error) => {
