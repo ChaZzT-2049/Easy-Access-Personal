@@ -290,7 +290,7 @@ export const InputColum = styled.section`
     }
 `;
 export const BaseBtn = styled.button`
-    padding: 1rem 1rem;
+    padding: 1rem;
     border-radius: .25rem;
     background: ${({theme}) => theme.surfacev};
     transition: all 300ms linear;
