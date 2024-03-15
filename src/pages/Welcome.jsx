@@ -356,7 +356,7 @@ const Welcome = () => {
         <Footer className={tema ? "light" : "dark"}>
             <section className="head">
                 <img src={logo} alt="" />
-                <h3><b>Aditum Delta. © Derechos Reservados 2023</b></h3>
+                <h3><b>Aditum Delta. © Derechos Reservados 2024</b></h3>
             </section>
             <section className="content">
                 <div>

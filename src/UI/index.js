@@ -44,7 +44,6 @@ export const MainContainer = styled.main`
     transition: all 200ms ease-in;
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem;}
 `;
-
 export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
@@ -60,12 +59,10 @@ export const Wrapper = styled.div`
         visibility: hidden;
     }
 `;
-
 export const FlexColum = styled.div`
     display: flex;
     flex-direction: column;
 `;
-
 export const Banner = styled.section`
     height: auto;
     background: url(${props => props.url}) center / cover;
@@ -113,26 +110,22 @@ export const Banner = styled.section`
         }
     }
 `;
-
 export const SectionBg = styled.section`
     background: ${props => props.bg};
     color: ${props => props.txt};
     padding: 0 2rem;
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: 0 1.5rem;}
 `;
-
 export const SignIUContainer = styled(Container)`
     @media screen and (min-width: 0px) and (max-width: 480px) {
         header{display:none;}
     }
 `;
-
 export const SignIUCard = styled.section`
     display: flex;
     flex-wrap: wrap;
     min-height: 100vh;
 `;
-
 export const SignIUCardLeft = styled.div`
     background: url(${props => props.url}) center / cover;
     flex: 1 1 250px;
@@ -176,7 +169,6 @@ export const SignIUCardLeft = styled.div`
         }
     }
 `;
-
 export const SignIUCardRight = styled.div`
     display: flex;
     flex-direction: column;
@@ -212,7 +204,6 @@ export const CardContent = styled(SignIUCardRight)`
         justify-content: center;
     }
 `;
-
 export const FormResponse = styled.small`
     font-weight: 700; text-align: center; padding: .5rem; border-radius: .5rem;
     &.error{
@@ -224,13 +215,11 @@ export const FormResponse = styled.small`
         background-color: ${({theme}) => theme.okcont};
     }
 `;
-
 export const FormFields = styled.fieldset`
     display: flex;
     flex-direction: column;
     gap: 1rem;
 `;
-
 export const Field = styled.div`
     display: flex;
     flex-direction: column;
@@ -245,7 +234,6 @@ export const Field = styled.div`
         color: ${({theme}) => theme.error};
     }
 `;
-
 export const FieldInput = styled.input`
     padding: .5rem 1rem;
     outline: none;
@@ -284,7 +272,6 @@ export const FieldInput = styled.input`
         &::placeholder{color: ${({theme}) => theme.error};}
     }
 `;
-
 export const SignIUFooter = styled.footer`
     background: ${({theme}) => theme.primarycont};
     color: ${({theme}) => theme.onprimarycont};
@@ -293,7 +280,6 @@ export const SignIUFooter = styled.footer`
     position: sticky;
     bottom: 0;
 `;
-
 export const InputColum = styled.section`
     display: flex;
     box-sizing: border-box;
@@ -326,4 +312,11 @@ export const BaseBtn = styled.button`
         font-weight: 700;
         & i{pointer-events: none;}
     }
+`;
+export const PageTitle = styled.h2`
+    color: ${({theme}) => theme.primary};
+    font-weight: 700;
+    padding-bottom: .25rem;
+    border-bottom: 2px solid ${({theme}) => theme.primary};
+    margin-bottom: 1rem;
 `;

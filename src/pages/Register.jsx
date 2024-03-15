@@ -42,9 +42,7 @@ const Register = () => {
                 <SignIUCardLeft url={signInUp}>
                     <div id="backdrop" className={tema ? "light" : "dark"}>
                         <h2 className="message">¡Bienvenido nuevo usuario!</h2>
-                        <Link to="/">
-                            <Logo slogan={true}/>
-                        </Link>
+                        <Logo slogan={true}/>
                         <span className="message">Descubre los beneficios de usar Aditum Delta, registra tus datos para crear tu cuenta.</span>
                     </div>
                 </SignIUCardLeft>

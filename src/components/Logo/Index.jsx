@@ -7,12 +7,10 @@ const SLogo = styled.div`
     align-items: center;
     gap: .25rem;
     color: ${({theme}) => theme.primary};
+    text-decoration: none;
     &.default{
         & img{width: 1.5rem;}
         & h2{line-height: normal;}
-        & h2 a{
-            text-decoration: none;
-        }
         @media screen and (min-width: 0px) and (max-width: 480px) {
             & h2{
                 font-size: 1.17rem;
@@ -31,11 +29,19 @@ const SLogo = styled.div`
     }
 `;
 const Logo = ({slogan, redirect = true}) =>{
-    return <SLogo className={slogan ? "slogan" : "default"}>
-        <img src={logo} alt="Logo" />
-        <h2>{redirect ? <Link to="/">Aditum <b>Delta</b></Link> : <>Aditum <b>Delta</b></>}</h2>
-        {slogan && <small>Acceso Seguro, Acceso Facil.</small>}
-    </SLogo>
+    const LogoContent = () => {
+        return <SLogo className={slogan ? "slogan" : "default"}>
+            <img src={logo} alt="Logo" />
+            <h2>Aditum <b>Delta</b></h2>
+            {slogan && <small>Acceso Seguro, Acceso Facil.</small>}
+        </SLogo>
+    }
+    if(redirect){ 
+        return <Link to="/" style={{textDecoration: 'none'}}>
+            <LogoContent />
+        </Link>
+    }
+    return <LogoContent />
 }
 
 export default Logo;

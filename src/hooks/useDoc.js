@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import { useLayoutEffect, useState } from "react";
 
 const useDoc = (collection, id) => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const ref = id ? doc(db, collection, id) : null

@@ -37,9 +37,7 @@ const Login = () => {
                 <SignIUCardLeft url={signInUp}>
                     <div id="backdrop" className={tema ? "light" : "dark"}>
                         <h2 className="message">¡Bienvenido!</h2>
-                        <Link to="/">
-                            <Logo slogan={true}/>
-                        </Link>
+                        <Logo slogan={true}/>
                         <span className="message">Inicia sesión para continuar usando la aplicación y disfrutar los beneficios que brinda Aditum Delta.</span>
                     </div>
                 </SignIUCardLeft>
