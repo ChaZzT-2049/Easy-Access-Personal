@@ -39,12 +39,14 @@ export const AppProvider = ({children}) => {
     }
     useLayoutEffect(()=>{
         const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
+            setLoader("Cargando")
             setUser(currentUser)
             if(currentUser === null){
                 setAuth(false)
             }else{
                 setAuth(true)
             }
+            setLoader("")
         });
         return () => unsubscribe();
     },[user])

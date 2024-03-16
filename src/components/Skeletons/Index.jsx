@@ -34,9 +34,9 @@ const ButtonSkeleton = styled.div`
 export const SkeletonPlans = () => {
     return <>
         <h3>Cargando planes</h3>
-        <Plan><h4> </h4><ButtonSkeleton /></Plan>
-        <Plan><h4> </h4><ButtonSkeleton /></Plan>
-        <Plan><h4> </h4><ButtonSkeleton /></Plan>
-        <Plan><h4> </h4><ButtonSkeleton /></Plan>
+        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
+        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
+        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
+        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
     </>
 }

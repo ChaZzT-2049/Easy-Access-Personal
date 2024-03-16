@@ -294,16 +294,39 @@ export const BaseBtn = styled.button`
     border-radius: .25rem;
     background: ${({theme}) => theme.surfacev};
     transition: all 300ms linear;
+    &:hover{
+        outline-width: 1px;
+        outline-style: solid;
+    }
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem 1rem;}
     &.primary{
         background: ${({theme}) => theme.primary};
         color: ${({theme}) => theme.onprimary};
         &:hover{
-            outline: 1px solid ${({theme}) => theme.primary};
+            outline-color: ${({theme}) => theme.primary};
             color: ${({theme}) => theme.onprimarycont};
             background: ${({theme}) => theme.primarycont};
         }
+        &.oncont{
+            background: ${({theme}) => theme.onprimarycont};
+            color: ${({theme}) => theme.onprimary};
+            &:hover{
+                outline-color: ${({theme}) => theme.onprimarycont};
+                color: ${({theme}) => theme.onprimarycont};
+                background: ${({theme}) => theme.onprimary};
+            }
+        }
     }
+    &.secondary{
+        background: ${({theme}) => theme.secondary};
+        color: ${({theme}) => theme.onsecondary};
+        &:hover{
+            outline-color: ${({theme}) => theme.secondary};
+            color: ${({theme}) => theme.onsecondarycont};
+            background: ${({theme}) => theme.secondarycont};
+        }
+    }
+    
     &.icon{
         display: flex;
         align-items: center;
