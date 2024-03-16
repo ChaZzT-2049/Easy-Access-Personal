@@ -335,6 +335,25 @@ export const BaseBtn = styled.button`
         font-weight: 700;
         & i{pointer-events: none;}
     }
+    &.only-icon{
+        padding: .25rem;
+        font-size: 0px;
+        width: min-content;
+    }
+
+    &:disabled{
+        background: ${({theme}) => theme.outline};
+        color: ${({theme}) => theme.surfacev};
+        cursor: not-allowed;
+        &:hover{
+            background: ${({theme}) => theme.outline};
+            color: ${({theme}) => theme.surfacev};
+            outline: none;
+        }
+    }
+    &:disabled i{
+        cursor: inherit;
+    }
 `;
 export const PageTitle = styled.h2`
     color: ${({theme}) => theme.primary};

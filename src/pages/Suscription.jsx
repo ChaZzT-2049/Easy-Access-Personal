@@ -6,18 +6,18 @@ import useAppContext from "../hooks/useAppContext";
 import useCollection from "../hooks/useCollection";
 import useDoc from "../hooks/useDoc";
 import { SkeletonPlans } from "../components/Skeletons/Index";
-import MissingData from "../components/Missing/Index";
+import NoData from "../components/NoData/Index";
 import { formatPrice } from "../helpers/formatPrice";
 import useToggle from "../hooks/useToggle";
 const PageContent = styled.section`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    
 `;
 const SuscriptionInfo = styled.div`
     padding: 1rem;
     border-radius: .5rem;
     transition: background-color 200ms ease;
+    margin: 1rem auto;
+    max-width: 600px;
     &.active{
         background-color: ${({theme}) => theme.primarycont};
         color: ${({theme}) => theme.onprimarycont};
@@ -27,7 +27,56 @@ const SuscriptionInfo = styled.div`
         color: ${({theme}) => theme.surfacev};
     }
 `;
+const Plans = styled.section`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    & :nth-child(1){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.onsurfv};
+            color: ${({theme}) => theme.surfacev};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.outline};
+            color: ${({theme}) => theme.surfacev};
+        }
+        
+    }
+    & :nth-child(2){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.secondary};
+            color: ${({theme}) => theme.onsecondary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.secondarycont};
+            color: ${({theme}) => theme.onsecondarycont};
+        }
+    }
+    & :nth-child(3){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.primary};
+            color: ${({theme}) => theme.onprimary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.primarycont};
+            color: ${({theme}) => theme.onprimarycont};
+        }
+    }
+    & :nth-child(4){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.onprimarycont};
+            color: ${({theme}) => theme.onprimary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.primarycont};
+            color: ${({theme}) => theme.onprimarycont};
+        }
+    }
+`;
 const Plan = styled.div`
+    flex: 0 1 350px;
     background-color: ${({theme}) => theme.surfacev};
     padding: 1rem;
     text-align: center;
@@ -35,29 +84,21 @@ const Plan = styled.div`
         padding: .5rem;
         border-radius: .25rem;
         margin-bottom: .5rem;
-        background-color: ${({theme}) => theme.secondary};
-        color: ${({theme}) => theme.onsecondary};
     }
     & p{
         padding: .5rem;
         background-color: ${({theme}) => theme.okcont};
         color: ${({theme}) => theme.onokcont};
     }
-`;
-const SelectorSuscription = styled.ul`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: .5rem 0;
-    & li{
-        background: ${({theme}) => theme.outline};
-        padding: .5rem 2rem;
-        color: ${({theme}) => theme.surfacev};
-        transition: all 200ms ease-in;
-        cursor: pointer;
-        &.selected{
-            background: ${({theme}) => theme.secondary};
-            color: ${({theme}) => theme.onsecondary};
+    & .selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .5rem 0;
+        & li{
+            padding: .5rem 2rem;
+            transition: all 200ms ease-in;
+            cursor: pointer;
         }
     }
 `;
@@ -88,18 +129,19 @@ const Suscription = () =>{
                     <h3><b>{data.type}</b></h3>
                     <p>Estado: {data.active ? "Activa" : "Inactiva"}</p>
                     <Btn onClick={toggleSuscription} colors="primary oncont" action={data.active ? "Desactivar" : "Activar"}/>
-                </SuscriptionInfo> : <MissingData message="Aun no tienes una suscripción." />
+                </SuscriptionInfo> : <NoData message="Aun no tienes una suscripción." />
                 }
             </>}
             {plansError && <li>Error: {plansError}</li>}
             {plansLoading ? <SkeletonPlans /> : <>
                 <h3>Tipos de planes</h3>
+                <Plans>
                 {plans.map(plan => <Plan key={plan.id}>
                     <h4>{plan.title}</h4>
-                    <SelectorSuscription>
+                    <ul className="selector">
                         <li className={!toggle ? "selected" : ""} onClick={() => {trigger()}}>Mensual</li>
                         <li className={toggle ? "selected" : ""} onClick={() => {trigger()}}>Anual</li>
-                    </SelectorSuscription>
+                    </ul>
                     <h2><b>{toggle ? formatPrice(plan.anual - (plan.anual * .15), plan.moneda) : formatPrice(plan.mensual, plan.moneda)}</b></h2>
                     {toggle && <small>Ahorra un 15%</small> }
                     <hr />
@@ -108,10 +150,12 @@ const Suscription = () =>{
                             <li key={plan.id + i}>{feature}</li>
                         )}
                     </ul>
-                    {data && plan.title === data.type ? 
-                    <p>Plan Actual</p> : 
-                    <Btn onClick={()=>{updateSuscription(plan.title)}} colors="primary" action="Suscribirse" />}
+                    <Btn disabled={(data && plan.title === data.type)}
+                        onClick={()=>{updateSuscription(plan.title)}} colors="primary" 
+                        action={data && plan.title === data.type ? "Plan Actual" : "Suscribirse"} 
+                    />
                 </Plan>)}
+                </Plans>
             </>
             }
         </PageContent>
