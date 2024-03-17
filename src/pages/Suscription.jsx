@@ -6,9 +6,9 @@ import useAppContext from "../hooks/useAppContext";
 import useCollection from "../hooks/useCollection";
 import useDoc from "../hooks/useDoc";
 import { SkeletonPlans } from "../components/Skeletons/Index";
-import NoData from "../components/NoData/Index";
 import { formatPrice } from "../helpers/formatPrice";
 import useToggle from "../hooks/useToggle";
+import DisplayData from "../components/DisplayData/Index";
 const PageContent = styled.section`
     
 `;
@@ -123,41 +123,37 @@ const Suscription = () =>{
         <PageTitle>Datos de Suscripcion</PageTitle>
         <PageContent>
             <p>Personaliza la experiencia de tu cuenta en Aditum Delta con tu suscripción.</p>
-            {loading ? <li>Loading...</li> : <>
-                {error && <li>Error: {error}</li>}
-                {data ? <SuscriptionInfo className={data.active ? "active" : "inactive"}>
+            <DisplayData loading={loading} error={error} data={data} loader={<li>Cargando</li>} noData="Aun no tienes una suscripción">
+                <SuscriptionInfo className={data.active ? "active" : "inactive"}>
                     <h3><b>{data.type}</b></h3>
                     <p>Estado: {data.active ? "Activa" : "Inactiva"}</p>
                     <Btn onClick={toggleSuscription} colors="primary oncont" action={data.active ? "Desactivar" : "Activar"}/>
-                </SuscriptionInfo> : <NoData message="Aun no tienes una suscripción." />
-                }
-            </>}
-            {plansError && <li>Error: {plansError}</li>}
-            {plansLoading ? <SkeletonPlans /> : <>
+                </SuscriptionInfo>
+            </DisplayData>
+            <DisplayData loading={plansLoading} error={plansError} data={plans} loader={<SkeletonPlans />} noData="No hay planes activos.">
                 <h3>Tipos de planes</h3>
                 <Plans>
-                {plans.map(plan => <Plan key={plan.id}>
-                    <h4>{plan.title}</h4>
-                    <ul className="selector">
-                        <li className={!toggle ? "selected" : ""} onClick={() => {trigger()}}>Mensual</li>
-                        <li className={toggle ? "selected" : ""} onClick={() => {trigger()}}>Anual</li>
-                    </ul>
-                    <h2><b>{toggle ? formatPrice(plan.anual - (plan.anual * .15), plan.moneda) : formatPrice(plan.mensual, plan.moneda)}</b></h2>
-                    {toggle && <small>Ahorra un 15%</small> }
-                    <hr />
-                    <ul>
-                        {plan.features.map((feature, i) =>
-                            <li key={plan.id + i}>{feature}</li>
-                        )}
-                    </ul>
-                    <Btn disabled={(data && plan.title === data.type)}
-                        onClick={()=>{updateSuscription(plan.title)}} colors="primary" 
-                        action={data && plan.title === data.type ? "Plan Actual" : "Suscribirse"} 
-                    />
-                </Plan>)}
+                    {plans.map(plan => <Plan key={plan.id}>
+                        <h4>{plan.title}</h4>
+                        <ul className="selector">
+                            <li className={!toggle ? "selected" : ""} onClick={() => {trigger()}}>Mensual</li>
+                            <li className={toggle ? "selected" : ""} onClick={() => {trigger()}}>Anual</li>
+                        </ul>
+                        <h2><b>{toggle ? formatPrice(plan.anual - (plan.anual * .15), plan.moneda) : formatPrice(plan.mensual, plan.moneda)}</b></h2>
+                        {toggle && <small>Ahorra un 15%</small> }
+                        <hr />
+                        <ul>
+                            {plan.features.map((feature, i) =>
+                                <li key={plan.id + i}>{feature}</li>
+                            )}
+                        </ul>
+                        <Btn disabled={(data && plan.title === data.type)}
+                            onClick={()=>{updateSuscription(plan.title)}} colors="primary" 
+                            action={data && plan.title === data.type ? "Plan Actual" : "Suscribirse"} 
+                        />
+                    </Plan>)}
                 </Plans>
-            </>
-            }
+            </DisplayData>
         </PageContent>
     
     </AppTemplate>

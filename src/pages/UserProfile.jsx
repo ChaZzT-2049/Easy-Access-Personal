@@ -1,3 +1,4 @@
+import DisplayData from "../components/DisplayData/Index"
 import AppTemplate from "../components/Template/Index"
 import useAppContext from "../hooks/useAppContext"
 import useDoc from "../hooks/useDoc"
@@ -13,15 +14,10 @@ const UserProfile = () =>{
         <p>Numero de Telefono: {user.phoneNumber}</p>
         <hr />
         <h1>Datos Personales</h1>
-        {loading ? <li>Loading...</li> : <>
-            {error && <li>Error: {error}</li>}
-            {data ? <>
-                <p>Nombre: {data.nombre}</p>
-                <p>Apellidos: {data.apellidos}</p>
-            </> : <>No hay</>
-            }
-        </>}
-
+        <DisplayData loading={loading} loader="Cargando" error={error} data={data} noData="No Haz agregado tus datos personales aun">
+            <p>Nombre: {data?.nombre}</p>
+            <p>Apellidos: {data?.apellidos}</p>
+        </DisplayData>
     </AppTemplate>
 }
 export default UserProfile

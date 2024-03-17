@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs, onSnapshot, doc, addDoc, setDoc, deleteDoc, query, orderBy } from 'firebase/firestore';
-const useCollection = (path, order) => {
+import { collection, getDocs, onSnapshot, doc, addDoc, setDoc, deleteDoc, query, orderBy, where } from 'firebase/firestore';
+const useCollection = (path, order, fwhere) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,6 +15,10 @@ const useCollection = (path, order) => {
       if (order) {
         const [field, direction] = order.split(':');
         q = query(r, orderBy(field, direction));
+      }
+      if (fwhere) {
+        const [field, operator, value] = fwhere.split(':');
+        q = query(r, where(field, operator, value));
       }
       try {
         const snap = await getDocs(q || r);
@@ -31,7 +35,7 @@ const useCollection = (path, order) => {
       setData(fetchedData);
     });
     return () => unsubscribe();
-  }, [path, order]);
+  }, [path, order, fwhere]);
 
   const docAdd = async (newData) => {
     await addDoc(ref, newData).catch((error) => {

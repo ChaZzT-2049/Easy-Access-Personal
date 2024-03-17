@@ -5,6 +5,7 @@ import useDoc from "../hooks/useDoc"
 import { PageTitle } from "../UI"
 import useCollection from "../hooks/useCollection"
 import styled from "styled-components"
+import DisplayData from "../components/DisplayData/Index"
 
 const Instalations = styled.section`
     & h2{
@@ -54,7 +55,7 @@ const Instalation = styled.li`
 const AdminPanel = () => {
     const {user} = useAppContext()
     const susDoc = useDoc("suscriptions", user.uid)
-    const [instalations] = useCollection("instalations")
+    const [instalations, loading, error ] = useCollection("instalations","", `user:==:${user.uid}`)
     return <AppTemplate>
         <PageTitle>Panel de Administrador</PageTitle>
         {susDoc.data && susDoc.data.active ? 
@@ -64,17 +65,19 @@ const AdminPanel = () => {
                     <Btn type="icon" colors="primary" action="Crear Instalacion" icon="add_box" />
                 </h2>
                 <ul>
-                    {instalations.map(instalation => <Instalation key={instalation.id}>
-                        <div>
-                            <h4>{instalation.name}</h4>
-                            <p>{instalation.city}</p>
-                            <div className="actions">
-                                <Btn colors="primary" type="only-icon" icon="create"></Btn>
-                                <Btn colors="primary" type="only-icon" icon="open_in_new"></Btn>
+                    <DisplayData data={instalations} error={error} loading={loading} loader="Cargando" noData="No tienes Instalaciones creadas">
+                        {instalations.map(instalation => <Instalation key={instalation.id}>
+                            <div>
+                                <h4>{instalation.name}</h4>
+                                <p>{instalation.city}</p>
+                                <div className="actions">
+                                    <Btn colors="primary" type="only-icon" icon="create"></Btn>
+                                    <Btn colors="primary" type="only-icon" icon="open_in_new"></Btn>
+                                </div>
                             </div>
-                        </div>
-                        <i className="material-icons icon">{instalation.icon}</i>
-                    </Instalation>)}
+                            <i className="material-icons icon">{instalation.icon}</i>
+                        </Instalation>)}
+                    </DisplayData>
                 </ul>
             </Instalations> : <span>Activa tu suscripcion de nuevo</span>
         }
