@@ -64,9 +64,11 @@ const AdminPanel = () => {
                     Tus instalaciones:
                     <Btn type="icon" colors="primary" action="Crear Instalacion" icon="add_box" />
                 </h2>
-                <ul>
-                    <DisplayData data={instalations} error={error} loading={loading} loader="Cargando" noData="No tienes Instalaciones creadas">
-                        {instalations.map(instalation => <Instalation key={instalation.id}>
+                <DisplayData data={instalations} error={error} loading={loading} loader="Cargando"
+                    noData={{message: "No tienes Instalaciones creadas.", content: "Intenta crear una instalacion."}}
+                >
+                    <ul>{instalations.map(instalation => 
+                        <Instalation key={instalation.id}>
                             <div>
                                 <h4>{instalation.name}</h4>
                                 <p>{instalation.city}</p>
@@ -77,8 +79,8 @@ const AdminPanel = () => {
                             </div>
                             <i className="material-icons icon">{instalation.icon}</i>
                         </Instalation>)}
+                    </ul>
                     </DisplayData>
-                </ul>
             </Instalations> : <span>Activa tu suscripcion de nuevo</span>
         }
     </AppTemplate>

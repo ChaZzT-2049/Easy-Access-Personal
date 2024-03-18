@@ -1,29 +1,7 @@
 import styled from "styled-components";
-
-const Plan = styled.div`
-    background-color: ${({theme}) => theme.surfacev};
-    padding: 1rem;
-    opacity: .7;
-    & h4{
-        background-color: ${({theme}) => theme.onsurfv};
-        height: 1.125rem;
-    }
-    animation: loading .4s linear infinite alternate;
-
-    @keyframes loading {
-        0%{
-            & h4 {
-                background-color: ${({theme}) => theme.onsurfv};
-            }
-        }
-        100%{
-            & h4 {
-                background-color: ${({theme}) => theme.outline};
-            }
-        }
-    }
-`;
-const ButtonSkeleton = styled.div`
+import { Plan, Plans } from "../../UI";
+const ButtonSkeleton = styled.p`
+    margin: 0 auto;
     padding: 1rem;
     background-color: ${({theme}) => theme.primary};
     width: 5rem;
@@ -34,9 +12,67 @@ const ButtonSkeleton = styled.div`
 export const SkeletonPlans = () => {
     return <>
         <h3>Cargando planes</h3>
-        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
-        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
-        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
-        <Plan><h4> </h4> <h2><b></b></h2> <hr /><ButtonSkeleton /></Plan>
+            <Plans>
+                <Plan className="skeleton">
+                <h4> </h4> 
+                <ul className="selector">
+                    <li className="selected"></li>
+                    <li></li>
+                </ul>
+                <h2> </h2> <hr />
+                <ul className="features">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <ButtonSkeleton />
+            </Plan>
+            <Plan className="skeleton">
+                <h4> </h4> 
+                <ul className="selector">
+                    <li className="selected"></li>
+                    <li></li>
+                </ul>
+                <h2> </h2><hr />
+                <ul className="features">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <ButtonSkeleton />
+            </Plan>
+            <Plan className="skeleton">
+                <h4> </h4> 
+                <ul className="selector">
+                    <li className="selected"></li>
+                    <li></li>
+                </ul>
+                <h2> </h2><hr />
+                <ul className="features">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <ButtonSkeleton />
+            </Plan>
+            <Plan className="skeleton">
+                <h4> </h4> 
+                <ul className="selector">
+                    <li className="selected"></li>
+                    <li></li>
+                </ul>
+                <h2> </h2><hr />
+                <ul className="features">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <ButtonSkeleton />
+            </Plan>
+        </Plans>
     </>
 }

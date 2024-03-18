@@ -362,3 +362,102 @@ export const PageTitle = styled.h2`
     border-bottom: 2px solid ${({theme}) => theme.primary};
     margin-bottom: 1rem;
 `;
+export const Plans = styled.section`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    & :nth-child(1){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.onsurfv};
+            color: ${({theme}) => theme.surfacev};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.outline};
+            color: ${({theme}) => theme.surfacev};
+        }
+        
+    }
+    & :nth-child(2){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.secondary};
+            color: ${({theme}) => theme.onsecondary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.secondarycont};
+            color: ${({theme}) => theme.onsecondarycont};
+        }
+    }
+    & :nth-child(3){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.primary};
+            color: ${({theme}) => theme.onprimary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.primarycont};
+            color: ${({theme}) => theme.onprimarycont};
+        }
+    }
+    & :nth-child(4){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.onprimarycont};
+            color: ${({theme}) => theme.onprimary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.primarycont};
+            color: ${({theme}) => theme.onprimarycont};
+        }
+    }
+`;
+export const Plan = styled.div`
+    flex: 0 1 350px;
+    background-color: ${({theme}) => theme.surfacev};
+    padding: 1rem;
+    text-align: center;
+    & h4{
+        padding: .5rem;
+        border-radius: .25rem;
+        margin-bottom: .5rem;
+    }
+    & .selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .5rem 0;
+        & li{
+            padding: .5rem 2rem;
+            transition: all 200ms ease-in;
+            cursor: pointer;
+        }
+    }
+    & .features li{
+        margin-bottom: .25rem;
+    }
+    &.skeleton{
+        opacity: .7;
+        & h4{height: 1.125rem;}
+        & h2{height: 1.25rem; }
+        & h2, .features li{
+            width: 50%; margin-inline: auto;
+            background-color: ${({theme}) => theme.onsurfv};
+        }
+        & .features li{
+            height: 1rem;
+        }
+        animation: loading .4s linear infinite alternate;
+
+        @keyframes loading {
+            0%{
+                & h4, h2 {
+                    background-color: ${({theme}) => theme.onsurfv};
+                }
+            }
+            100%{
+                & h4, h2 {
+                    background-color: ${({theme}) => theme.outline};
+                }
+            }
+        }
+    }
+`;
