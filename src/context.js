@@ -12,11 +12,13 @@ export const AppProvider = ({children}) => {
     const [loader, setLoader] = useState("")
     const [tema, setTema] = useState(localStorage.getItem("theme") === "true")
     const [alerts, setAlerts] = useState([]);
-
+    const clearAlert = () => {
+        setAlerts((a) => a.slice(1));
+    }
     const createToast = (newAlert) => {
         setAlerts([...alerts, newAlert]);
         setTimeout(() => {
-          setAlerts((a) => a.slice(1));
+            clearAlert()
         }, 5000);
     };
     const toasts = {
@@ -27,7 +29,7 @@ export const AppProvider = ({children}) => {
             createToast({variant: "success",title, message})
         },
         warning: (title, message) =>{
-            createToast({variant: "error",title, message})
+            createToast({variant: "warning",title, message})
         },
         error: (title, message) =>{
             createToast({variant: "error",title, message})

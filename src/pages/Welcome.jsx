@@ -347,7 +347,7 @@ const Welcome = () => {
                                     <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
                                 )}
                             </ul>
-                            <Btn onClick={() => {navigate("/register")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
+                            <Btn onClick={() => {navigate("/suscription")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
                         </li>
                     )}
                 </Planes>

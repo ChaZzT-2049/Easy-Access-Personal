@@ -1,29 +1,14 @@
-import styled from "styled-components";
-import { PageTitle, Plan, Plans } from "../UI";
+import { PageTitle, Plan, Plans, SuscriptionInfo } from "../UI";
 import Btn from "../components/Button/Index"
 import AppTemplate from "../components/Template/Index"
 import useAppContext from "../hooks/useAppContext";
 import useCollection from "../hooks/useCollection";
 import useDoc from "../hooks/useDoc";
-import { SkeletonPlans } from "../components/Skeletons/Index";
+import { SkeletonPlans, SkeletonSuscription } from "../components/Skeletons/Index";
 import { formatPrice } from "../helpers/formatPrice";
 import useToggle from "../hooks/useToggle";
 import DisplayData from "../components/DisplayData/Index";
-const SuscriptionInfo = styled.div`
-    padding: 1rem;
-    border-radius: .5rem;
-    transition: background-color 200ms ease;
-    margin: 1rem auto;
-    max-width: 600px;
-    &.active{
-        background-color: ${({theme}) => theme.primarycont};
-        color: ${({theme}) => theme.onprimarycont};
-    }
-    &.inactive{
-        background-color: ${({theme}) => theme.outline};
-        color: ${({theme}) => theme.surfacev};
-    }
-`;
+
 const Suscription = () =>{
     const {user, toasts} = useAppContext()
     const {toggle, trigger} = useToggle()
@@ -44,18 +29,20 @@ const Suscription = () =>{
 
     return <AppTemplate>
         <PageTitle>Datos de Suscripcion</PageTitle>
-            <p>Personaliza la experiencia de tu cuenta en Aditum Delta con tu suscripción.</p>
-            <DisplayData loading={loading} error={error} data={data} loader={<li>Cargando</li>} 
-                noData={{message: "Aun no tienes una suscripción.", content: "Adquiere uno de nuestros planes y disfruta sus beneficios."}}
-            >
-                <SuscriptionInfo className={active ? "active" : "inactive"}>
-                    <h3><b>{type}</b></h3>
-                    <p>Estado: {active ? "Activa" : "Inactiva"}</p>
-                    <Btn onClick={toggleSuscription} colors="primary oncont" action={active ? "Desactivar" : "Activar"}/>
-                </SuscriptionInfo>
-            </DisplayData>
-        <DisplayData loading={plansLoading} error={plansError} data={plans} loader={<SkeletonPlans />} noData="No hay planes activos.">
-            <h3>Tipos de planes</h3>
+        <p>Personaliza la experiencia de tu cuenta en Aditum Delta con tu suscripción.</p>
+        <DisplayData loading={loading} error={error} data={data} loader={<SkeletonSuscription/>} 
+            noData={{message: "Aun no tienes una suscripción.", content: "Adquiere uno de nuestros planes y disfruta sus beneficios."}}
+        >
+            <SuscriptionInfo className={active ? "active" : "inactive"}>
+                <h3><b>{type}</b></h3>
+                <p>Estado: {active ? "Activa" : "Inactiva"}</p>
+                <Btn onClick={toggleSuscription} colors="primary oncont" action={active ? "Desactivar" : "Activar"}/>
+            </SuscriptionInfo>
+        </DisplayData>
+        <h3>Tipos de planes</h3>
+        <DisplayData loading={plansLoading} error={plansError} data={plans} loader={<SkeletonPlans />} 
+            noData={{message: "No hemos podido cargar los planes.", content: "Espera un momento."}}
+        >     
             <Plans>
                 {plans.map(plan => <Plan key={plan.id}>
                     <h4>{plan.title}</h4>
@@ -75,7 +62,8 @@ const Suscription = () =>{
                         onClick={()=>{updateSuscription(plan.title)}} colors="primary" 
                         action={data && plan.title === type ? "Plan Actual" : "Suscribirse"} 
                     />
-                </Plan>)}
+                    </Plan>
+                )}
             </Plans>
         </DisplayData>
     </AppTemplate>

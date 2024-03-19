@@ -172,9 +172,9 @@ const Sidebar = ({controls}) => {
             </Head>
             <Content>
                 <ProfileSection>
-                    <img src={ user.photoURL || ""} referrerPolicy="no-referrer" alt="Profile" />
-                    <h4>{ user.displayName}</h4>
-                    <small>{ user.email}</small>
+                    <img src={ user?.photoURL} referrerPolicy="no-referrer" alt="Profile" />
+                    <h4>{ user?.displayName}</h4>
+                    <small>{ user?.email}</small>
                 </ProfileSection>
                 <Section>
                     <NavTab to="/home" > Home <Icon icon="home" />

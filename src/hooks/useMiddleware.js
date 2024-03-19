@@ -4,18 +4,19 @@ import useDoc from "./useDoc"
 const useMiddleware = () => {
   const {auth, user} = useAppContext()
   const uid = user ? user.uid : null
-  const susDoc = useDoc("suscriptions", uid)
+  const {data} = useDoc("suscriptions", uid)
   const loginM = {
     redirect: "/home",
     validacion: auth
   }
   const authM = {
     redirect: "/login",
-    validacion: (auth === false || user === null)
+    validacion: (auth === false || user === null),
   }
   const suscriptionM = {
     redirect: "/suscription",
-    validacion: (user === null || !susDoc.data)
+    validacion: (user != null && (!data || data.type === "Starter")),
+    message: "Actualiza tu plan"
   }
   return {
     loginM,

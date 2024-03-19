@@ -368,6 +368,8 @@ export const Plans = styled.section`
     gap: 1rem;
     justify-content: center;
     margin-top: 1rem;
+    &.skeleton{animation: loading 800ms linear infinite alternate;
+    @keyframes loading {0%{opacity: .4}100%{opacity: .7;}}}
     & :nth-child(1){
         & h4, .selector li.selected{
             background-color: ${({theme}) => theme.onsurfv};
@@ -377,7 +379,7 @@ export const Plans = styled.section`
             background-color: ${({theme}) => theme.outline};
             color: ${({theme}) => theme.surfacev};
         }
-        
+        &.skeleton{transition-delay: 200ms;}
     }
     & :nth-child(2){
         & h4, .selector li.selected{
@@ -388,6 +390,7 @@ export const Plans = styled.section`
             background-color: ${({theme}) => theme.secondarycont};
             color: ${({theme}) => theme.onsecondarycont};
         }
+        &.skeleton{transition-delay: 400ms;}
     }
     & :nth-child(3){
         & h4, .selector li.selected{
@@ -398,6 +401,7 @@ export const Plans = styled.section`
             background-color: ${({theme}) => theme.primarycont};
             color: ${({theme}) => theme.onprimarycont};
         }
+        &.skeleton{transition-delay: 600ms;}
     }
     & :nth-child(4){
         & h4, .selector li.selected{
@@ -408,6 +412,7 @@ export const Plans = styled.section`
             background-color: ${({theme}) => theme.primarycont};
             color: ${({theme}) => theme.onprimarycont};
         }
+        &.skeleton{transition-delay: 800ms;}
     }
 `;
 export const Plan = styled.div`
@@ -432,32 +437,100 @@ export const Plan = styled.div`
         }
     }
     & .features li{
-        margin-bottom: .25rem;
+        text-align: left;
+        margin-bottom: .5rem;
+        &::first-letter{text-transform: uppercase;}
+        &::after{content:"."}
     }
     &.skeleton{
-        opacity: .7;
-        & h4{height: 1.125rem;}
-        & h2{height: 1.25rem; }
+        & h4{height: 1.125rem;}& h2{height: 1.25rem; width: 50%; margin-inline: auto;}
         & h2, .features li{
-            width: 50%; margin-inline: auto;
             background-color: ${({theme}) => theme.onsurfv};
         }
-        & .features li{
-            height: 1rem;
+        .selector li{height: 1rem;width: 2rem;}
+        & .features li{height: 1rem;width: 60%; &:last-child{width: 40%;}}
+    }
+`;
+export const SuscriptionInfo = styled.div`
+    padding: 1rem;
+    border-radius: .5rem;
+    transition: background-color 200ms ease;
+    margin: 1rem auto;
+    max-width: 600px;
+    &.active{
+        background: ${({theme}) => theme.primarycont};
+        color: ${({theme}) => theme.onprimarycont};
+    }
+    &.inactive{
+        background: ${({theme}) => theme.outline};
+        color: ${({theme}) => theme.surfacev};
+    }
+    &.skeleton{
+        background: ${({theme}) => theme.surfacev};
+        & h3, p{width: 25%; height: 1rem; background: ${({theme}) => theme.onsurfv}; margin-bottom: .5rem;}
+        animation: loading 800ms linear infinite alternate;
+        @keyframes loading {0%{opacity: .4}100%{opacity: .7;}}
+    }
+`;
+export const Instalations = styled.section`
+    & h2{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: .5rem;
+    }
+    & ul {
+        padding: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    &.skeleton{
+        animation: loading 800ms linear infinite alternate;
+        @keyframes loading {0%{opacity: .4}100%{opacity: .7;}}
+    }
+`;
+export const Instalation = styled.li`
+    background: ${({theme}) => theme.secondarycont};
+    color: ${({theme}) => theme.onsecondarycont};
+    display: flex;
+    flex: 0 1 200px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: .5rem;
+    padding: 1rem;
+    height: 90px;
+    gap: .5rem;
+    & div{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        & h4{font-weight: 700;}
+    }
+    & .actions{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: .5rem;
+    }
+    & .icon{
+        font-size: 3.5rem;
+        cursor: default;
+    }
+    &.skeleton{
+        gap: 1rem;
+        & div{
+            flex-grow: 1;
+            & h4, p { background: ${({theme}) => theme.onsecondarycont}; width: 100%; height: 1.5rem; margin-bottom: .5rem}
+            & p{width: 80%;}
         }
-        animation: loading .4s linear infinite alternate;
-
-        @keyframes loading {
-            0%{
-                & h4, h2 {
-                    background-color: ${({theme}) => theme.onsurfv};
-                }
-            }
-            100%{
-                & h4, h2 {
-                    background-color: ${({theme}) => theme.outline};
-                }
-            }
+        & i{
+            width: 3.5rem;
+            height: 3.5rem;
+            background: ${({theme}) => theme.onsecondarycont};
         }
     }
 `;

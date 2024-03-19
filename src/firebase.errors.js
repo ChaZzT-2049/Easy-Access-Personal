@@ -11,3 +11,6 @@ export const authErrors = {
     "auth/invalid-action-code": "Codigo de verificacion invalido, solicita uno nuevo.",
     defaulError: "Lo sentimos, hubo algun error. Intentalo mas tarde."
 }
+export const firestoreErrors = {
+    "Missing or insufficient permissions.": "La informacion no se encuentra disponible o no tienes los permisos suficientes."
+}

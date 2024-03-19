@@ -12,16 +12,14 @@ const Missing = styled.div`
         border-radius: .25rem .25rem 0 0;
         margin-bottom: 1rem;
     }
-    & span{
+    & p{
         padding: 0 1rem;
     }
 `;
 const NoData = ({message, content}) => {
     return <Missing>
         <h4>{message}</h4>
-        <span>
-            {content}
-        </span>
+        <p>{content}</p>
     </Missing>
 }
 export default NoData
