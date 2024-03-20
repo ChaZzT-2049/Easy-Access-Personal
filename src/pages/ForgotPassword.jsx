@@ -9,6 +9,7 @@ import useAuth from "../hooks/useAuth";
 import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../UI";
 import useMiddleware from "../hooks/useMiddleware";
 import Middleware from "../components/Middleware/Index";
+import { authErrors } from "../firebase.errors";
 
 const ForgotPassword = () => {
     const {forgotPassword} = useAuth()
@@ -34,7 +35,7 @@ const ForgotPassword = () => {
                                 forgotPassword(email.value).then(()=>{
                                     showResponseMessage("Hemos enviado un correo para actualizar tu contraseña.")
                                 }).catch((error)=>{
-                                    showResponseError(error.code)
+                                    showResponseError(authErrors[error.code] || authErrors.defaulError)
                                 });
                             }
                         }}
