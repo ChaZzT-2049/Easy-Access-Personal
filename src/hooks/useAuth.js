@@ -21,7 +21,10 @@ const useAuth = () =>{
     }
 
     const verifyEmail = async(oobCode) => {
-        return applyActionCode(firebaseAuth, oobCode)
+        setLoader("Verificando")
+        return applyActionCode(firebaseAuth, oobCode).finally(()=>{
+            setLoader("")
+        })
     }
 
     const changeName = async(name, lastname) => {

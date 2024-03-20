@@ -41,7 +41,7 @@ const AccountVerifyReset = () => {
                                         showResponseMessage("Se ha actalizado tu contraseña, intenta iniciar sesion de nuevo.")
                                         
                                     }).catch((error)=>{
-                                        showResponseError(authErrors[error.code])
+                                        showResponseError(authErrors[error.code] || authErrors.defaulError)
                                     })
                                 }
                             }}
@@ -63,9 +63,8 @@ const AccountVerifyReset = () => {
                             click={()=>{
                                 verifyEmail(oobCode).then(()=>{
                                     showResponseMessage("Correo verificado.")
-                                    
                                 }).catch((error)=>{
-                                    showResponseError(authErrors[error.code])
+                                    showResponseError(authErrors[error.code] || authErrors.defaulError)
                                 })
                             }} 
                         />
