@@ -24,16 +24,17 @@ const useAuth = () =>{
         return applyActionCode(firebaseAuth, oobCode)
     }
 
-    const changeName = async(name) => {
-        updateProfile(firebaseAuth.currentUser, {displayName: `${name}`}).catch((error) => {
+    const changeName = async(name, lastname) => {
+        updateProfile(firebaseAuth.currentUser, {displayName: `${name} ${lastname}`}).catch((error) => {
             console.log(error)
         });
     }
 
-    const signUp = async(name, apellidos, email, password)=>{
+    const signUp = async(name, lastname, email, password)=>{
         setLoader("Creando Cuenta")
         return createUserWithEmailAndPassword(firebaseAuth, email, password).then(async()=>{
             sendEmailToVerify()
+            changeName(name, lastname)
         }).finally(()=>{
             setLoader("")
         });
