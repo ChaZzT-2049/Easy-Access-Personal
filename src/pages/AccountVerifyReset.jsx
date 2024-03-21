@@ -60,7 +60,7 @@ const AccountVerifyReset = () => {
                         <FormResponse className={type}>{response}</FormResponse>
                         Haz clic en el boton para verificar tu correo electronico.
                         <Btn action="Verificar" colors="primary"
-                            click={()=>{
+                            onClick={()=>{
                                 verifyEmail(oobCode).then(()=>{
                                     showResponseMessage("Correo verificado.")
                                 }).catch((error)=>{
