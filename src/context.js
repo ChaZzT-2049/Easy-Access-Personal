@@ -33,7 +33,8 @@ export const AppProvider = ({children}) => {
         },
         error: (title, message) =>{
             createToast({variant: "error",title, message})
-        }
+        },
+        clear: clearAlert
     }
     const toggleTheme = () => {
         localStorage.theme = `${!tema}`

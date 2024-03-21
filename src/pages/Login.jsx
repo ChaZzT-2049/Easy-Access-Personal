@@ -48,7 +48,7 @@ const Login = () => {
                         pass.validate(pass.value)
                         if(email.valid && pass.valid){
                             login(email.value, pass.value).catch((error)=>{
-                                showResponseError(authErrors[error.code])
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }
                     }}>
@@ -65,21 +65,21 @@ const Login = () => {
                     <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login" 
                         onClick={() => {
                             loginWithGoogle().catch((error)=>{
-                                showResponseError(authErrors[error.code])
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
                         onClick={()=>{
                             loginWithFacebook().catch((error)=>{
-                                showResponseError(authErrors[error.code])
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
                         onClick={()=>{
                             loginWithMicrosoft().catch((error)=>{
-                                showResponseError(authErrors[error.code])
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />

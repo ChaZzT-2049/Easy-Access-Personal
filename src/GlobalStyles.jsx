@@ -38,6 +38,10 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         background: none;
     }
+    .skeleton{
+        animation: loading 800ms linear infinite alternate;
+        @keyframes loading {from{opacity: .4}to{opacity: .8;}}
+    }
 `;
 
 export default GlobalStyle;

@@ -368,8 +368,6 @@ export const Plans = styled.section`
     gap: 1rem;
     justify-content: center;
     margin-top: 1rem;
-    &.skeleton{animation: loading 800ms linear infinite alternate;
-    @keyframes loading {0%{opacity: .4}100%{opacity: .7;}}}
     & :nth-child(1){
         & h4, .selector li.selected{
             background-color: ${({theme}) => theme.onsurfv};
@@ -468,8 +466,6 @@ export const SuscriptionInfo = styled.div`
     &.skeleton{
         background: ${({theme}) => theme.surfacev};
         & h3, p{width: 25%; height: 1rem; background: ${({theme}) => theme.onsurfv}; margin-bottom: .5rem;}
-        animation: loading 800ms linear infinite alternate;
-        @keyframes loading {0%{opacity: .4}100%{opacity: .7;}}
     }
 `;
 export const Instalations = styled.section`
@@ -485,10 +481,6 @@ export const Instalations = styled.section`
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-    }
-    &.skeleton{
-        animation: loading 800ms linear infinite alternate;
-        @keyframes loading {0%{opacity: .4}100%{opacity: .7;}}
     }
 `;
 export const Instalation = styled.li`

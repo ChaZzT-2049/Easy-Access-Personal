@@ -150,6 +150,22 @@ const ProfileSection = styled(Section)`
         width: 30%;
         border-radius: 100%;
         border: 4px inset ${({theme}) => theme.primarycont};
+        &.no-photo{
+            width: 4rem;
+            height: 4rem;
+            background: ${({theme}) => theme.outline};
+            color: ${({theme}) => theme.surfacev};
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &::after{
+                content: "\\e853";
+                font-size: 3rem;
+                font-family: Material Icons;
+                text-align: center;
+            }
+        }
     }
     & h4{
         text-align: center;
@@ -172,8 +188,8 @@ const Sidebar = ({controls}) => {
             </Head>
             <Content>
                 <ProfileSection>
-                    <img src={ user?.photoURL} referrerPolicy="no-referrer" alt="Profile" />
-                    <h4>{ user?.displayName}</h4>
+                    <img className={!user.photoURL ? "no-photo" : "" } src={ user?.photoURL} referrerPolicy="no-referrer" alt="user" />
+                    <h4>{ user?.displayName || "Usuario"}</h4>
                     <small>{ user?.email}</small>
                 </ProfileSection>
                 <Section>

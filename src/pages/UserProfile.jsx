@@ -58,6 +58,38 @@ const AccountData = styled.section`
         }
     }
 `;
+const UserData = styled.section`
+    & h3{
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        & i{
+            color: ${({theme}) => theme.primary};
+            &:hover{
+                outline: 1px solid ${({theme}) => theme.onprimarycont};
+                color: ${({theme}) => theme.onprimarycont};
+                background: ${({theme}) => theme.primarycont};
+            }
+        }
+    }
+    & p{
+        margin-bottom: .5rem;
+    }
+    & .skeleton{
+        & p{
+            height: 1rem;
+            width: 15rem;
+            background: ${({theme}) => theme.outline};
+            & b{
+                display: inline-flex;
+                width: 5rem;
+                height: 1rem;
+                background: ${({theme}) => theme.onsurfv};
+            }
+        }
+    }
+`;
 const UserProfile = () =>{
     const {user} = useAppContext()
     const {sendEmailToVerify} = useAuth()
@@ -65,7 +97,7 @@ const UserProfile = () =>{
     return <AppTemplate>
         <PageTitle>Perfil de Usuario</PageTitle>
         <AccountData>
-            <img className={!user.photoURL && "no-photo"} src={user.photoURL} alt={user.photoURL ? user.displayName : "Sin foto de perfil"} referrerPolicy="no-referrer" />
+            <img className={!user.photoURL ? "no-photo" : ""} src={user.photoURL} alt={user.photoURL ? user.displayName : "Sin foto de perfil"} referrerPolicy="no-referrer" />
             <div>
                 <h3>Datos de la cuenta <Icon icon="create"/></h3>
                 <p><b><Icon icon="account_box"/></b> {user.displayName || "Aun no agregado"}</p>
@@ -80,13 +112,16 @@ const UserProfile = () =>{
             </div>
         </AccountData>
         <hr />
-        <h3>Datos Personales {data && <Icon icon="create"/>}</h3>
-        <DisplayData loading={loading} loader="Cargando" error={error} data={data} 
-            noData={{message: "No haz ingresado tus datos personales.", content: <Btn action="Agregar mis datos" colors="primary"/>}}
-        >
-            <p>Nombre: {data?.nombre}</p>
-            <p>Apellidos: {data?.apellidos}</p>
-        </DisplayData>
+        <UserData>
+            <h3>Datos Personales {data && <Icon icon="create"/>}</h3>
+            <DisplayData loading={loading} loader={<div className="skeleton"><p><b/></p><p><b/></p></div>} 
+                error={error} data={data} 
+                noData={{message: "No haz ingresado tus datos personales.", content: <Btn action="Agregar mis datos" colors="primary"/>}}
+            >
+                <p><b>Nombre:</b> {data?.nombre}</p>
+                <p><b>Apellidos:</b> {data?.apellidos}</p>
+            </DisplayData>
+        </UserData>
     </AppTemplate>
 }
 export default UserProfile
