@@ -1,15 +1,17 @@
 import useAppContext from "./useAppContext"
 import useDoc from "./useDoc"
-window.onbeforeunload = () => {
-  localStorage.setItem("previous", window.location.pathname)
-}
+document.addEventListener("visibilitychange", ()=> {
+  if(document.visibilityState === "hidden"){
+    localStorage.setItem("previous", window.location.pathname)
+  }
+})
 const useMiddleware = () => {
   const {auth, user} = useAppContext()
   const uid = user ? user.uid : null
   const {data} = useDoc("suscriptions", uid)
-  const previous = localStorage.getItem("previous")
+  const previous = localStorage.getItem("previous") || "/home"
   const loginM = {
-    redirect:  previous === "/" ? "/home" : previous,
+    redirect:  previous === "/login" ? "/home" : previous,
     validacion: auth
   }
   const authM = {

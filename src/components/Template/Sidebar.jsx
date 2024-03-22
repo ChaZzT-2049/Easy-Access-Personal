@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Icon from "../Icon/Index";
 import Logo from "../Logo/Index"
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import useAppContext from "../../hooks/useAppContext";
 import useAuth from "../../hooks/useAuth";
 const AsideContainer = styled.dialog`
@@ -180,6 +180,7 @@ const Sidebar = ({controls}) => {
     const {closeOutside, trigger, ref} = controls
     const {user} = useAppContext()
     const {logout} = useAuth()
+    const location = useLocation()
     return <AsideContainer onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <Aside>
             <Head>
@@ -208,6 +209,7 @@ const Sidebar = ({controls}) => {
                     <NavTab to="/perfil" > Perfil de Usuario <Icon icon="account_circle" /></NavTab>
                     <NavTab to="/suscription" > Suscripción <Icon icon="credit_card" /></NavTab>
                     <NavBtn onClick={() => {
+                        localStorage.setItem("previous", location.pathname)
                         logout();
                     }}>
                         Cerrar Sesión
