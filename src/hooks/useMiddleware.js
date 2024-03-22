@@ -1,12 +1,15 @@
 import useAppContext from "./useAppContext"
 import useDoc from "./useDoc"
-
+window.onbeforeunload = () => {
+  localStorage.setItem("previous", window.location.pathname)
+}
 const useMiddleware = () => {
   const {auth, user} = useAppContext()
   const uid = user ? user.uid : null
   const {data} = useDoc("suscriptions", uid)
+  const previous = localStorage.getItem("previous")
   const loginM = {
-    redirect: "/home",
+    redirect:  previous === "/" ? "/home" : previous,
     validacion: auth
   }
   const authM = {

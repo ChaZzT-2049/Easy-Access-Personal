@@ -6,7 +6,6 @@ import RouteList from "./components/Routes/Index";
 import { AppProvider } from "./context";
 
 function App() {
-
   return (
     <AppProvider>
       <GlobalStyle />
