@@ -12,16 +12,18 @@ export const AppProvider = ({children}) => {
     const [loader, setLoader] = useState("")
     const [tema, setTema] = useState(localStorage.getItem("theme") === "true")
     const [alerts, setAlerts] = useState([]);
-    const clearAlert = () => {
+    const deleteToast = () => {
         setAlerts((a) => a.slice(1));
     }
     const createToast = (newAlert) => {
-        setAlerts([...alerts, newAlert]);
         setTimeout(() => {
-            clearAlert()
-        }, 5000);
+            setAlerts([...alerts, newAlert]);
+        }, 500);
+        setTimeout(()=>{
+            deleteToast()
+        },5000)
     };
-    const toasts = {
+    const appToast = {
         info: (title, message) =>{
             createToast({variant: "info",title, message})
         },
@@ -34,7 +36,14 @@ export const AppProvider = ({children}) => {
         error: (title, message) =>{
             createToast({variant: "error",title, message})
         },
-        clear: clearAlert
+        delete: deleteToast
+    }
+    const appLoader = {
+        basic: () => {setLoader("Cargando")},
+        login: () => {setLoader("Iniciando Sesión")},
+        register: () => {setLoader("Creando Cuenta")},
+        custom: (message) => {setLoader(message)},
+        clearLoader: () => {setLoader("")}
     }
     const toggleTheme = () => {
         localStorage.theme = `${!tema}`
@@ -42,14 +51,13 @@ export const AppProvider = ({children}) => {
     }
     useLayoutEffect(()=>{
         const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
-            setLoader("Cargando")
             setUser(currentUser)
             if(currentUser === null){
                 setAuth(false)
             }else{
+                localStorage.setItem("uid", currentUser.uid)
                 setAuth(true)
             }
-            setLoader("")
         });
         return () => unsubscribe();
     },[user])
@@ -59,8 +67,8 @@ export const AppProvider = ({children}) => {
         loader,
         tema,
         alerts,
-        toasts,
-        setLoader,
+        appToast,
+        appLoader,
         toggleTheme,
     }
     return <AppContext.Provider value={values} >{children}</AppContext.Provider>

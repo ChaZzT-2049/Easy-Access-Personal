@@ -1,7 +1,8 @@
 import { useState } from "react"
 
 const useInput = (type, validation) =>{
-    const [value, setValue] = useState(type === "checkbox" ? false : "");
+    const initialValue = type === "checkbox" ? false : ""
+    const [value, setValue] = useState(initialValue);
     const [error, setError] = useState(false);
     const [valid, setValid] = useState(false);
     const [message, setMessage] = useState("");
@@ -13,6 +14,9 @@ const useInput = (type, validation) =>{
         setMessage(description);
         !fail && setValid(true)
     }
+    const clear = () => {
+        setValue(initialValue)
+    }
 
     return {
         type,
@@ -20,7 +24,8 @@ const useInput = (type, validation) =>{
         error,
         valid,
         message,
-        validate
+        validate,
+        clear
     }
 }
 export default useInput

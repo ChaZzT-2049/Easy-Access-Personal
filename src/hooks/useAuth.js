@@ -3,93 +3,80 @@ import useAppContext from "./useAppContext"
 import { firebaseAuth } from "../firebase"
 
 const useAuth = () =>{
-    const {setLoader, toasts} = useAppContext()
-
+    const {appToast, appLoader} = useAppContext()
     const login = async(email, password) => {
-        setLoader("Iniciando Sesión")
+        appLoader.login()
         return signInWithEmailAndPassword(firebaseAuth, email, password).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         })
     }
-
     const sendEmailToVerify = async() => {
         sendEmailVerification(firebaseAuth.currentUser).then(() => {
-            toasts.success("Verifica tu Correo","Hemos enviado un codigo de verificacion a tu correo.")
+            appToast.success("Verifica tu Correo","Hemos enviado un codigo de verificacion a tu correo.")
         }).catch((error) => {
-            console.log(error)
+            appToast.error("Correo de verificación fallido", error.code)
         });
     }
-
     const verifyEmail = async(oobCode) => {
-        setLoader("Verificando")
+        appLoader.custom("Verificando Correo")
         return applyActionCode(firebaseAuth, oobCode).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         })
     }
-
-    const changeName = async(name, lastname) => {
-        updateProfile(firebaseAuth.currentUser, {displayName: `${name} ${lastname}`}).catch((error) => {
-            console.log(error)
+    const changeName = async(username) => {
+        updateProfile(firebaseAuth.currentUser, {displayName: username}).catch((error) => {
+            appToast.error("No se pudo actualizar tu nombre de usuario.", error.code)
         });
     }
-
-    const signUp = async(name, lastname, email, password)=>{
-        setLoader("Creando Cuenta")
+    const signUp = async(email, password)=>{
+        appLoader.register()
         return createUserWithEmailAndPassword(firebaseAuth, email, password).then(async()=>{
             sendEmailToVerify()
-            changeName(name, lastname)
         }).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         });
     }
-
     const loginWithGoogle = async() => {
-        setLoader("Iniciando Sesión")
+        appLoader.login()
         const googleProvider = new GoogleAuthProvider()
         return signInWithPopup(firebaseAuth, googleProvider).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         });
     }
-
     const loginWithFacebook = async() => {
-        setLoader("Iniciando Sesión")
+        appLoader.login()
         const facebookProvider = new FacebookAuthProvider()
         return signInWithPopup(firebaseAuth, facebookProvider).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         });
     }
-
     const loginWithMicrosoft = async() => {
-        setLoader("Iniciando Sesión")
+        appLoader.login()
         const microsoftProvider = new OAuthProvider('microsoft.com')
         return signInWithPopup(firebaseAuth, microsoftProvider).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         });
     }
-
     const logout = () => {
-        setLoader("Cerrando Sesion")
-        signOut(firebaseAuth).catch((e)=>{
-            console.log(e)
+        appLoader.custom("Cerrando Sesión")
+        signOut(firebaseAuth).catch((error)=>{
+            appToast.error("Error al cerrar sesión.", error.code)
         }).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         })
     }
-
     const forgotPassword = async(email) =>{
-        setLoader("Enviando correo de recuperación.")
+        appLoader.custom("Enviando correo de recuperación.")
         return sendPasswordResetEmail(firebaseAuth, email).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         });
     }
-
     const resetPassword = async(oobCode, newPassword) =>{
-        setLoader("Cambiando contraseña.")
+        appLoader.custom("Cambiando contraseña.")
         return confirmPasswordReset(firebaseAuth, oobCode, newPassword).finally(()=>{
-            setLoader("")
+            appLoader.clearLoader()
         });
     }
-    
     return {
         login, loginWithGoogle, loginWithFacebook, loginWithMicrosoft,
         signUp,

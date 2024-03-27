@@ -26,7 +26,6 @@ const Message = styled.section`
     }
     & p { margin-bottom: 1rem;}
 `;
-
 const NotFound = () => {
     const navigate = useNavigate()
     return <>
@@ -39,7 +38,7 @@ const NotFound = () => {
                     <h1>Error 404</h1> <span className="material-icons">sentiment_very_dissatisfied</span>
                 </div>
                 <p>Parece que la pagina que estas buscando no existe, lo sentimos.</p>
-                <Btn action="Volver" colors="primary" type="icon" icon="history" click={()=>{
+                <Btn action="Volver" colors="primary" type="icon" icon="history" onClick={()=>{
                     navigate(-1)
                 }}/>
             </Message>

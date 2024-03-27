@@ -1,9 +1,9 @@
+import { crudDoc } from "../firebase.crud"
 import useAppContext from "./useAppContext"
-import useDoc from "./useDoc"
+const susDoc = crudDoc("suscriptions", localStorage.getItem("uid") || null)
 const useMiddleware = () => {
   const {auth, user} = useAppContext()
-  const uid = user ? user.uid : null
-  const {data} = useDoc("suscriptions", uid)
+  const suscription = susDoc.read()
   const previous = localStorage.getItem("previous") || "/home";
   const loginM = {
     redirect:  previous,
@@ -15,7 +15,7 @@ const useMiddleware = () => {
   }
   const suscriptionM = {
     redirect: "/suscription",
-    validacion: (user != null && (!data || data.type === "Starter")),
+    validacion: (user != null && (!suscription?.data || suscription?.data.type === "Starter")),
     message: "Actualiza tu plan"
   }
   return {

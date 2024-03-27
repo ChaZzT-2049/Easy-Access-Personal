@@ -224,8 +224,8 @@ export const Field = styled.div`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    gap: 1rem;
-    & label{font-weight: 700;}
+    & label{font-weight: 700;padding-bottom: .5rem;}
+    & input{margin-bottom: .5rem;};
     &:focus-within label{
         color: ${({theme}) => theme.primary};
         transition: all 200ms ease-in;
@@ -469,14 +469,14 @@ export const SuscriptionInfo = styled.div`
     }
 `;
 export const Instalations = styled.section`
-    & h2{
+    &> section{
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         gap: .5rem;
     }
-    & ul {
+    &> ul {
         padding: 1rem 0;
         display: flex;
         flex-wrap: wrap;

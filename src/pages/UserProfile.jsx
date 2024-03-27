@@ -4,9 +4,9 @@ import Btn from "../components/Button/Index"
 import DisplayData from "../components/DisplayData/Index"
 import AppTemplate from "../components/Template/Index"
 import useAppContext from "../hooks/useAppContext"
-import useDoc from "../hooks/useDoc"
 import Icon from "../components/Icon/Index"
 import useAuth from "../hooks/useAuth"
+import { crudDoc } from "../firebase.crud"
 const AccountData = styled.section`
     display: flex;
     gap: 1rem;
@@ -90,10 +90,11 @@ const UserData = styled.section`
         }
     }
 `;
+const userCrud = crudDoc("users", localStorage.getItem("uid") || null)
 const UserProfile = () =>{
     const {user} = useAppContext()
     const {sendEmailToVerify} = useAuth()
-    const {data, loading, error} = useDoc("users", user.uid)
+    const userDoc = userCrud.read()
     return <AppTemplate>
         <PageTitle>Perfil de Usuario</PageTitle>
         <AccountData>
@@ -113,13 +114,13 @@ const UserProfile = () =>{
         </AccountData>
         <hr />
         <UserData>
-            <h3>Datos Personales {data && <Icon icon="create"/>}</h3>
-            <DisplayData loading={loading} loader={<div className="skeleton"><p><b/></p><p><b/></p></div>} 
-                error={error} data={data} 
+            <h3>Datos Personales {userDoc?.data && <Icon icon="create"/>}</h3>
+            <DisplayData loader={<div className="skeleton"><p><b/></p><p><b/></p></div>} 
+                error={userDoc?.error} data={userDoc?.data} 
                 noData={{message: "No haz ingresado tus datos personales.", content: <Btn action="Agregar mis datos" colors="primary"/>}}
             >
-                <p><b>Nombre:</b> {data?.nombre}</p>
-                <p><b>Apellidos:</b> {data?.apellidos}</p>
+                <p><b>Nombre:</b> {userDoc?.data?.nombre}</p>
+                <p><b>Apellidos:</b> {userDoc?.data?.apellidos}</p>
             </DisplayData>
         </UserData>
     </AppTemplate>

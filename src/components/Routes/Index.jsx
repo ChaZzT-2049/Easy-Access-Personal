@@ -21,7 +21,7 @@ import useMiddleware from "../../hooks/useMiddleware";
 import Middleware from "../Middleware/Index";
 
 const RouteList = () => {
-  const {tema, loader, alerts, toasts} = useAppContext();
+  const {tema, loader, alerts, appToast} = useAppContext();
   const {suscriptionM, authM} = useMiddleware()
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
     <Loader message={loader}/>
@@ -35,7 +35,7 @@ const RouteList = () => {
         <Route path="/account-verify-reset" element={ <AccountVerifyReset/> }/>
         <Route path="/home" element={<Middleware {...authM} children={<Home/>}/>} />
         <Route path="/admin-panel" element={<Middleware {...authM} children={
-          <Middleware alert={toasts.warning} {...suscriptionM} children={<AdminPanel/>}/>}/>
+          <Middleware alert={appToast.warning} {...suscriptionM} children={<AdminPanel/>}/>}/>
         } />
         <Route path="/asignaciones" element={<Middleware {...authM} children={<Asignaciones/>}/>}/>
         <Route path="/perfil" element={<Middleware {...authM} children={<UserProfile/>}/>}/>
