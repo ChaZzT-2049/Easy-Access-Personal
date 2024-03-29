@@ -14,6 +14,7 @@ const InputSelect = styled.button`
     box-sizing: border-box;
     margin-bottom: .5rem;
     &:hover{ background: ${({theme})=>theme.surfacev}; }
+    &:not(:hover){ background: inherit}
     &:focus{
         border-color: ${({theme})=>theme.secondary};
         outline: 3px solid ${({theme})=>theme.secondarycont};

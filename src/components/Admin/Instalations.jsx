@@ -9,6 +9,7 @@ import InstalationEdit from "./InstalationEdit"
 import { icons } from "./icons"
 import styled from "styled-components"
 import InstalationDeactivate from "./InstalationDeactivate"
+import { Link } from "react-router-dom"
 const ContextMenu = styled.dialog`
     inset: unset;
     background: ${({theme}) => theme.surfacev};
@@ -60,9 +61,9 @@ const AdminInstalations = ({data, editAction, deactivate}) => {
                 <section>
                     <h4>{instalation.name}</h4>
                     <p>{instalation.city}</p>
-                    <div className="actions">
-                        <Btn colors="primary" type="only-icon" icon="open_in_new"/>
-                    </div>
+                    <Link to={`/admin/instalation/${instalation.id}`} className="actions">
+                        <Btn colors="primary" action="Ver Instalación" type="icon" icon="open_in_new"/>
+                    </Link>
                 </section>
                 <section className="context">
                     <Btn colors="primary" type="only-icon" icon="more_horiz"

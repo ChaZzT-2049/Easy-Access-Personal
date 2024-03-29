@@ -37,6 +37,9 @@ const RouteList = () => {
         <Route path="/admin-panel" element={<Middleware {...authM} children={
           <Middleware alert={appToast.warning} {...suscriptionM} children={<AdminPanel/>}/>}/>
         } />
+        <Route path="/admin/instalation/:id" element={<Middleware {...authM} children={
+          <Middleware alert={appToast.warning} {...suscriptionM} children={<AdminInstalation/>}/>}/>
+        } />
         <Route path="/asignaciones" element={<Middleware {...authM} children={<Asignaciones/>}/>}/>
         <Route path="/perfil" element={<Middleware {...authM} children={<UserProfile/>}/>}/>
         <Route path="/suscription" element={<Middleware {...authM} children={<Suscription/>}/>}/>
