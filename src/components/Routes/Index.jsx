@@ -19,6 +19,7 @@ import {lightTheme, darkTheme} from "../../UI/themes";
 import useAppContext from "../../hooks/useAppContext";
 import useMiddleware from "../../hooks/useMiddleware";
 import Middleware from "../Middleware/Index";
+import AdminInstalation from "../../pages/AdminInstalation";
 
 const RouteList = () => {
   const {tema, loader, alerts, appToast} = useAppContext();
