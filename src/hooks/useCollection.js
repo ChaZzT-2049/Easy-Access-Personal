@@ -15,7 +15,7 @@ const useCollection = (path, options) => {
             setLoadingColl(false)
         };
         fetchCollection();
-    },[]);
+    },[path, options]);
 
     const getCollection = async() =>{
         const fetchedData = await crud.read();

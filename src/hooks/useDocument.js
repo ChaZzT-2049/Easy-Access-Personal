@@ -17,7 +17,7 @@ const useDocument = (path, id) => {
             setLoadingDoc(false)
         };
         fetchCollection();
-    },[]);
+    },[path, id]);
 
     const getDocument = async() =>{
         const fetchedData = await crud.read().catch((error)=>{
