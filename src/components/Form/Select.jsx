@@ -56,7 +56,7 @@ const Option = styled.li`
         background: ${({theme})=>theme.primarycont};
     }
 `;
-const Select = ({name, id, placeholder, label,  options = [], selected, handleOption, error, valid}) => {
+const Select = ({name, id, placeholder, label, options, selected, handleOption, error, valid}) => {
     return <Field>
         <label htmlFor={id}>{label}</label>
         <InputSelect className={error && "error"} popovertarget={`${id}-options`} name={name} id={id}>
@@ -65,11 +65,11 @@ const Select = ({name, id, placeholder, label,  options = [], selected, handleOp
                 : <>{placeholder} <Icon icon="arrow_drop_down"/></>}
             </p>
             <Options popover="auto" id={`${id}-options`}>
+                <p>{placeholder} <Icon icon="arrow_drop_up"/></p>
                 {options.map((option, i) => <Option key={option.value + i} value={option.value}
-                onClick={async()=>{
+                onClick={()=>{
                     handleOption(option)
-                }}
-                >
+                }}>
                     {option.title} <Icon icon={option.icon}/>
                 </Option>)}
             </Options>

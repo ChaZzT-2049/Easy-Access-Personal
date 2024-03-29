@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Btn from "../Button/Index"
 import Icon from "../Icon/Index";
 const ModalStyled = styled.dialog`
-    width: 100%;
+    width: 95%;
     max-width: 600px;
     background: ${({theme}) => theme.bg};
     color: ${({theme}) => theme.onbg};
@@ -33,6 +33,11 @@ const ModalStyled = styled.dialog`
     }
     & section{
         padding: 1rem;
+        &> small{
+            padding: 1rem;
+            background: ${({theme}) => theme.errorcont};
+            color: ${({theme}) => theme.onerrorcont};
+        }
     }
     & div.actions{
         display: flex;
@@ -44,15 +49,20 @@ const ModalStyled = styled.dialog`
     }
 `;
 
-const Modal = ({controls, children, modalFunction, confirm, title}) => {
+const Modal = ({controls, children, modalFunction, confirm, title, clean}) => {
     const {closeOutside, trigger, ref} = controls
-    return <ModalStyled onClick={(e) =>{closeOutside(e)}} ref={ref}>
-        <h2>{title} <Icon onClick={trigger} icon="close"/></h2>
+    return <ModalStyled onClick={(e) =>{closeOutside(e);}} ref={ref}>
+        <h2>{title} <Icon onClick={()=>{trigger()}} icon="close"/></h2>
         <section>
             {children}
         </section>
         <div className="actions">
-            <Btn action="Cancelar" colors="primary" onClick={trigger} />
+            <Btn action="Cancelar" colors="primary" onClick={() => {
+                trigger()
+                if(clean){
+                    clean()
+                }
+            }} />
             <Btn action={confirm} colors="primary oncont" onClick={modalFunction} />
         </div>
     </ModalStyled>

@@ -1,6 +1,7 @@
 import {createContext, useLayoutEffect, useState} from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth} from "./firebase";
+import useDocument from "./hooks/useDocument";
 
 export const AppContext = createContext()
 export const AppProvider = ({children}) => {
@@ -9,6 +10,7 @@ export const AppProvider = ({children}) => {
     }
     const [user,setUser] = useState(null)
     const [auth, setAuth] = useState(false)
+    const { document, updateDoc } = useDocument("suscriptions", localStorage.getItem("uid") || null)
     const [loader, setLoader] = useState("")
     const [tema, setTema] = useState(localStorage.getItem("theme") === "true")
     const [alerts, setAlerts] = useState([]);
@@ -16,9 +18,7 @@ export const AppProvider = ({children}) => {
         setAlerts((a) => a.slice(1));
     }
     const createToast = (newAlert) => {
-        setTimeout(() => {
-            setAlerts([...alerts, newAlert]);
-        }, 500);
+        setAlerts([...alerts, newAlert]);
         setTimeout(()=>{
             deleteToast()
         },5000)
@@ -64,12 +64,14 @@ export const AppProvider = ({children}) => {
     const values ={
         auth,
         user,
+        suscription: document,
         loader,
         tema,
         alerts,
         appToast,
         appLoader,
         toggleTheme,
+        updateSuscription: updateDoc
     }
     return <AppContext.Provider value={values} >{children}</AppContext.Provider>
 }

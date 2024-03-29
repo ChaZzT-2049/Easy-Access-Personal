@@ -95,7 +95,7 @@ const Options = ({controls}) =>{
     return <Menu onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <div>
             <h3>Options</h3>
-            <Icon onClick={trigger} icon="close"/>
+            <Icon onClick={()=>{trigger()}} icon="close"/>
         </div>
         <ul>
             <li>Item</li>

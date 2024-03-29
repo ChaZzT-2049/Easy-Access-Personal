@@ -184,7 +184,7 @@ const Sidebar = ({controls}) => {
     return <AsideContainer onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <Aside>
             <Head>
-                <Icon onClick={trigger} icon="close" />
+                <Icon onClick={()=>{trigger()}} icon="close" />
                 <h2>Menú</h2>
             </Head>
             <Content>

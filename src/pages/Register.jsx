@@ -24,7 +24,7 @@ const Register = () => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const passconf = useInput("password", validatePassconf)
-    const terms = useInput("checkbox", validateTerms)
+    const terms = useInput("checkbox", validateTerms, false)
     const {response, type, showResponseError} = useFormResponse();
 
     const {loginM} = useMiddleware()

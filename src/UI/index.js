@@ -476,7 +476,7 @@ export const Instalations = styled.section`
         flex-wrap: wrap;
         gap: .5rem;
     }
-    &> ul {
+    &> ul{
         padding: 1rem 0;
         display: flex;
         flex-wrap: wrap;
@@ -487,26 +487,30 @@ export const Instalation = styled.li`
     background: ${({theme}) => theme.secondarycont};
     color: ${({theme}) => theme.onsecondarycont};
     display: flex;
-    flex: 0 1 200px;
+    flex: 1 1 250px;
     justify-content: space-between;
     align-items: center;
     border-radius: .5rem;
     padding: 1rem;
-    height: 90px;
     gap: .5rem;
-    & div{
+    position: relative;
+    &.inactive{
+        background: ${({theme}) => theme.outline};
+        color: ${({theme}) => theme.surfacev};
+    }
+    & section{
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: 1rem;
         & h4{font-weight: 700;}
     }
-    & .actions{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        gap: .5rem;
+    & .context{
+        & button{
+            align-self: flex-end;
+            padding: 0;
+        }
     }
     & .icon{
         font-size: 3.5rem;
