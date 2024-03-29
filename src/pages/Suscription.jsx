@@ -12,14 +12,14 @@ const Suscription = () =>{
     const {appToast, suscription, updateSuscription} = useAppContext()
     const {toggle, trigger} = useToggle()
     const {collection, loadingColl, errorColl} = useCollection("suscription-plans", {orderParams: {oField: "mensual"}})
-    const {document, loadingDoc, errorDoc, updateDoc} = useDocument("suscriptions", localStorage.getItem("uid") || null)
+    const {document, loadingDoc, errorDoc} = useDocument("suscriptions", localStorage.getItem("uid") || null)
     const updateSuscriptionPlan = async(type) => {
-        updateDoc({type: type, active: suscription.active}).then(()=>{
+        updateSuscription({type: type, active: suscription.active}).then(()=>{
             appToast.success("Operacion exitosa", "Se ha actualizado tu suscripcion")
         })
     }
     const toggleSuscription = async() => {
-        updateDoc({type: suscription.type, active: !suscription.active}).then(()=>{
+        updateSuscription({type: suscription.type, active: !suscription.active}).then(()=>{
             appToast.success("Cambio Exitoso", "Se desactivado tu suscripcion")
         })
     }

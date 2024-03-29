@@ -9,7 +9,8 @@ const useDocument = (path, id) => {
 
     useEffect(() => {
         const fetchCollection = async () => {
-            const fetchedData = await crud.read().catch((error)=>{
+            const crudEffect = documentCRUD(path, id)
+            const fetchedData = await crudEffect.read().catch((error)=>{
                 setErrorDoc(error.message)
             });
             setData(fetchedData);

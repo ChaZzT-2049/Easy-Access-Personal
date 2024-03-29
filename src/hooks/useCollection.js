@@ -9,7 +9,8 @@ const useCollection = (path, options) => {
 
     useEffect(() => {
         const fetchCollection = async () => {
-            const fetchedData = await crud.read();
+            const crudEffect = documentCRUD(path, id)
+            const fetchedData = await crudEffect.read();
             setData(fetchedData);
             setLoadingColl(false)
         };
