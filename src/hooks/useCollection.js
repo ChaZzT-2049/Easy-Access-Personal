@@ -1,27 +1,26 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { collectionCRUD } from '../firebase.crud';
 
 const useCollection = (path, options) => {
     const crud = useMemo(() => collectionCRUD(path, options), [path, options]);
-    const [collection, setData] = useState([]);
+    const [collection, setCollection] = useState(null);
     const [loadingColl, setLoadingColl] = useState(true)
     const [errorColl, setErrorColl] = useState("")
 
-    useEffect(() => {
-        const fetchCollection = async () => {
-            const crudEffect = collectionCRUD(path, options)
-            const fetchedData = await crudEffect.read();
-            setData(fetchedData);
+    const getCollection = useCallback(async() =>{
+        setLoadingColl(true)
+        const fetchedData = await crud.read().catch((error)=>{
+            setErrorColl(error.message)
+        }).finally(()=>{
             setLoadingColl(false)
-        };
-        fetchCollection();
-    },[path, options]);
-
-    const getCollection = async() =>{
-        const fetchedData = await crud.read();
-        setData(fetchedData);
-    }
-
+        });
+        setCollection(fetchedData);
+    },[crud])
+    useEffect(()=>{
+        if(collection === null){
+            getCollection()
+        }
+    },[collection, getCollection])
     const createCollDoc = async(newData) => {
         return crud.create(newData).then(()=>{
             getCollection()

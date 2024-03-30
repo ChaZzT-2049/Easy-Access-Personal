@@ -34,7 +34,7 @@ const Login = () => {
                 </NavHeader>
             </Header>
             <SignIUCard>
-                <SignIUCardLeft url={signInUp}>
+                <SignIUCardLeft $url={signInUp}>
                     <div id="backdrop" className={tema ? "light" : "dark"}>
                         <h2 className="message">¡Bienvenido!</h2>
                         <Logo slogan={true}/>

@@ -265,7 +265,7 @@ const Welcome = () => {
             </NavHeader>
         </Header>
         <PageContainer>
-            <Banner className={tema ? "light" : "dark"} url={banner}>
+            <Banner className={tema ? "light" : "dark"} $url={banner}>
                 <div className="info">
                     <div className="text flex-column">
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
@@ -286,7 +286,7 @@ const Welcome = () => {
                 </div>
                 <Logo redirect={false} slogan={true} />
             </section>
-            <SectionBg bg={colors.secondary} txt={colors.onsecondary}>
+            <SectionBg $bg={colors.secondary} $txt={colors.onsecondary}>
                 <section className="center">
                     <div className="flex-column description">
                         <h1>Diferentes casos, una solución.</h1>

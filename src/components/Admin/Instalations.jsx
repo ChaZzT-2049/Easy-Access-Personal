@@ -61,7 +61,7 @@ const AdminInstalations = ({data, editAction, deactivate}) => {
                 <section>
                     <h4>{instalation.name}</h4>
                     <p>{instalation.city}</p>
-                    <Link to={`/admin/instalation/${instalation.id}`} className="actions">
+                    <Link to={`/admin/instalation/${instalation.id}`}>
                         <Btn colors="primary" action="Ver Instalación" type="icon" icon="open_in_new"/>
                     </Link>
                 </section>
@@ -72,7 +72,7 @@ const AdminInstalations = ({data, editAction, deactivate}) => {
                             setDoc(instalation)
                         }}
                     />
-                    <i className="material-icons icon">{instalation.icon}</i>
+                    <i className="material-icons instalation-icon">{instalation.icon}</i>
                 </section>
                 {id === instalation.id && <ContextMenu ref={menuRef} open={true}>
                     <button onClick={()=>{

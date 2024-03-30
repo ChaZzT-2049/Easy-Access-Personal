@@ -29,17 +29,19 @@ const AdminPanel = () => {
     return <AppTemplate>
         <PageTitle>Panel de Administrador</PageTitle>
         <Instalations>
+            {document && document.active === true &&
+                <section>
+                    <h2>Tus instalaciones:</h2>
+                    <InstalationAdd action={addInstalation}/>
+                </section>
+            }
             <DisplayData data={collection} loading={loadingColl} error={errorColl} loader={<SkeletonInstalations />}
                 noData={{message: "No tienes Instalaciones creadas.", content: "Intenta crear una instalacion."}}
             >
-                {document && document.active === true ?
-                    <>
-                        <section>
-                            <h2>Tus instalaciones:</h2>
-                            <InstalationAdd action={addInstalation}/>
-                        </section>
-                        <AdminInstalations data={collection} editAction={editInstalation} deactivate={deactivateInstalation}/>
-                    </>
+                {document && document.active === true ? 
+                    <AdminInstalations 
+                        data={collection} editAction={editInstalation} deactivate={deactivateInstalation}
+                    />
                     : <span>Activa tu suscripcion de nuevo</span>
                 }
             </DisplayData>

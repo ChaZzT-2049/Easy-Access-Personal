@@ -31,10 +31,16 @@ const ModalStyled = styled.dialog`
         justify-content: space-between;
         & i{outline: 1px solid ${({theme}) => theme.onprimary};}
     }
+    &.danger h2{
+        background: ${({theme}) => theme.error};
+        color: ${({theme}) => theme.onerror};
+    }
     & section{
         padding: 1rem;
-        &> small{
-            padding: 1rem;
+        &> p{
+            padding: .5rem;
+            border-radius: .5rem;
+            margin-bottom: .5rem;
             background: ${({theme}) => theme.errorcont};
             color: ${({theme}) => theme.onerrorcont};
         }
@@ -49,9 +55,9 @@ const ModalStyled = styled.dialog`
     }
 `;
 
-const Modal = ({controls, children, modalFunction, confirm, title, clean}) => {
+const Modal = ({controls, children, modalFunction, confirm, title, clean, type}) => {
     const {closeOutside, trigger, ref} = controls
-    return <ModalStyled onClick={(e) =>{closeOutside(e);}} ref={ref}>
+    return <ModalStyled className={type || ""} onClick={(e) =>{closeOutside(e);}} ref={ref}>
         <h2>{title} <Icon onClick={()=>{trigger()}} icon="close"/></h2>
         <section>
             {children}

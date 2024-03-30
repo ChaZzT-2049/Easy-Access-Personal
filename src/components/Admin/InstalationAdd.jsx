@@ -28,7 +28,7 @@ const InstalationAdd = ({action}) => {
             city.validate(city.value)
             icon.validate(icon.selected.value)
             if(name.valid && city.valid && icon.valid){
-                action({name: name.value, city: city.value, icon: icon.selected.value, user: user.uid})
+                action({name: name.value, city: city.value, icon: icon.selected.value, user: user.uid, active: true})
                 create.trigger()
                 cleanInputs()
             }

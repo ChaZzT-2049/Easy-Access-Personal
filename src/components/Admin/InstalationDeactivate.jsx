@@ -6,7 +6,7 @@ const InstalationDeactivate = ({controls, doc, action}) => {
     const name = useInput("text", validateNameApellidos)
     const active = doc.active === false ? "Activar" : "Desactivar"
     return <>
-        <Modal confirm={active} controls={controls} title={`${active} ${doc.name}`}
+        <Modal confirm={active} controls={controls} title={`${active} ${doc.name}`} type="danger"
         modalFunction={()=>{
             name.validate(name.value)
             if(name.valid){
@@ -15,12 +15,14 @@ const InstalationDeactivate = ({controls, doc, action}) => {
             }
             name.clean()
         }}>
-            {doc.active === false && <small>
-                Advertencia: Desactivar la instalación provocara que no se generen nuevos registros, 
-                los datos previos estaran disponibles.
-            </small>}
+            {doc.active !== false && <p>
+                <b>Advertencia:</b> <small>
+                    Desactivar la instalación provocara que no se generen nuevos registros, sin embargo
+                    los datos previos estarán disponibles.
+                </small>
+            </p>}
             <Input {...name} 
-            label="Confimar Acción" id="name-edit" placeholder="Escribe el nombre de tu Instalación." /><br />
+            label="Confimar Acción" id="name-deactivate" placeholder="Escribe el nombre de tu Instalación." /><br />
         </Modal>
     </>
 }

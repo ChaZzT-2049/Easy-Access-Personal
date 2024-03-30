@@ -14,7 +14,6 @@ const InputSelect = styled.button`
     box-sizing: border-box;
     margin-bottom: .5rem;
     &:hover{ background: ${({theme})=>theme.surfacev}; }
-    &:not(:hover){ background: inherit}
     &:focus{
         border-color: ${({theme})=>theme.secondary};
         outline: 3px solid ${({theme})=>theme.secondarycont};
@@ -30,22 +29,29 @@ const InputSelect = styled.button`
             outline: 3px solid ${({theme})=>theme.errorcont};
         }
     }
-    position: relative;
+    &[popovertarget] {
+        anchor-name: --select-button;
+    }
+    &:has(:popover-open){
+        & .dropdown-icon{
+            rotate: 180deg;
+            transition: rotate 300ms ease-in-out;
+        }
+    }
+    & [popover] {
+        anchor-default: --select-button;
+        top: anchor(bottom);
+        width: anchor-size(width);
+        left: anchor(left);
+    }
 `;
 const Options = styled.ul`
-    background: inherit;
+    background: ${({theme})=>theme.surfacev};
     color: inherit;
     max-height: 200px;
-    width: 95%;
-    max-width: 500px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border: 2px solid ${({theme})=>theme.outline};
     box-sizing: border-box;
+    border-radius: .5rem;
 `;
 const Option = styled.li`
     display: flex;
@@ -60,13 +66,12 @@ const Option = styled.li`
 const Select = ({name, id, placeholder, label, options, selected, handleOption, error, valid}) => {
     return <Field>
         <label htmlFor={id}>{label}</label>
-        <InputSelect className={error && "error"} popovertarget={`${id}-options`} name={name} id={id}>
-            <p>{selected.title ? 
+        <InputSelect className={error && "error"} name={name} id={id} popovertarget={`${id}-options`}>
+            <p className="value">{selected.title ? 
                 <>{selected.title} <Icon icon={selected.icon}/></> 
-                : <>{placeholder} <Icon icon="arrow_drop_down"/></>}
+                : <>{placeholder} <i className="material-icons dropdown-icon">arrow_drop_down</i></>}
             </p>
             <Options popover="auto" id={`${id}-options`}>
-                <p>{placeholder} <Icon icon="arrow_drop_up"/></p>
                 {options.map((option, i) => <Option key={option.value + i} value={option.value}
                 onClick={()=>{
                     handleOption(option)

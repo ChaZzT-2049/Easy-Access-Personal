@@ -9,12 +9,12 @@ const CarrouselContainer = styled.div`
     margin: 0 auto;
 
     & ul.slider{
-        width: ${props => props.length * 100}%;
+        width: ${props => props.$length * 100}%;
         display: flex;
         flex-flow: row nowrap;
         transition: transform 500ms ease;
         & li{
-            width: calc(100% / ${props => props.length});
+            width: calc(100% / ${props => props.$length});
             display: flex;
             flex-wrap: wrap;
             background: ${({theme}) => theme.surfacev};
@@ -81,7 +81,7 @@ const Slider = ({datos}) => {
     const handleSlide = (translate) =>{
         carrouselRef.current.style.transform = `translateX(${translate}%)`
     }
-    return <CarrouselContainer length={datos.length}>
+    return <CarrouselContainer $length={datos.length}>
         <ul className="slider" ref={carrouselRef}>
             {datos.map(dato => 
                 <li key={dato.id}>

@@ -17,7 +17,7 @@ export const collectionCRUD = (path, options) => {
         return addDoc(ref, newData)
     };
     const read = async () => {
-        let fetchedData
+        let fetchedData = []
         await getDocs(q).then((snap)=>{
             fetchedData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         })
@@ -40,7 +40,7 @@ export const documentCRUD = (path, id) => {
     const ref = doc(db, path, id)
 
     const read = async () => {
-        let fetchedData
+        let fetchedData = {}
         await getDoc(ref).then((snap)=>{
             fetchedData = snap.data()
         })

@@ -65,7 +65,7 @@ export const FlexColum = styled.div`
 `;
 export const Banner = styled.section`
     height: auto;
-    background: url(${props => props.url}) center / cover;
+    background: url(${props => props.$url}) center / cover;
     &.light{
         div.info{
             color: ${({theme}) => theme.bg};
@@ -111,8 +111,8 @@ export const Banner = styled.section`
     }
 `;
 export const SectionBg = styled.section`
-    background: ${props => props.bg};
-    color: ${props => props.txt};
+    background: ${props => props.$bg};
+    color: ${props => props.$txt};
     padding: 0 2rem;
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: 0 1.5rem;}
 `;
@@ -127,7 +127,7 @@ export const SignIUCard = styled.section`
     min-height: 100vh;
 `;
 export const SignIUCardLeft = styled.div`
-    background: url(${props => props.url}) center / cover;
+    background: url(${props => props.$url}) center / cover;
     flex: 1 1 250px;
     & #backdrop{
         height: 100%;
@@ -505,6 +505,9 @@ export const Instalation = styled.li`
         justify-content: space-between;
         gap: 1rem;
         & h4{font-weight: 700;}
+        & a{
+            text-decoration: none;
+        }
     }
     & .context{
         & button{
@@ -512,7 +515,7 @@ export const Instalation = styled.li`
             padding: 0;
         }
     }
-    & .icon{
+    & .instalation-icon{
         font-size: 3.5rem;
         cursor: default;
     }
