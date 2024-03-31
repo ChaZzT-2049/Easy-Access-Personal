@@ -6,7 +6,7 @@ import Btn from "../../components/Button/Index";
 import Icon from "../../components/Icon/Index";
 import { Link } from "react-router-dom";
 import { validateEmail, validatePass } from "../../validations";
-import signInUp from "../assets/img/landing/signInUp.webp"
+import signInUp from "../../assets/img/landing/signInUp.webp"
 import useAppContext from "../../hooks/useAppContext"
 import useInput from "../../hooks/useInput";
 import useFormResponse from "../../hooks/useFormResponse";
