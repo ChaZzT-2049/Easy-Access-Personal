@@ -1,46 +1,47 @@
-import { PageTitle, Plan, Plans, SuscriptionInfo } from "../UI";
-import Btn from "../components/Button/Index"
-import AppTemplate from "../components/Template/Index"
-import useAppContext from "../hooks/useAppContext";
-import { SkeletonPlans, SkeletonSuscription } from "../components/Skeletons/Index";
-import { formatPrice } from "../helpers/formatPrice";
-import useToggle from "../hooks/useToggle";
-import DisplayData from "../components/DisplayData/Index";
-import useCollection from "../hooks/useCollection";
-import useDocument from "../hooks/useDocument";
+import { PageTitle, Plan, Plans, SuscriptionInfo } from "../../UI";
+import Btn from "../../components/Button/Index"
+import useAppContext from "../../hooks/useAppContext";
+import { SkeletonPlans, SkeletonSuscription } from "../../components/Skeletons/Index";
+import { formatPrice } from "../../helpers/formatPrice";
+import useToggle from "../../hooks/useToggle";
+import DisplayData from "../../components/DisplayData/Index";
+import useCollection from "../../hooks/useCollection";
+import useDocument from "../../hooks/useDocument";
+import { isActive } from "../../helpers/isActive";
 const Suscription = () =>{
-    const {appToast, suscription, updateSuscription} = useAppContext()
+    const {appToast} = useAppContext()
     const {toggle, trigger} = useToggle()
-    const {collection, loadingColl, errorColl} = useCollection("suscription-plans", {orderParams: {oField: "mensual"}})
-    const {document, loadingDoc, errorDoc} = useDocument("suscriptions", localStorage.getItem("uid") || null)
-    const updateSuscriptionPlan = async(type) => {
-        updateSuscription({type: type, active: suscription.active}).then(()=>{
+    const {collData, loadingColl, errorColl} = useCollection("suscription-plans", {orderParams: {oField: "mensual"}})
+    const {document, loadingDoc, errorDoc, updateDoc} = useDocument("suscriptions", localStorage.getItem("uid") || null)
+    const {type, active, display} = document || {type: "", active: false, display: ""}
+    const updateSuscriptionPlan = async(type, name) => {
+        updateDoc({type: type, display: name, active: active}).then(()=>{
             appToast.success("Operacion exitosa", "Se ha actualizado tu suscripcion")
         })
     }
     const toggleSuscription = async() => {
-        updateSuscription({type: suscription.type, active: !suscription.active}).then(()=>{
+        updateDoc({active: !active}).then(()=>{
             appToast.success("Cambio Exitoso", "Se desactivado tu suscripcion")
         })
     }
-    return <AppTemplate>
+    return <>
         <PageTitle>Datos de Suscripcion</PageTitle>
         <p>Personaliza la experiencia de tu cuenta en Aditum Delta con tu suscripción.</p>
         <DisplayData data={document} loading={loadingDoc} error={errorDoc} loader={<SkeletonSuscription/>} 
             noData={{message: "Aun no tienes una suscripción.", content: "Adquiere uno de nuestros planes y disfruta sus beneficios."}}
         >
-            <SuscriptionInfo className={document?.active ? "active" : "inactive"}>
-                <h3><b>{document?.type}</b></h3>
-                <p>Estado: {document?.active ? "Activa" : "Inactiva"}</p>
-                <Btn onClick={toggleSuscription} colors="primary oncont" action={document?.active ? "Desactivar" : "Activar"}/>
+            <SuscriptionInfo className={isActive(active)}>
+                <h3><b>{display}</b></h3>
+                <p>Estado: {isActive(active, "Activa", "Inactiva")}</p>
+                <Btn onClick={toggleSuscription} colors="primary oncont" action={isActive(active, "Activar", "Desactivar")}/>
             </SuscriptionInfo>
         </DisplayData>
         <h3>Tipos de planes</h3>
-        <DisplayData data={collection} loading={loadingColl} error={errorColl} loader={<SkeletonPlans />} 
+        <DisplayData data={collData} loading={loadingColl} error={errorColl} loader={<SkeletonPlans />} 
             noData={{message: "No hemos podido cargar los planes.", content: "Espera un momento."}}
         >     
             <Plans>
-                {collection?.map(plan => 
+                {collData?.map(plan => 
                     <Plan key={plan.id}>
                         <h4>{plan.title}</h4>
                         <ul className="selector">
@@ -55,14 +56,14 @@ const Suscription = () =>{
                                 <li key={plan.id + i}>{feature}</li>
                             )}
                         </ul>
-                        <Btn disabled={(document && plan.title === document.type)}
-                            onClick={()=>{updateSuscriptionPlan(plan.title)}} colors="primary" 
-                            action={document && plan.title === document.type ? "Plan Actual" : "Suscribirse"} 
+                        <Btn disabled={(document && plan.id === type)}
+                            onClick={()=>{updateSuscriptionPlan(plan.id, plan.title)}} colors="primary" 
+                            action={document && plan.id === type ? "Plan Actual" : "Suscribirse"} 
                         />
                     </Plan>
                 )}
             </Plans>
         </DisplayData>
-    </AppTemplate>
+    </>
 }
 export default Suscription

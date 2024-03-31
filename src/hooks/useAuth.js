@@ -1,6 +1,7 @@
 import { FacebookAuthProvider, GoogleAuthProvider, OAuthProvider, applyActionCode, confirmPasswordReset, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth"
 import useAppContext from "./useAppContext"
-import { firebaseAuth } from "../firebase"
+import { db, firebaseAuth } from "../firebase"
+import { doc, setDoc } from "firebase/firestore"
 
 const useAuth = () =>{
     const {appToast, appLoader} = useAppContext()
@@ -28,10 +29,14 @@ const useAuth = () =>{
             appToast.error("No se pudo actualizar tu nombre de usuario.", error.code)
         });
     }
-    const signUp = async(email, password)=>{
+    const updateUserDoc = async(name, lastname) => {
+        await setDoc(doc(db, "users", firebaseAuth.currentUser.uid),{name, lastname})
+    }
+    const signUp = async(name, lastname, email, password)=>{
         appLoader.register()
         return createUserWithEmailAndPassword(firebaseAuth, email, password).then(async()=>{
             sendEmailToVerify()
+            updateUserDoc(name, lastname)
         }).finally(()=>{
             appLoader.clearLoader()
         });

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Icon from "../Icon/Index";
 import Logo from "../Logo/Index"
-
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useAppContext from "../../hooks/useAppContext";
 import useAuth from "../../hooks/useAuth";
+import SidebarTab from "./SidebarTab";
 const AsideContainer = styled.dialog`
     background: ${({theme}) => theme.bg};
     transition: all 300ms ease-in-out;
@@ -103,29 +103,6 @@ const Section = styled.nav`
     transition: all 300ms ease-in;
 
 `;
-
-const NavTab = styled(NavLink)`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: ${({theme}) => theme.primary};
-    text-decoration: none;
-    border-radius: .5rem;
-    padding-left: 0;
-    padding-right: .125rem;
-    transition: all 300ms ease-in;
-    cursor: pointer;
-
-    &:hover{
-        background: ${({theme}) => theme.primarycont};
-        padding-left: .5rem;
-    }
-    &.active{
-        padding-left: .5rem;
-        background: ${({theme}) => theme.onprimarycont};
-        color: ${({theme}) => theme.primarycont};
-    }
-`;
 const NavBtn = styled.button`
     display: flex;
     align-items: center;
@@ -194,22 +171,18 @@ const Sidebar = ({controls}) => {
                     <small>{ user?.email}</small>
                 </ProfileSection>
                 <Section>
-                    <NavTab to="/home" > Home <Icon icon="home" />
-                    </NavTab>
-                    <NavTab to="/admin-panel" > Panel Administrador <Icon icon="dashboard" />
-                    </NavTab>
-                    <NavTab to="/" > Mis Vehiculos <Icon icon="directions_car" />
-                    </NavTab>
-                    <NavTab to="/asignaciones" > Usuarios Asignados <Icon icon="supervisor_account" />
-                    </NavTab>
-                    <NavTab to="/" > Notificaciones <Icon icon="notifications" />
-                    </NavTab>
+                    <SidebarTab link="/home" title="Home" icon="home" handleSidebar={trigger}/>
+                    <SidebarTab link="/admin/panel" title="Panel Administrador" icon="dashboard" handleSidebar={trigger}/>
+                    <SidebarTab link="/" title="Mis Vehiculos" icon="directions_car" handleSidebar={trigger} />
+                    <SidebarTab link="/asignaciones" title="Usuarios Asignados" icon="supervisor_account" handleSidebar={trigger} />
+                    <SidebarTab link="/" title="Notificaciones" icon="notifications" handleSidebar={trigger} />
                 </Section>
                 <Section>
-                    <NavTab to="/perfil" > Perfil de Usuario <Icon icon="account_circle" /></NavTab>
-                    <NavTab to="/suscription" > Suscripción <Icon icon="credit_card" /></NavTab>
+                    <SidebarTab link="/perfil" title="Perfil de Usuario" icon="account_circle" handleSidebar={trigger} />
+                    <SidebarTab link="/suscription" title="Suscripción" icon="credit_card" handleSidebar={trigger} />
                     <NavBtn onClick={() => {
                         localStorage.setItem("previous", location.pathname)
+                        trigger()
                         logout();
                     }}>
                         Cerrar Sesión
@@ -217,9 +190,9 @@ const Sidebar = ({controls}) => {
                     </NavBtn>
                 </Section>
                 <Section>
-                    <NavTab to="/" > Ayuda <Icon icon="help" /></NavTab>
-                    <NavTab to="/" > Accesibilidad <Icon icon="accessibility" /></NavTab>
-                    <NavTab to="/" > Soporte <Icon icon="question_answer" /></NavTab>
+                    <SidebarTab link="/" title="Ayuda" icon="help" handleSidebar={trigger} />
+                    <SidebarTab link="/" title="Accesibilidad" icon="accessibility" handleSidebar={trigger} />
+                    <SidebarTab link="/" title="Soporte" icon="question_answer" handleSidebar={trigger} />
                 </Section>
             </Content>
             <div className="logo">

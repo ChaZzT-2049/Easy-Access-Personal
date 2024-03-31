@@ -1,40 +1,36 @@
-import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, InputColum, FormResponse } from "../UI";
-import Logo from "../components/Logo/Index";
-import Input from "../components/Form/Input";
-import InputPass from "../components/Form/InputPass";
-import InputCheck from "../components/Form/InputCheck";
-import Btn from "../components/Button/Index";
-import Icon from "../components/Icon/Index";
+import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, InputColum, FormResponse } from "../../UI";
+import Logo from "../../components/Logo/Index";
+import Input from "../../components/Form/Input";
+import InputPass from "../../components/Form/InputPass";
+import InputCheck from "../../components/Form/InputCheck";
+import Btn from "../../components/Button/Index";
+import Icon from "../../components/Icon/Index";
 import signInUp from "../assets/img/landing/signInUp.webp"
 import { Link } from "react-router-dom";
-import Middleware from "../components/Middleware/Index";
-import { validateNameApellidos, validateEmail, validatePass, validatePassconf, validateTerms } from "../validations";
-import useAppContext from "../hooks/useAppContext"
-import useInput from "../hooks/useInput";
-import useFormResponse from "../hooks/useFormResponse";
-import useMiddleware from "../hooks/useMiddleware";
-import useAuth from "../hooks/useAuth";
-import { authErrors } from "../firebase.errors";
+import { validateNames, validateEmail, validatePass, validatePassconf, validateTerms } from "../../validations";
+import useAppContext from "../../hooks/useAppContext"
+import useInput from "../../hooks/useInput";
+import useFormResponse from "../../hooks/useFormResponse";
+import useAuth from "../../hooks/useAuth";
+import { authErrors } from "../../firebase.errors";
 
 const Register = () => {
     const { toggleTheme, tema } = useAppContext();
     const {signUp, loginWithGoogle, loginWithFacebook, loginWithMicrosoft} = useAuth()
-    const name = useInput("text", validateNameApellidos)
-    const apellidos = useInput("text", validateNameApellidos)
+    const name = useInput("text", validateNames)
+    const lastname = useInput("text", validateNames)
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const passconf = useInput("password", validatePassconf)
     const terms = useInput("checkbox", validateTerms, false)
     const {response, type, showResponseError} = useFormResponse();
 
-    const {loginM} = useMiddleware()
-
-    return <Middleware {...loginM}>
+    return <>
         <SignIUContainer>
             <Header>
                 <Logo/>
                 <NavHeader>
-                    <Link to="/login">Login</Link>
+                    <Link to="/auth/login">Login</Link>
                     <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
                 </NavHeader>
             </Header>
@@ -50,13 +46,13 @@ const Register = () => {
                     <form onSubmit={(e) => {
                         e.preventDefault()
                         name.validate(name.value)
-                        apellidos.validate(apellidos.value)
+                        lastname.validate(lastname.value)
                         email.validate(email.value)
                         pass.validate(pass.value)
                         passconf.validate(passconf.value, pass.value)
                         terms.validate(terms.value)
-                        if(name.valid && apellidos.valid && email.valid && pass.valid && passconf.valid && terms.valid){
-                            signUp(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
+                        if(name.valid && lastname.valid && email.valid && pass.valid && passconf.valid && terms.valid){
+                            signUp(name.value, lastname.value, email.value, pass.value).catch((error)=>{
                                 showResponseError(authErrors[error.code])
                             })
                         }
@@ -66,7 +62,7 @@ const Register = () => {
                         <FormFields>
                             <InputColum>
                                 <Input {...name} label="Nombre" id="nombre" placeholder="Escribe tu nombre" />
-                                <Input {...apellidos} label="Apellidos" id="apellidos" placeholder="Escribe tus apellidos" />
+                                <Input {...lastname} label="Apellidos" id="apellidos" placeholder="Escribe tus apellidos" />
                             </InputColum>
                             <Input {...email} label="Correo" id="correo" placeholder="Escribe tu correo electronico" />
                             <InputPass {...pass} label="Contraseña" id="contra" placeholder="Escribe una contraseña"/>
@@ -102,6 +98,6 @@ const Register = () => {
             </SignIUCard>
             <SignIUFooter><h4>Aditum Delta. © Derechos Reservados 2024</h4></SignIUFooter>
         </SignIUContainer>
-    </Middleware>
+    </>
 }
 export default Register;

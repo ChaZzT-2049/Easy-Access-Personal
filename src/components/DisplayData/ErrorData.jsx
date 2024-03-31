@@ -9,13 +9,14 @@ const ErrorContent = styled.div`
     max-width: 600px;
     & hr{border-color: ${({theme}) => theme.error}; border-style: solid;}
 `;
-const ErrorData = ({message}) => {
+const ErrorData = ({title, message}) => {
     return <ErrorContent>
-        <h4>{firestoreErrors[message] || message}</h4>
+        <h4>{firestoreErrors[title] || title}</h4>
         <hr />
-        <span>
-            Intentalo mas tarde.
-        </span>
+        <p>
+            {message}
+        </p>
+        Intentalo mas tarde.
     </ErrorContent>
 }
 export default ErrorData

@@ -1,24 +1,20 @@
 import { Link } from "react-router-dom";
-import Input from "../components/Form/Input";
-import { validateEmail } from "../validations";
-import Btn from "../components/Button/Index";
-import Logo from "../components/Logo/Index";
-import useInput from "../hooks/useInput";
-import useFormResponse from "../hooks/useFormResponse";
-import useAuth from "../hooks/useAuth";
-import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../UI";
-import useMiddleware from "../hooks/useMiddleware";
-import Middleware from "../components/Middleware/Index";
-import { authErrors } from "../firebase.errors";
+import Input from "../../components/Form/Input";
+import { validateEmail } from "../../validations";
+import Btn from "../../components/Button/Index";
+import Logo from "../../components/Logo/Index";
+import useInput from "../../hooks/useInput";
+import useFormResponse from "../../hooks/useFormResponse";
+import useAuth from "../../hooks/useAuth";
+import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../../UI";
+import { authErrors } from "../../firebase.errors";
 
 const ForgotPassword = () => {
     const {forgotPassword} = useAuth()
     const email = useInput("email", validateEmail)
     const {response, type, showResponseMessage, showResponseError} = useFormResponse();
 
-    const loginM = useMiddleware()
-
-    return <Middleware {...loginM}> 
+    return <> 
         <Container>
             <Header>
                 <Logo/>
@@ -43,14 +39,14 @@ const ForgotPassword = () => {
                         <Input {...email} label="Correo" id="correo" placeholder="Escribe tu correo electronico" />
                         <Btn action="Cambiar Contraseña" colors="primary" />
                         <div className="enlaces">
-                            <Link to="/login">Iniciar Sesión</Link> ó
-                            <Link to="/register">Crear Cuenta</Link>
+                            <Link to="/auth/login">Iniciar Sesión</Link> ó
+                            <Link to="/auth/register">Crear Cuenta</Link>
                         </div>
                     </form>
                 </CardContent>
             </SignIUCard>
             <SignIUFooter><h4>Aditum Delta. © Derechos Reservados 2024</h4></SignIUFooter>
         </Container>
-    </Middleware>
+    </>
 }
 export default ForgotPassword;

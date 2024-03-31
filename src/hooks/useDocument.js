@@ -1,7 +1,8 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { documentCRUD } from '../firebase.crud';
+import { onSnapshot } from 'firebase/firestore';
 
-const useDocument = (path, id) => {
+const useDocument = (path, id, realTime = false) => {
     const crud = useMemo(() => documentCRUD(path, id), [path, id])
     const [document, setDocument] = useState(null);
     const [loadingDoc, setLoadingDoc] = useState(false)
@@ -16,15 +17,23 @@ const useDocument = (path, id) => {
         });
         setDocument(fetchedData);
     },[crud])
-
     useEffect(()=>{
         if(document === null){
             getDocument()
         }
     },[document, getDocument])
+    useEffect(() => {
+        if (realTime) {
+            const ref = crud.getRef()
+            const unsubscribe = onSnapshot(ref, (snapshot) => {
+                setDocument(snapshot.data());
+            });
+            return () => unsubscribe();
+        }
+    }, [realTime, crud]);
     const updateDoc = async (newData) => {
         return crud.update(newData).then(()=>{
-            getDocument()
+            if(!realTime) {getDocument()}
         }).catch((error)=>{
             setErrorDoc(error.message)
         });
@@ -32,7 +41,7 @@ const useDocument = (path, id) => {
     
     const deleteDoc = async () => {
         return crud.destroy().then(()=>{
-            getDocument()
+            if(!realTime) {getDocument()}
         }).catch((error)=>{
             setErrorDoc(error.message)
         });

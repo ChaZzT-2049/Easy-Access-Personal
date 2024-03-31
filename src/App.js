@@ -4,7 +4,7 @@ import { AppProvider } from "./context";
 document.addEventListener("visibilitychange", ()=> {
   const path = window.location.pathname
   if(document.visibilityState === "hidden"){
-    if(path !== "/login" && path !== "/register"){
+    if(path !== "/auth/login" && path !== "/auth/register"){
       localStorage.setItem("previous", path)
     }
   }

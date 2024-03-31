@@ -31,13 +31,13 @@ const SLogo = styled.div`
 const Logo = ({slogan, redirect = true}) =>{
     const LogoContent = () => {
         return <SLogo className={slogan ? "slogan" : "default"}>
-            <img src={logo} alt="Logo" />
+            <img loading="lazy" src={logo} alt="Logo" />
             <h2>Aditum <b>Delta</b></h2>
             {slogan && <small>Acceso Seguro, Acceso Facil.</small>}
         </SLogo>
     }
     if(redirect){ 
-        return <Link to="/" style={{textDecoration: 'none'}}>
+        return <Link to="/welcome" style={{textDecoration: 'none'}}>
             <LogoContent />
         </Link>
     }

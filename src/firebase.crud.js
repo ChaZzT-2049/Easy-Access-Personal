@@ -13,6 +13,13 @@ export const collectionCRUD = (path, options) => {
         q = query(q, orderBy(oField, direction || 'asc'));
     }
 
+    const getRef = () => {
+        return ref
+    }
+    const getQuery = () => {
+        return q
+    }
+
     const create = (newData) => {
         return addDoc(ref, newData)
     };
@@ -24,13 +31,13 @@ export const collectionCRUD = (path, options) => {
         return fetchedData
     };
     const update = (id, newData) => {
-        return setDoc(doc(ref, id), newData)
+        return setDoc(doc(ref, id), newData, { merge: true })
     };
     const destroy = (id) => {
         return deleteDoc(doc(ref, id))
     };
     return {
-        create, read, update, destroy
+        create, read, update, destroy, getRef, getQuery
     }
 }
 export const documentCRUD = (path, id) => {
@@ -38,6 +45,10 @@ export const documentCRUD = (path, id) => {
         return {error: "Id del documento no proporcionada"}
     }
     const ref = doc(db, path, id)
+
+    const getRef = () => {
+        return ref
+    }
 
     const read = async () => {
         let fetchedData = {}
@@ -47,13 +58,13 @@ export const documentCRUD = (path, id) => {
         return fetchedData
     };
     const update = (newData) => {
-        return setDoc(ref, newData);
+        return setDoc(ref, newData, { merge: true });
     };
     const destroy = () => {
         return deleteDoc(ref)
     };
     return {
-        read, update, destroy
+        read, update, destroy, getRef
     }
 
 }

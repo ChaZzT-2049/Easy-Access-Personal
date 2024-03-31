@@ -257,8 +257,8 @@ const Welcome = () => {
             <Logo />
             <NavHeader>
                 {auth === false ? <>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                    <Link to="/auth/login">Login</Link>
+                    <Link to="/auth/register">Register</Link>
                 </> : <Link to="/home">Home</Link>
                 }
                 <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
@@ -275,7 +275,7 @@ const Welcome = () => {
                         </div>
                     </div>
                     <div className="img">
-                        <img src={qrScan} alt="qr code" />
+                        <img loading="lazy" src={qrScan} alt="qr code" />
                     </div>
                 </div>
             </Banner>
@@ -297,8 +297,8 @@ const Welcome = () => {
                     {clients.map(client => 
                         <li className="clientes" key={client.id}>
                             <div className="head">
-                                <img className="cover" src={client.cover} alt="" />
-                                <img className="icon" src={client.icon} alt="" />
+                                <img loading="lazy" className="cover" src={client.cover} alt="" />
+                                <img loading="lazy" className="icon" src={client.icon} alt="" />
                             </div>
                             <div className="text flex-column">
                                 <h3><b>{client.titulo}</b></h3>
@@ -341,7 +341,7 @@ const Welcome = () => {
                                 <h1>{toggle ? plan.anual : plan.mensual}<small>{plan.moneda}</small></h1>
                                 <span className={`message ${toggle && plan.anual > 0 && "visible"}`}>Ahorra un 15%</span>
                             </div>
-                            <img src={plan.img} alt="suscripcion icon" />
+                            <img loading="lazy" src={plan.img} alt="suscripcion icon" />
                             <ul>
                                 {plan.features.map((feature, i) =>
                                     <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
@@ -355,7 +355,7 @@ const Welcome = () => {
         </PageContainer>
         <Footer className={tema ? "light" : "dark"}>
             <section className="head">
-                <img src={logo} alt="" />
+                <img loading="lazy" src={logo} alt="" />
                 <h3><b>Aditum Delta. © Derechos Reservados 2024</b></h3>
             </section>
             <section className="content">

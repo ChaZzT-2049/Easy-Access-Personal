@@ -22,8 +22,8 @@ export const validatePassconf = (value, passvalue) => {
         return {fail: true, description: "No debe estar vacío y debe coincidir con la contraseña."}
     }
 }
-export const validateNameApellidos = (value) => {
-    const pat = /^[a-zA-Zá-ó ]{1,50}$/;
+export const validateNames = (value) => {
+    const pat = /^[a-zA-Zá-ú ]{1,50}$/;
     if(value.length > 0 && value.length <= 50){
         if(pat.test(value)){
             return {fail: false, description: ""}
@@ -40,4 +40,18 @@ export const validateTerms = (value) =>{
     }else{
         return {fail: true, description: "Debes aceptar los términos y condiciones para crear una cuenta."}
     }
+}
+export const validateInstalation = (value, compare) => {
+    const pat = /^[a-zA-Zá-ú ]{1,40}$/;
+    if(value.length > 0){
+        if(value.length <= 40){
+            if(compare && value !== compare){
+                return {fail: true, description: "Debe ser el nombre exacto de tu instalación."}
+            }else{
+                if(pat.test(value)){
+                    return {fail: false, description: ""}
+                }else{return {fail: true, description: "No debe contenener caracteres especiales."}}
+            }
+        }else{return {fail: true, description: "No debe contenener caracteres especiales."}}
+    }else{ return {fail: true, description: "No debe estar vacío."}}
 }

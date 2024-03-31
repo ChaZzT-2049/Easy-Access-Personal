@@ -1,12 +1,11 @@
 import styled from "styled-components"
-import { PageTitle } from "../UI"
-import Btn from "../components/Button/Index"
-import DisplayData from "../components/DisplayData/Index"
-import AppTemplate from "../components/Template/Index"
-import useAppContext from "../hooks/useAppContext"
-import Icon from "../components/Icon/Index"
-import useAuth from "../hooks/useAuth"
-import useDocument from "../hooks/useDocument"
+import { PageTitle } from "../../UI"
+import Btn from "../../components/Button/Index"
+import DisplayData from "../../components/DisplayData/Index"
+import useAppContext from "../../hooks/useAppContext"
+import Icon from "../../components/Icon/Index"
+import useAuth from "../../hooks/useAuth"
+import useDocument from "../../hooks/useDocument"
 const AccountData = styled.section`
     display: flex;
     gap: 1rem;
@@ -94,7 +93,7 @@ const UserProfile = () =>{
     const {user} = useAppContext()
     const {sendEmailToVerify} = useAuth()
     const {document, loadingDoc, errorDoc} = useDocument("users", localStorage.getItem("uid") || null)
-    return <AppTemplate>
+    return <>
         <PageTitle>Perfil de Usuario</PageTitle>
         <AccountData>
             <img className={!user.photoURL ? "no-photo" : ""} src={user.photoURL} alt={user.photoURL ? user.displayName : "Sin foto de perfil"} referrerPolicy="no-referrer" />
@@ -119,10 +118,10 @@ const UserProfile = () =>{
                 loading={loadingDoc}
                 noData={{message: "No haz ingresado tus datos personales.", content: <Btn action="Agregar mis datos" colors="primary"/>}}
             >
-                <p><b>Nombre:</b> {document?.nombre}</p>
-                <p><b>Apellidos:</b> {document?.apellidos}</p>
+                <p><b>Nombre:</b> {document?.name}</p>
+                <p><b>Apellidos:</b> {document?.lastname}</p>
             </DisplayData>
         </UserData>
-    </AppTemplate>
+    </>
 }
 export default UserProfile

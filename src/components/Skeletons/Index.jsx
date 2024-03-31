@@ -50,8 +50,7 @@ export const SkeletonInstalations = () => {
                 <h4> </h4>
                 <p> </p>
                 <div className="actions">
-                    <SkeletonBtn className="primary only-icon" />
-                    <SkeletonBtn className="primary only-icon" />
+                    <SkeletonBtn className="primary icon" />
                 </div>
             </div>
             <i className="material-icons icon"></i>

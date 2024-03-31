@@ -1,51 +1,69 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { collectionCRUD } from '../firebase.crud';
+import { onSnapshot } from 'firebase/firestore';
 
-const useCollection = (path, options) => {
+const useCollection = (path, options, realTime = false) => {
     const crud = useMemo(() => collectionCRUD(path, options), [path, options]);
-    const [collection, setCollection] = useState(null);
+    const [collData, setCollData] = useState(null);
     const [loadingColl, setLoadingColl] = useState(true)
     const [errorColl, setErrorColl] = useState("")
 
     const getCollection = useCallback(async() =>{
         setLoadingColl(true)
         const fetchedData = await crud.read().catch((error)=>{
-            setErrorColl(error.message)
+            setErrorColl(error)
         }).finally(()=>{
             setLoadingColl(false)
         });
-        setCollection(fetchedData);
+        setCollData(fetchedData);
     },[crud])
+
     useEffect(()=>{
-        if(collection === null){
+        if(collData === null){
             getCollection()
         }
-    },[collection, getCollection])
+    },[collData, getCollection])
+
+    useEffect(() => {
+        if (realTime) {
+            const query = crud.getQuery();
+            const unsubscribe = onSnapshot(query, (snapshot) => {
+                const updatedCollection = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setCollData(updatedCollection);
+            });
+
+            return () => unsubscribe();
+        }
+    }, [realTime, crud]);
+
     const createCollDoc = async(newData) => {
         return crud.create(newData).then(()=>{
-            getCollection()
+            if(!realTime){getCollection()}
         }).catch((error)=>{
-            setErrorColl(error.message)
+            setErrorColl(error)
         });
     };
     
     const updateCollDoc = async (id, newData) => {
         return crud.update(id, newData).then(()=>{
-            getCollection()
+            if(!realTime){getCollection()}
         }).catch((error)=>{
-            setErrorColl(error.message)
+            setErrorColl(error)
         });
     };
     
     const deleteCollDoc = async (id) => {
         return crud.destroy(id).then(()=>{
-            getCollection()
+            if(!realTime){getCollection()}
         }).catch((error)=>{
-            setErrorColl(error.message)
+            setErrorColl(error)
         });
     };
     return {
-        collection,
+        collData,
         loadingColl,
         errorColl,
         createCollDoc,

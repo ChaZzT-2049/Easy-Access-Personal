@@ -2,7 +2,7 @@ import useAppContext from "../../hooks/useAppContext"
 import useDialog from "../../hooks/useDialog"
 import useInput from "../../hooks/useInput"
 import useSelect from "../../hooks/useSelect"
-import { validateNameApellidos } from "../../validations"
+import { validateInstalation, validateNames } from "../../validations"
 import Btn from "../Button/Index"
 import Modal from "../Modal/Index"
 import Input from "../Form/Input"
@@ -11,8 +11,8 @@ import { icons } from "./icons"
 const InstalationAdd = ({action}) => {
     const {user} = useAppContext()
     const create = useDialog()
-    const name = useInput("text", validateNameApellidos)
-    const city = useInput("text", validateNameApellidos)
+    const name = useInput("text", validateInstalation)
+    const city = useInput("text", validateNames)
     const icon = useSelect(icons)
     const cleanInputs = () => {
         name.clean()

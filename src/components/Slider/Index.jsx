@@ -86,7 +86,7 @@ const Slider = ({datos}) => {
             {datos.map(dato => 
                 <li key={dato.id}>
                     <div className="img">
-                        <img src={dato.img} alt={dato.titulo} />
+                        <img loading="lazy" src={dato.img} alt={dato.titulo} />
                     </div>
                     <div className="text">
                         <h2>{dato.titulo}</h2>

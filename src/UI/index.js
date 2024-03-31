@@ -334,6 +334,9 @@ export const BaseBtn = styled.button`
         gap: .5rem;
         font-weight: 700;
         & i{pointer-events: none;}
+        &.inverted{
+            flex-direction: row-reverse;
+        }
     }
     &.only-icon{
         padding: .25rem;
@@ -516,7 +519,7 @@ export const Instalation = styled.li`
         }
     }
     & .instalation-icon{
-        font-size: 3.5rem;
+        font-size: 5rem;
         cursor: default;
     }
     &.skeleton{

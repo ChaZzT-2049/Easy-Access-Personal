@@ -1,16 +1,17 @@
 import Modal from "../Modal/Index"
 import Input from "../Form/Input"
 import useInput from "../../hooks/useInput"
-import { validateNameApellidos } from "../../validations"
+import { validateInstalation } from "../../validations"
+import { isActive } from "../../helpers/isActive"
 const InstalationDeactivate = ({controls, doc, action}) => {
-    const name = useInput("text", validateNameApellidos)
-    const active = doc.active === false ? "Activar" : "Desactivar"
+    const name = useInput("text", validateInstalation)
+    const active = isActive(doc.active, "Activar", "Desactivar")
     return <>
-        <Modal confirm={active} controls={controls} title={`${active} ${doc.name}`} type="danger"
+        <Modal confirm={active} clean={name.clean} controls={controls} title={`${active} ${doc.name}`} type={isActive(doc.active, "danger", "")}
         modalFunction={()=>{
-            name.validate(name.value)
+            name.validate(name.value, doc.name)
             if(name.valid){
-                action(doc.id, {...doc, active: !doc.active})
+                action(doc.id, {active: !doc.active})
                 controls.trigger()
             }
             name.clean()

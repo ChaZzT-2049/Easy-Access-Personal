@@ -22,7 +22,7 @@ const AccountVerifyReset = () => {
     const oobCode = getParam("oobCode");
     const mode = getParam("mode");
 
-    return <Middleware redirect="/login" validacion={(oobCode === null || (mode === "resetPassword" && auth))}>
+    return <Middleware redirect="/auth/login" validacion={(oobCode === null || (mode === "resetPassword" && auth))}>
         <Container>
             <Header>
                 <Logo/>
@@ -49,8 +49,8 @@ const AccountVerifyReset = () => {
                             <InputPass {...password} label="Contraseña" id="pass" placeholder="Ingresa tu nueva contraseña" />
                             <Btn action="Cambiar Contraseña" colors="primary" />
                             <div className="enlaces">
-                                <Link to="/login">Iniciar Sesión</Link> ó
-                                <Link to="/register">Crear Cuenta</Link>
+                                <Link to="/auth/login">Iniciar Sesión</Link> ó
+                                <Link to="/auth/register">Crear Cuenta</Link>
                             </div>
                         </form>
                     </CardContent>
