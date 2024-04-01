@@ -57,12 +57,13 @@ export const SkeletonInstalations = () => {
         </Instalation>
     }
     return <Instalations className="skeleton">
-        <ul>
-            <SkeletonInst/>
-            <SkeletonInst/>
-            <SkeletonInst/>
-            <SkeletonInst/>
-            <SkeletonInst/>
-        </ul>
+        <div className="content">
+            <ul>
+                <SkeletonInst/>
+                <SkeletonInst/>
+                <SkeletonInst/>
+                <SkeletonInst/>
+            </ul>
+        </div>
     </Instalations>
 }

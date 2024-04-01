@@ -56,7 +56,7 @@ const AdminInstalations = ({data, editAction, deactivate}) => {
                     <hr />
                     <button onClick={()=>{
                         deactivateModal.trigger()
-                    }}>{isActive(instalation.active, "Desactivar", "Reactivar")} Instalacion</button>
+                    }}>{isActive(instalation.active, "Reactivar", "Desactivar", true)} Instalacion</button>
                     <hr />
                 </InstalationContext>}
             </Instalation>)}

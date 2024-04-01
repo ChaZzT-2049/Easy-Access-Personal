@@ -28,11 +28,11 @@ const Panel = () => {
     return <>
         <PageTitle>Panel de Administrador</PageTitle>
         <Instalations>
-            {document && document.active === true &&
-                <section>
+            {document && document.active === true && document.type !== "Ir4PWX9f1jxAI34bBo2G" ?
+                <section className="add">
                     <h2>Tus instalaciones:</h2>
                     <InstalationAdd action={addInstalation}/>
-                </section>
+                </section> : <h2>Actualiza tu plan para agregar instalaciones.</h2>
             }
             <DisplayData data={collData} loading={loadingColl} error={errorColl} loader={<SkeletonInstalations />}
                 noData={{message: "No tienes Instalaciones creadas.", content: "Intenta crear una instalacion."}}

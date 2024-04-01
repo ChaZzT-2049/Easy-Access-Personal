@@ -417,9 +417,8 @@ export const Plans = styled.section`
     }
 `;
 export const Plan = styled.div`
-    flex: 0 1 350px;
+    flex: 0 1 325px;
     background-color: ${({theme}) => theme.surfacev};
-    padding: 1rem;
     text-align: center;
     & h4{
         padding: .5rem;
@@ -437,11 +436,30 @@ export const Plan = styled.div`
             cursor: pointer;
         }
     }
+    & .discount{
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        font-weight: 300;
+        transition: opacity 300ms ease, font-weight 300ms ease;
+        color: ${({theme}) => theme.onprimarycont};
+        &.visible{
+            opacity: 1;
+            font-weight: 700;
+        }
+    }
+    & .features{
+        padding: .5rem 1rem;
+    }
     & .features li{
         text-align: left;
         margin-bottom: .5rem;
         &::first-letter{text-transform: uppercase;}
         &::after{content:"."}
+    }
+    & button{
+        margin-bottom: 1rem;
     }
     &.skeleton{
         & h4{height: 1.125rem;}& h2{height: 1.25rem; width: 50%; margin-inline: auto;}
@@ -472,14 +490,14 @@ export const SuscriptionInfo = styled.div`
     }
 `;
 export const Instalations = styled.section`
-    &> section{
+    & .add{
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         gap: .5rem;
     }
-    &> ul{
+    & .content > ul{
         padding: 1rem 0;
         display: flex;
         flex-wrap: wrap;

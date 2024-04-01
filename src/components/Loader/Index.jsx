@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useRef, useLayoutEffect } from "react";
+import useAppContext from "../../hooks/useAppContext";
 
 const Loading = styled.dialog`
     background: ${({theme}) => theme.primary};
@@ -47,7 +48,6 @@ const Loading = styled.dialog`
         border-radius: 0;
     } */
 `;
-
 const Spinner = styled.section`
     display: block;
     position: relative;
@@ -86,12 +86,13 @@ const Spin = styled.div`
     }
 `;
 
-const Loader = ({message}) => {
+const Loader = () => {
+    const {loader} = useAppContext()
     const loaderRef = useRef(null)
 
     useLayoutEffect(() => {
         const handleLoad = () =>{
-            message.length > 0 ? loaderRef.current.showModal() : loaderRef.current.close();
+            loader.length > 0 ? loaderRef.current.showModal() : loaderRef.current.close();
             loaderRef.current.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape') {
                   event.preventDefault();
@@ -100,12 +101,12 @@ const Loader = ({message}) => {
         }
         handleLoad();
         loaderRef.current.removeEventListener("keydown", handleLoad)
-    },[message])
+    },[loader])
     return <Loading ref={loaderRef} >
             <Spinner>
                 <Spin/><Spin/><Spin/><Spin/>
             </Spinner>
-            <h3>{message}</h3>
+            <h3>{loader}</h3>
     </Loading>
 }
 

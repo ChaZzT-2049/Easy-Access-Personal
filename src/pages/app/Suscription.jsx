@@ -33,7 +33,7 @@ const Suscription = () =>{
             <SuscriptionInfo className={isActive(active)}>
                 <h3><b>{display}</b></h3>
                 <p>Estado: {isActive(active, "Activa", "Inactiva")}</p>
-                <Btn onClick={toggleSuscription} colors="primary oncont" action={isActive(active, "Activar", "Desactivar")}/>
+                <Btn onClick={toggleSuscription} colors="primary oncont" action={isActive(active, "Activar", "Desactivar", true)}/>
             </SuscriptionInfo>
         </DisplayData>
         <h3>Tipos de planes</h3>
@@ -49,12 +49,19 @@ const Suscription = () =>{
                             <li className={toggle ? "selected" : ""} onClick={() => {trigger()}}>Anual</li>
                         </ul>
                         <h2><b>{toggle ? formatPrice(plan.anual - (plan.anual * .15), plan.moneda) : formatPrice(plan.mensual, plan.moneda)}</b></h2>
-                        {toggle && <small>Ahorra un 15%</small> }
+                        <span className={`discount ${toggle && plan.anual > 0 ? "visible" : ""}`}>Ahorra un 15%</span>
                         <hr />
                         <ul className="features">
-                            {plan.features.map((feature, i) =>
-                                <li key={plan.id + i}>{feature}</li>
-                            )}
+                            <li>solicita acceso a instalaciones</li>
+                            <li>obten QR's de acceso</li>
+                            <li>agrega vehiculos</li>
+                            <li>{plan.features.instalations ? `crea y gestiona ${plan.features.instalations === "unlimited" ? "instalaciones ilimitadas" : `hasta ${plan.features.instalations > 1 ? `${plan.features.instalations} instalaciones` : `${plan.features.instalations} instalación`}`}`  : "sin creación de instalaciones"}</li>
+                            <li>{plan.features.users ? `agrega ${plan.features.users === "unlimited" ? "usuarios ilimitados" : `hasta ${plan.features.users} usuarios`}`  : "sin gestión de usuarios"}</li>
+                            <li>{plan.features.guests ? `agrega ${plan.features.guests === "unlimited" ? "invitados ilimitados" : `hasta ${plan.features.guests} invitados`}`  : "sin gestión de invitados"}</li>
+                            <li>{plan.features.it_integrations ? "integración de tecnologías" : "sin integración de tecnologías"}</li>
+                            <li>{plan.features.qr_scanning ? "escanea QR's de acceso" : "sin escaneo QR"}</li>
+                            <li>{plan.features.statistics ? "obten estadisticas" : "sin estadisticas"}</li>
+                            <li>{plan.features.apply_filters ? "aplica filtros" : "sin filtros"}</li>
                         </ul>
                         <Btn disabled={(document && plan.id === type)}
                             onClick={()=>{updateSuscriptionPlan(plan.id, plan.title)}} colors="primary" 

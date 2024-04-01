@@ -1,3 +1,15 @@
-export const isActive = (active, itIs = "active", isNot = "inactive") => {
-    return active ? itIs : isNot
+export const isActive = (active, itIs = "active", isNot = "inactive", oposite = false) => {
+    if(oposite){
+        if(active){
+            return isNot
+        }else{
+            return itIs
+        }
+    }else{
+        if(active){
+            return itIs
+        }else{
+            return isNot
+        }
+    }
 }

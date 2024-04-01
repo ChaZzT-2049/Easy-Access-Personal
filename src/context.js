@@ -12,27 +12,27 @@ export const AppProvider = ({children}) => {
     const [loader, setLoader] = useState("")
     const [tema, setTema] = useState(localStorage.getItem("theme") === "true")
     const [alerts, setAlerts] = useState([]);
-    const deleteToast = () => {
-        setAlerts((a) => a.slice(1));
+    const deleteToast = (id) => {
+        setAlerts((a) => a.filter(alert => alert.id !== id));
     }
     const createToast = (newAlert) => {
         setAlerts([...alerts, newAlert]);
         setTimeout(()=>{
-            deleteToast()
-        },5000)
+            deleteToast(newAlert.id)
+        },4000)
     };
     const appToast = {
         info: (title, message) =>{
-            createToast({variant: "info",title, message})
+            createToast({variant: "info",title, message, id: `I-${Math.random() * alerts.length}`})
         },
         success: (title, message) =>{
-            createToast({variant: "success",title, message})
+            createToast({variant: "success",title, message, id: `S-${Math.random() * alerts.length}`})
         },
         warning: (title, message) =>{
-            createToast({variant: "warning",title, message})
+            createToast({variant: "warning",title, message, id: `W-${Math.random() * alerts.length}`})
         },
         error: (title, message) =>{
-            createToast({variant: "error",title, message})
+            createToast({variant: "error",title, message, id: `E-${Math.random() * alerts.length}`})
         },
         delete: deleteToast
     }

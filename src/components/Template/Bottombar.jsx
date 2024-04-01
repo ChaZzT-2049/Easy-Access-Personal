@@ -9,7 +9,7 @@ const Footer = styled.footer`
     color: ${({theme}) => theme.primary};
     border-top: 3px solid ${({theme}) => theme.primary};
     background: ${({theme}) => theme.bg};
-
+    z-index: 2;
     position: sticky;
     bottom: 0;
     & nav{

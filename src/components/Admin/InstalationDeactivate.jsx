@@ -5,7 +5,7 @@ import { validateInstalation } from "../../validations"
 import { isActive } from "../../helpers/isActive"
 const InstalationDeactivate = ({controls, doc, action}) => {
     const name = useInput("text", validateInstalation)
-    const active = isActive(doc.active, "Activar", "Desactivar")
+    const active = isActive(doc.active, "Activar", "Desactivar", true)
     return <>
         <Modal confirm={active} clean={name.clean} controls={controls} title={`${active} ${doc.name}`} type={isActive(doc.active, "danger", "")}
         modalFunction={()=>{
@@ -13,8 +13,8 @@ const InstalationDeactivate = ({controls, doc, action}) => {
             if(name.valid){
                 action(doc.id, {active: !doc.active})
                 controls.trigger()
+                name.clean()
             }
-            name.clean()
         }}>
             {doc.active !== false && <p>
                 <b>Advertencia:</b> <small>
@@ -22,7 +22,7 @@ const InstalationDeactivate = ({controls, doc, action}) => {
                     los datos previos estarán disponibles.
                 </small>
             </p>}
-            <Input {...name} 
+            <Input {...name} confirm={doc.name} 
             label="Confimar Acción" id="name-deactivate" placeholder="Escribe el nombre de tu Instalación." /><br />
         </Modal>
     </>

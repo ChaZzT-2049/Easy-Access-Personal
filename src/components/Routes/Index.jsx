@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
 import Welcome from "../../pages/Welcome"
 import AccountVerifyReset from "../../pages/AccountVerifyReset";
 import Login from "../../pages/auth/Login";
@@ -15,9 +16,9 @@ import NotFound from "../../pages/NotFound";
 
 import Loader from "../Loader/Index";
 import Alerts from "../Alerts/Index";
-
 import { ThemeProvider } from "styled-components";
 import {lightTheme, darkTheme} from "../../UI/themes";
+
 import useAppContext from "../../hooks/useAppContext";
 import AuthContainer from "../Middleware/AuthContainer";
 import AppContainer from "../Middleware/AppContainer";
@@ -26,10 +27,10 @@ import InstalationContainer from "../Middleware/InstalationContainer";
 
 
 const RouteList = () => {
-  const {tema, loader, alerts} = useAppContext();
+  const {tema} = useAppContext();
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
-    <Loader message={loader}/>
-    <Alerts alerts={alerts} />
+    <Loader/>
+    <Alerts/>
     <Router>
       <Routes>
         <Route path="/welcome" element={ <Welcome/> }/>

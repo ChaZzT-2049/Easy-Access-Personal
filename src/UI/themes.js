@@ -21,9 +21,10 @@ export const lightTheme = {
     errorcont: "#ffdad6",
     onerrorcont: "#410002",
 
-    ok: "#426915",
-    okcont: "#c2f18e",
-    onokcont: "#0f2000",
+    ok: "#1EC856",
+    onok: "#DCFAE6",
+    okcont: "#85EDA8",
+    onokcont: "#0F642B",
 
     alert: "#9f4200",
     alertcont: "#ffdbcb",
@@ -57,10 +58,10 @@ export const darkTheme = {
     errorcont: "#93000a",
     onerrorcont: "#ffdad6",
 
-    ok: "#a7d475",
+    ok: "#489D65",
     onok: "#1d3700",
-    okcont: "#2d5000",
-    onokcont: "#c2f18e",
+    okcont: "#61856D",
+    onokcont: "#85EDA8",
 
     alert: "#ffb692",
     onalert: "#552000",

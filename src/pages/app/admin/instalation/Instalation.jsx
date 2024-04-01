@@ -66,11 +66,11 @@ const Instalation = () => {
     }
     return <>
         <PageTitle>Administrar Instalación</PageTitle>
+        <MainInfo>
+            <Link to="/admin/panel"><Btn action="Panel" colors="primary" type="icon inverted" icon="arrow_back" /></Link>
+            <h2>{name} <small>{isActive(active, "Activa", "Inactiva")}</small></h2>
+        </MainInfo>
         <DisplayData loader={<>Cargando...</>} loading={loadingDoc} error={errorDoc} data={document}>
-            <MainInfo>
-                <Link to="/admin/panel"><Btn action="Panel" colors="primary" type="icon inverted" icon="arrow_back" /></Link>
-                <h2>{name} <small>{isActive(active, "Activa", "Inactiva")}</small></h2>
-            </MainInfo>
             <Dashboard>
                 <InfoCard>
                     <div className="info">

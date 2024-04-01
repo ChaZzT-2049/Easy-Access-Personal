@@ -1,11 +1,11 @@
 import { Field, FieldInput } from "../../UI"
-const Input = ({label,type,placeholder,id,value, validate, error, message}) => {
+const Input = ({label,type,placeholder,id,value, validate, error, message, confirm}) => {
     return <Field>
         <label htmlFor={id}>{label}</label>
         <FieldInput className={error && "error"}
             id={id} type={type} placeholder={placeholder} value={value} 
-            onChange={(e) => {validate(e.target.value)}}
-            onBlur={(e)=>{validate(e.target.value)}} 
+            onChange={(e) => {confirm ? validate(e.target.value, confirm) : validate(e.target.value)}}
+            onBlur={(e)=>{confirm ? validate(e.target.value, confirm) : validate(e.target.value)}} 
         />
         {error && <small>{message}</small>}
     </Field>
