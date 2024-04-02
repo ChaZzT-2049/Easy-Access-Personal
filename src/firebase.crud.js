@@ -5,8 +5,10 @@ export const collectionCRUD = (path, options) => {
     const ref = collection(db, path);
     let q = ref
     if (options && options.whereParams) {
-        const { wField, op, value } = options.whereParams;
-        q = query(q, where(wField, op, value));
+        options.whereParams.forEach(param => {
+            const { wField, op, value } = param;
+            q = query(q, where(wField, op, value));
+        });
     }
     if (options && options.orderParams) {
         const { oField, direction } = options.orderParams;
@@ -41,10 +43,12 @@ export const collectionCRUD = (path, options) => {
     }
 }
 export const documentCRUD = (path, id) => {
-    if(!id){
-        return {error: "Id del documento no proporcionada"}
+    let ref
+    try {
+        ref = doc(db, path, id)
+    } catch (error) {
+        console.log(error)
     }
-    const ref = doc(db, path, id)
 
     const getRef = () => {
         return ref

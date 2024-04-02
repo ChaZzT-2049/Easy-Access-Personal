@@ -1,13 +1,13 @@
-import useAppContext from "../../hooks/useAppContext"
-import useDialog from "../../hooks/useDialog"
-import useInput from "../../hooks/useInput"
-import useSelect from "../../hooks/useSelect"
-import { validateInstalation, validateNames } from "../../validations"
-import Btn from "../Button/Index"
-import Modal from "../Modal/Index"
-import Input from "../Form/Input"
-import Select from "../Form/Select"
-import { icons } from "./icons"
+import useAppContext from "../../../hooks/useAppContext"
+import useDialog from "../../../hooks/useDialog"
+import useInput from "../../../hooks/useInput"
+import useSelect from "../../../hooks/useSelect"
+import { validateInstalation, validateNames } from "../../../validations"
+import Btn from "../../Button/Index"
+import Modal from "../../Modal/Index"
+import Input from "../../Form/Input"
+import Select from "../../Form/Select"
+import { icons } from "../icons"
 const InstalationAdd = ({action}) => {
     const {user} = useAppContext()
     const create = useDialog()

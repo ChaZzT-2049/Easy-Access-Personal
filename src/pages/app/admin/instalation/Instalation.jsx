@@ -60,7 +60,7 @@ const InfoCard = styled.li`
 const Instalation = () => {
     const {id} = useParams()
     const {document, loadingDoc, errorDoc} = useDocument("instalations", id)
-    const {name, active, icon, city} = document || {name: "", active: true, icon: "villa", city: ""}
+    const {name, active, icon, city, users} = document || {name: "", active: true, icon: "villa", city: "", users: 0}
     if(!id){
         return <Navigate to="/admin/panel" />
     }
@@ -92,7 +92,7 @@ const Instalation = () => {
                 </InfoCard>
                 <InfoCard>
                     <div className="info">
-                        <h1><b>800</b></h1>
+                        <h1><b>{users}</b></h1>
                         <span>Usuarios</span>
                     </div>
                     <div className="action">

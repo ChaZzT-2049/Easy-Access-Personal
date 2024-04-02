@@ -4,12 +4,17 @@ import DisplayData from "../../../components/DisplayData/Index"
 import useAppContext from "../../../hooks/useAppContext"
 import useCollection from "../../../hooks/useCollection"
 import useDocument from "../../../hooks/useDocument"
-import AdminInstalations from "../../../components/Admin/Instalations"
-import InstalationAdd from "../../../components/Admin/InstalationAdd"
+import AdminInstalations from "../../../components/Admin/CRUD/Instalations"
+import InstalationAdd from "../../../components/Admin/CRUD/InstalationAdd"
+import MonitorInstalations from "../../../components/Admin/Monitor/Instalations"
 const Panel = () => {
-    const {appToast} = useAppContext()
-    const {collData, loadingColl, errorColl, createCollDoc, updateCollDoc} = useCollection("instalations", {orderParams: {oField: "active", direction: "desc"},whereParams: {wField: "user", op: "==", value: localStorage.getItem("uid") || null}})
+    const {appToast, user} = useAppContext()
+    const {collData, loadingColl, errorColl, createCollDoc, updateCollDoc} = useCollection("instalations", {orderParams: {oField: "active", direction: "desc"},whereParams: [{wField: "user", op: "==", value: localStorage.getItem("uid") || null}]})
     const {document} = useDocument("suscriptions", localStorage.getItem("uid") || null)
+    const monitors = useCollection("inscriptions", {whereParams: [
+        {wField: "userID", op: "==", value: localStorage.getItem("uid") || user?.uid || null},
+        {wField: "monitor", op: "==", value: true}
+    ]})
     const addInstalation = async(data) => {
         createCollDoc(data).then(()=>{
             appToast.success("Creacion Exitosa", "Se ha creado tu instalacion")
@@ -23,6 +28,11 @@ const Panel = () => {
     const deactivateInstalation = async(id, data) => {
         updateCollDoc(id, data).then(()=>{
             appToast.success("Instalación Actualizada", `Se ha ${data.active ? "activado" : "desactivado"} tu instalación`)
+        })
+    }
+    const editMonitoringInstalation = async(id, data) => {
+        updateCollDoc(id, data).then(()=>{
+            appToast.success("Instalación Actualizada", "Se ha actualizado la instalación")
         })
     }
     return <>
@@ -44,7 +54,13 @@ const Panel = () => {
                     : <span>Activa tu suscripcion de nuevo</span>
                 }
             </DisplayData>
-        </Instalations> 
+        </Instalations>
+        <h2>Instalaciones que puedes monitorear</h2>
+        <DisplayData data={monitors.collData} loading={monitors.loadingColl} error={errorColl.loading} loader={<SkeletonInstalations/>}
+            noData={{message: "No hay instalaciones por monitorear.", content: "Espera a que te den permisos."}}
+        > 
+            <MonitorInstalations data={monitors.collData} editAction={editMonitoringInstalation}/>
+        </DisplayData>
     </>
 }
 export default Panel
