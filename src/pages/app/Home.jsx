@@ -1,4 +1,4 @@
-import useAppContext from "../../hooks/useAppContext"
+import useAppContext from "../../hooks/app/useAppContext"
 const Home = () => {
     const {user} = useAppContext()
     return <>

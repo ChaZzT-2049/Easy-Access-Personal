@@ -10,16 +10,16 @@ import Asignaciones from "../../pages/app/Asignaciones";
 import UserProfile from "../../pages/app/UserProfile";
 import Suscription from "../../pages/app/Suscription";
 import Panel from "../../pages/app/admin/Panel";
-import Instalation from "../../pages/app/admin/instalation/Instalation";
+import Instalation from "../../pages/app/admin/instalation/Dashboard";
 import InstalationUsers from "../../pages/app/admin/instalation/InstalationUsers";
 import NotFound from "../../pages/NotFound";
 
-import Loader from "../Loader/Index";
-import Alerts from "../Alerts/Index";
+import Loader from "../UI/Loader/Index";
+import Alerts from "../UI/Alerts/Index";
 import { ThemeProvider } from "styled-components";
-import {lightTheme, darkTheme} from "../../UI/themes";
+import {lightTheme, darkTheme} from "../../styled/themes";
 
-import useAppContext from "../../hooks/useAppContext";
+import useAppContext from "../../hooks/app/useAppContext";
 import AuthContainer from "../Middleware/AuthContainer";
 import AppContainer from "../Middleware/AppContainer";
 import AdminContainer from "../Middleware/AdminContainer";

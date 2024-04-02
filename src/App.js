@@ -1,4 +1,4 @@
-import GlobalStyle from "./GlobalStyles";
+import GlobalStyle from "./lib/GlobalStyles";
 import RouteList from "./components/Routes/Index";
 import { AppProvider } from "./context";
 document.addEventListener("visibilitychange", ()=> {

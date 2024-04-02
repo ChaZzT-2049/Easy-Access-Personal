@@ -1,18 +1,18 @@
-import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, InputColum, FormResponse } from "../../UI";
-import Logo from "../../components/Logo/Index";
+import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, InputColum, FormResponse } from "../../styled/index";
+import Logo from "../../components/UI/Logo/Index";
 import Input from "../../components/Form/Input";
 import InputPass from "../../components/Form/InputPass";
 import InputCheck from "../../components/Form/InputCheck";
-import Btn from "../../components/Button/Index";
-import Icon from "../../components/Icon/Index";
+import Btn from "../../components/UI/Button/Index";
+import Icon from "../../components/UI/Icon/Index";
 import signInUp from "../../assets/img/landing/signInUp.webp"
 import { Link } from "react-router-dom";
-import { validateNames, validateEmail, validatePass, validatePassconf, validateTerms } from "../../validations";
-import useAppContext from "../../hooks/useAppContext"
-import useInput from "../../hooks/useInput";
-import useFormResponse from "../../hooks/useFormResponse";
-import useAuth from "../../hooks/useAuth";
-import { authErrors } from "../../firebase.errors";
+import { validateNames, validateEmail, validatePass, validatePassconf, validateTerms } from "../../utils/validations";
+import useAppContext from "../../hooks/app/useAppContext"
+import useInput from "../../hooks/form/useInput";
+import useFormResponse from "../../hooks/form/useFormResponse";
+import useAuth from "../../hooks/app/useAuth";
+import { authErrors } from "../../firebase/firebase.errors";
 
 const Register = () => {
     const { toggleTheme, tema } = useAppContext();

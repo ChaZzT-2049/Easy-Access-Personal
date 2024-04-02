@@ -1,6 +1,6 @@
 import {createContext, useLayoutEffect, useState} from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { firebaseAuth} from "./firebase";
+import { firebaseAuth} from "./firebase/firebase";
 
 export const AppContext = createContext()
 export const AppProvider = ({children}) => {

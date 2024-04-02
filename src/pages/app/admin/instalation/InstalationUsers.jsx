@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
-import { PageTitle } from "../../../../UI";
-import Btn from "../../../../components/Button/Index";
-import useCollection from "../../../../hooks/useCollection";
+import { PageTitle } from "../../../../styled";
+import Btn from "../../../../components/UI/Button/Index";
+import useCollection from "../../../../hooks/data/useCollection";
 import DisplayData from "../../../../components/DisplayData/Index";
 
 const InstalationUsers = () => {

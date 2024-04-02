@@ -1,8 +1,8 @@
 import { Outlet, useParams } from "react-router-dom"
 import Middleware from "./Index"
-import useDocument from "../../hooks/useDocument"
-import useAppContext from "../../hooks/useAppContext"
-import useCollection from "../../hooks/useCollection"
+import useDocument from "../../hooks/data/useDocument"
+import useAppContext from "../../hooks/app/useAppContext"
+import useCollection from "../../hooks/data/useCollection"
 
 const InstalationContainer = () => {
     const {user, appToast, appLoader} = useAppContext()

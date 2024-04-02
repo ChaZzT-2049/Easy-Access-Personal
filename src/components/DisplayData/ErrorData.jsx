@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { firestoreErrors } from "../../firebase.errors";
+import { firestoreErrors } from "../../firebase/firebase.errors";
 const ErrorContent = styled.div`
     background: ${({theme}) => theme.errorcont};
     color: ${({theme}) => theme.onerrorcont};

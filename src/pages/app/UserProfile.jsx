@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { PageTitle } from "../../UI"
-import Btn from "../../components/Button/Index"
+import { PageTitle } from "../../styled/index"
+import Btn from "../../components/UI/Button/Index"
 import DisplayData from "../../components/DisplayData/Index"
-import useAppContext from "../../hooks/useAppContext"
-import Icon from "../../components/Icon/Index"
-import useAuth from "../../hooks/useAuth"
-import useDocument from "../../hooks/useDocument"
+import useAppContext from "../../hooks/app/useAppContext"
+import Icon from "../../components/UI/Icon/Index"
+import useAuth from "../../hooks/app/useAuth"
+import useDocument from "../../hooks/data/useDocument"
 const AccountData = styled.section`
     display: flex;
     gap: 1rem;

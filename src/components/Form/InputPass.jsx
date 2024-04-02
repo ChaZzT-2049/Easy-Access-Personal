@@ -1,5 +1,5 @@
-import { Field, FieldInput } from "../../UI"
-import Icon from "../Icon/Index"
+import { Field, FieldInput } from "../../styled/index"
+import Icon from "../UI/Icon/Index"
 import styled from "styled-components"
 import useToggle from "../../hooks/useToggle";
 const PassContainer = styled.div`

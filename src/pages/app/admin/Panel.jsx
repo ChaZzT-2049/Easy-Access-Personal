@@ -1,15 +1,18 @@
-import { Instalations, PageTitle } from "../../../UI"
-import { SkeletonInstalations } from "../../../components/Skeletons/Index"
+import { Instalations, PageTitle } from "../../../styled"
+import { SkeletonInstalations } from "../../../components/UI/Skeletons/Index"
 import DisplayData from "../../../components/DisplayData/Index"
-import useAppContext from "../../../hooks/useAppContext"
-import useCollection from "../../../hooks/useCollection"
-import useDocument from "../../../hooks/useDocument"
-import AdminInstalations from "../../../components/Admin/CRUD/Instalations"
-import InstalationAdd from "../../../components/Admin/CRUD/InstalationAdd"
-import MonitorInstalations from "../../../components/Admin/Monitor/Instalations"
+import useAppContext from "../../../hooks/app/useAppContext"
+import useCollection from "../../../hooks/data/useCollection"
+import useDocument from "../../../hooks/data/useDocument"
+import AdminInstalations from "../../../features/Admin/Instalations"
+import InstalationAdd from "../../../features/Admin/InstalationAdd"
+import MonitorInstalations from "../../../features/Monitor/Instalations"
 const Panel = () => {
     const {appToast, user} = useAppContext()
-    const {collData, loadingColl, errorColl, createCollDoc, updateCollDoc} = useCollection("instalations", {orderParams: {oField: "active", direction: "desc"},whereParams: [{wField: "user", op: "==", value: localStorage.getItem("uid") || null}]})
+    const {collData, loadingColl, errorColl, createCollDoc, updateCollDoc} = useCollection("instalations", {orderParams: {oField: "active", direction: "desc"},
+    whereParams: [
+        {wField: "user", op: "==", value: localStorage.getItem("uid") || null}
+    ]})
     const {document} = useDocument("suscriptions", localStorage.getItem("uid") || null)
     const monitors = useCollection("inscriptions", {whereParams: [
         {wField: "userID", op: "==", value: localStorage.getItem("uid") || user?.uid || null},
@@ -55,7 +58,9 @@ const Panel = () => {
                 }
             </DisplayData>
         </Instalations>
+        <br />
         <h2>Instalaciones que puedes monitorear</h2>
+        <br />
         <DisplayData data={monitors.collData} loading={monitors.loadingColl} error={errorColl.loading} loader={<SkeletonInstalations/>}
             noData={{message: "No hay instalaciones por monitorear.", content: "Espera a que te den permisos."}}
         > 

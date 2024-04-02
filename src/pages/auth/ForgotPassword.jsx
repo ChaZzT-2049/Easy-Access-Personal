@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import Input from "../../components/Form/Input";
-import { validateEmail } from "../../validations";
-import Btn from "../../components/Button/Index";
-import Logo from "../../components/Logo/Index";
-import useInput from "../../hooks/useInput";
-import useFormResponse from "../../hooks/useFormResponse";
-import useAuth from "../../hooks/useAuth";
-import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../../UI";
-import { authErrors } from "../../firebase.errors";
+import { validateEmail } from "../../utils/validations";
+import Btn from "../../components/UI/Button/Index";
+import Logo from "../../components/UI/Logo/Index";
+import useInput from "../../hooks/form/useInput";
+import useFormResponse from "../../hooks/form/useFormResponse";
+import useAuth from "../../hooks/app/useAuth";
+import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../../styled/index";
+import { authErrors } from "../../firebase/firebase.errors";
 
 const ForgotPassword = () => {
     const {forgotPassword} = useAuth()

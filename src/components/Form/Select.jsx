@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { Field } from "../../UI";
-import Icon from "../Icon/Index";
+import { Field } from "../../styled/index";
+import Icon from "../UI/Icon/Index";
 
 const InputSelect = styled.button`
     padding: .5rem 1rem;

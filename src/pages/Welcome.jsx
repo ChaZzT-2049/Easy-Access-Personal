@@ -1,18 +1,18 @@
 import styled, { useTheme } from "styled-components";
-import { Header, NavHeader, Banner, SectionBg, Container } from "../UI";
-import Logo from "../components/Logo/Index";
+import { Header, NavHeader, Banner, SectionBg, Container } from "../styled/index";
+import Logo from "../components/UI/Logo/Index";
 import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
 import banner from "../assets/img/landing/places-cover-min.webp"
 import logo from "../assets/img/logo.png"
-import Icon from "../components/Icon/Index";
-import Btn from "../components/Button/Index";
-import Slider from "../components/Slider/Index";
+import Icon from "../components/UI/Icon/Index";
+import Btn from "../components/UI/Button/Index";
+import Slider from "../components/UI/Slider/Index";
 
 import { clients, features, planes } from "../datoswelcome";
 import { Link, useNavigate } from "react-router-dom";
 
 import useToggle from "../hooks/useToggle";
-import useAppContext from "../hooks/useAppContext";
+import useAppContext from "../hooks/app/useAppContext";
 
 const PageContainer = styled(Container)`
     & .center{

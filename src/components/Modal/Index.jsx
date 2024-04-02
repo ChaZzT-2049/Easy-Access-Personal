@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Btn from "../Button/Index"
-import Icon from "../Icon/Index";
+import Btn from "../UI/Button/Index"
+import Icon from "../UI/Icon/Index";
 const ModalStyled = styled.dialog`
     width: 95%;
     max-width: 600px;

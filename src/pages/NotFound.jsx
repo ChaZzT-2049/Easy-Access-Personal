@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { Header, MainContainer, SignIUFooter } from "../UI";
-import Logo from "../components/Logo/Index";
+import { Header, MainContainer, SignIUFooter } from "../styled/index";
+import Logo from "../components/UI/Logo/Index";
 import styled from "styled-components";
-import Btn from "../components/Button/Index";
+import Btn from "../components/UI/Button/Index";
 
 const Message = styled.section`
     background-color: ${({theme}) => theme.errorcont};

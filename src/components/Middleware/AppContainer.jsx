@@ -1,5 +1,5 @@
-import useAppContext from "../../hooks/useAppContext"
-import AppTemplate from "../Template/Index"
+import useAppContext from "../../hooks/app/useAppContext"
+import AppTemplate from "../UI/Template/Index"
 import Middleware from "./Index"
 
 const AppContainer = () => {
