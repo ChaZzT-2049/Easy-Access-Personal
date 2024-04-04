@@ -41,14 +41,14 @@ const InstalationContainer = () => {
     const [loading, setLoading] = useState(true)
     
     useLayoutEffect(()=>{
-        getInstalation(id).then(inst=>{
+        getInstalation(id).then((inst)=>{
             setIsnotO(inst.user !== localStorage.getItem("uid"))
-            getSuscription(inst.user).then(sus => {
+            getSuscription(inst.user).then((sus) => {
                 setIsSuscriptionI(sus?.active !== true)
             })
-            getInscription(id, localStorage.getItem("uid")).then(insc=>{
-                setIsnotM(insc?.monitor !== true)
-                setIsMonitorI(insc?.active !== true)
+            getInscription(id, localStorage.getItem("uid")).then((insc) =>{
+                setIsnotM(insc !== undefined && insc.monitor !== true)
+                setIsMonitorI(insc !== undefined && insc.active !== true)
             }).finally(()=>{
                 setLoading(false)
             })
@@ -58,9 +58,9 @@ const InstalationContainer = () => {
         return <SecondaryLoader>Validando permisos</SecondaryLoader>
     }
     return <Middleware redirect="/admin/panel" 
-        validacion={(id) && ((isNotOwner && isNotMonitor && isMonitorInactive) || isSuscriptionInactive)}
+        validacion={(id) && ((isNotOwner && isNotMonitor) || isMonitorInactive || isSuscriptionInactive)}
         alert={appToast.warning}
-        message={`"La suscripcion del dueño debe estar activa" : "No tienes permisos para administrar esta instalación"}`}
+        message={isSuscriptionInactive ? "La suscripcion del dueño debe estar activa" : "No tienes permisos para administrar esta instalación"}
     >
         <Outlet />
     </Middleware>
