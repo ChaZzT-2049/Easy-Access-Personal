@@ -56,7 +56,7 @@ const Loading = styled.dialog`
     }
 `;
 const Spinner = styled.section`
-    border: 4px solid currentColor;
+    border: 10px solid currentColor;
     width: 50px;
     height: 50px;
     border-radius: 50%;

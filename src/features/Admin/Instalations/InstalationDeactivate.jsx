@@ -1,8 +1,8 @@
-import Modal from "../../components/Modal/Index"
-import Input from "../../components/Form/Input"
-import useInput from "../../hooks/form/useInput"
-import { validateInstalation } from "../../utils/validations"
-import isActive from "../../utils/isActive"
+import Modal from "../../../components/Modal/Index"
+import Input from "../../../components/Form/Input"
+import useInput from "../../../hooks/form/useInput"
+import { validateInstalation } from "../../../utils/validations"
+import isActive from "../../../utils/isActive"
 const InstalationDeactivate = ({controls, doc, action}) => {
     const name = useInput("text", validateInstalation)
     const active = isActive(doc.active, "Activar", "Desactivar", true)

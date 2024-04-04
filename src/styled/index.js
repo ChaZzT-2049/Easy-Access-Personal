@@ -13,11 +13,6 @@ export const Header = styled.header`
     position: sticky;
     top: 0;
 
-    & i:hover{
-        background: ${({theme}) => theme.primarycont};
-        outline-style: solid;
-    }
-
     @media screen and (min-width: 0px) and (max-width: 480px) {
         &{
             padding: 1rem .5rem;
@@ -256,6 +251,15 @@ export const FieldInput = styled.input`
         }
         &::placeholder{color: ${({theme}) => theme.error};}
     }
+    &:disabled{
+        background: ${({theme}) => theme.outline};
+        color: ${({theme}) => theme.surfacev};
+        border-color: ${({theme}) => theme.onsurfv};
+        cursor: not-allowed;
+        &::placeholder{
+            color: ${({theme}) => theme.surfacev};
+        }
+    }
 `;
 export const SignIUFooter = styled.footer`
     background: ${({theme}) => theme.primarycont};
@@ -287,10 +291,19 @@ export const BaseBtn = styled.button`
     &.primary{
         background: ${({theme}) => theme.primary};
         color: ${({theme}) => theme.onprimary};
-        &:hover{
+        &:hover, &:focus{
             outline-color: ${({theme}) => theme.primary};
             color: ${({theme}) => theme.onprimarycont};
             background: ${({theme}) => theme.primarycont};
+        }
+        &.cont{
+            background: ${({theme}) => theme.primarycont};
+            color: ${({theme}) => theme.onprimarycont};
+            &:hover, &:focus{
+                outline-color: ${({theme}) => theme.onprimarycont};
+                color: ${({theme}) => theme.onprimary};
+                background: ${({theme}) => theme.onprimarycont};
+            }
         }
         &.oncont{
             background: ${({theme}) => theme.onprimarycont};
@@ -298,7 +311,7 @@ export const BaseBtn = styled.button`
             &:hover{
                 outline-color: ${({theme}) => theme.onprimarycont};
                 color: ${({theme}) => theme.onprimarycont};
-                background: ${({theme}) => theme.onprimary};
+                background: transparent;
             }
         }
     }
@@ -324,7 +337,7 @@ export const BaseBtn = styled.button`
         }
     }
     &.only-icon{
-        padding: .25rem;
+        padding: 0rem;
         font-size: 0px;
         width: min-content;
     }

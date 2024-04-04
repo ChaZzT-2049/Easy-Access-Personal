@@ -3,7 +3,7 @@ import { Instalation } from "../../styled/index"
 import useDialog from "../../hooks/useDialog"
 import InstalationEdit from "./InstalationEdit"
 import InstalationContext from "../../components/Menu/ContextMenu"
-import { icons } from "../Admin/icons"
+import { icons } from "../Admin/Instalations/icons"
 import useSelect from "../../hooks/form/useSelect"
 import useInput from "../../hooks/form/useInput"
 import { validateInstalation } from "../../utils/validations"
@@ -32,7 +32,7 @@ const MonitorInstalations = ({data, editAction}) => {
                 <section>
                     <h4>{instalation.instDisplay}</h4>
                     <p>{instalation.type}</p>
-                    <Link to={`/admin/instalation/${instalation.instalationID}/dashboard`}>
+                    <Link to={`/admin/instalation/${instalation.instID}/dashboard`}>
                         <Btn colors="primary" action="Ver Instalación" type="icon" icon="open_in_new"/>
                     </Link>
                 </section>

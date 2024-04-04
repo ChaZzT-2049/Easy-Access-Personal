@@ -4,8 +4,8 @@ import DisplayData from "../../../components/DisplayData/Index"
 import useAppContext from "../../../hooks/app/useAppContext"
 import useCollection from "../../../hooks/data/useCollection"
 import useDocument from "../../../hooks/data/useDocument"
-import AdminInstalations from "../../../features/Admin/Instalations"
-import InstalationAdd from "../../../features/Admin/InstalationAdd"
+import AdminInstalations from "../../../features/Admin/Instalations/Instalations"
+import InstalationAdd from "../../../features/Admin/Instalations/InstalationAdd"
 import MonitorInstalations from "../../../features/Monitor/Instalations"
 const Panel = () => {
     const {appToast, user} = useAppContext()

@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { PageTitle } from "../../../../styled";
 import useDocument from "../../../../hooks/data/useDocument";
 import DisplayData from "../../../../components/DisplayData/Index";
@@ -48,22 +48,22 @@ const InfoCard = styled.li`
         background: ${({theme})=>theme.primary};
         color: ${({theme})=>theme.onprimary};
     }
-    & a{
+    & button{
+        color: inherit;
         text-decoration: none;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: .5rem;
+        margin: 0 auto;
     }
 `;
 
 const Instalation = () => {
+    const navigate = useNavigate()
     const {id} = useParams()
     const {document, loadingDoc, errorDoc} = useDocument("instalations", id)
     const {name, active, icon, city, users} = document || {name: "", active: true, icon: "villa", city: "", users: 0}
-    if(!id){
-        return <Navigate to="/admin/panel" />
-    }
     return <>
         <PageTitle>Administrar Instalación</PageTitle>
         <MainInfo>
@@ -92,13 +92,15 @@ const Instalation = () => {
                 </InfoCard>
                 <InfoCard>
                     <div className="info">
-                        <h1><b>{users}</b></h1>
+                        <h1><b>{users > 0 ? users : "0"}</b></h1>
                         <span>Usuarios</span>
                     </div>
                     <div className="action">
-                        <Link to={`/admin/instalation/${id}/users`}>
+                        <button onClick={()=>{
+                            navigate(`/admin/instalation/${id}/users`, {state: {instalation: document}})
+                        }}>
                             Administrar <i className="material-icons">fact_check</i>
-                        </Link>
+                        </button>
                     </div>
                 </InfoCard>
                 <InfoCard>

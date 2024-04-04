@@ -1,6 +1,6 @@
-import Modal from "../../components/Modal/Index"
-import Input from "../../components/Form/Input"
-import Select from "../../components/Form/Select"
+import Modal from "../../../components/Modal/Index"
+import Input from "../../../components/Form/Input"
+import Select from "../../../components/Form/Select"
 const InstalationEdit = ({controls, clean, name, icon, city, action, doc}) => {
     return <>
         <Modal confirm="Editar" clean={clean} controls={controls} title="Editar Instalación."

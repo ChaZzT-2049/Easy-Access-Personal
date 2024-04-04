@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 const Loader = styled.div`
     color: ${({theme}) => theme.primarycont};
-    width: 100%;
+    width: 90vw;
     height: 100%;
+    margin: 0 auto;
     max-height: 650px;
     position: absolute;
     z-index: 1;
@@ -39,10 +40,10 @@ const Spinner = styled.div`
         }
     }
 `;
-const SecondaryLoader = () => {
+const SecondaryLoader = ({children}) => {
     return <Loader>
         <Spinner />
-        <h2>Cargando</h2>
+        <h2>{children || "Cargando"}</h2>
     </Loader>
 }
 export default SecondaryLoader

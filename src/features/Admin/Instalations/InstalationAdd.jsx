@@ -1,12 +1,12 @@
-import useAppContext from "../../hooks/app/useAppContext"
-import useDialog from "../../hooks/useDialog"
-import useInput from "../../hooks/form/useInput"
-import useSelect from "../../hooks/form/useSelect"
-import { validateInstalation, validateNames } from "../../utils/validations"
-import Btn from "../../components/UI/Button/Index"
-import Modal from "../../components/Modal/Index"
-import Input from "../../components/Form/Input"
-import Select from "../../components/Form/Select"
+import useAppContext from "../../../hooks/app/useAppContext"
+import useDialog from "../../../hooks/useDialog"
+import useInput from "../../../hooks/form/useInput"
+import useSelect from "../../../hooks/form/useSelect"
+import { validateInstalation, validateNames } from "../../../utils/validations"
+import Btn from "../../../components/UI/Button/Index"
+import Modal from "../../../components/Modal/Index"
+import Input from "../../../components/Form/Input"
+import Select from "../../../components/Form/Select"
 import { icons } from "./icons"
 const InstalationAdd = ({action}) => {
     const {user} = useAppContext()
@@ -28,7 +28,7 @@ const InstalationAdd = ({action}) => {
             city.validate(city.value)
             icon.validate(icon.selected.value)
             if(name.valid && city.valid && icon.valid){
-                action({name: name.value, city: city.value, icon: icon.selected.value, user: user.uid, active: true})
+                action({name: name.value, city: city.value, icon: icon.selected.value, user: user.uid, active: true, users: 0})
                 create.trigger()
                 cleanInputs()
             }

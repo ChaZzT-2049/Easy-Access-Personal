@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Icon from "../Icon/Index";
+import Btn from "../Button/Index";
 import useAppContext from "../../../hooks/app/useAppContext";
 
 const Menu = styled.dialog`
@@ -60,11 +60,6 @@ const Menu = styled.dialog`
         color: ${({theme}) => theme.onprimary};
         padding: .5rem;
         border-radius: .4rem .4rem 0 0;
-
-        & i:hover{
-            background: ${({theme}) => theme.onprimarycont};
-            outline: 1px solid ${({theme}) => theme.onprimary};
-        }
     }
     & ul{
         color: ${({theme}) => theme.onsurfv};
@@ -79,10 +74,6 @@ const Menu = styled.dialog`
             &:last-child{
                 border: none;
             }
-            & i:hover{
-                background: ${({theme}) => theme.bg};
-                outline: 1px solid ${({theme}) => theme.onsurfv};
-            }
             @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem;}
         }
     }
@@ -95,13 +86,13 @@ const Options = ({controls}) =>{
     return <Menu onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <div>
             <h3>Options</h3>
-            <Icon onClick={()=>{trigger()}} icon="close"/>
+            <Btn onClick={()=>{trigger()}} icon="close" type="only-icon" colors="primary"/>
         </div>
         <ul>
             <li>Item</li>
             <li>Item</li>
             <li>Tema: {tema ? "Light" : "Dark"} 
-                <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"}/>
+                <Btn onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} type="only-icon"/>
             </li>
         </ul>
     </Menu>

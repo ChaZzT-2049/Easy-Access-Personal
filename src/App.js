@@ -1,6 +1,6 @@
 import GlobalStyle from "./styled/GlobalStyles";
 import RouteList from "./components/Routes/Index";
-import { AppProvider } from "./context";
+import { AppProvider } from "./contexts/context";
 document.addEventListener("visibilitychange", ()=> {
   const path = window.location.pathname
   if(document.visibilityState === "hidden"){

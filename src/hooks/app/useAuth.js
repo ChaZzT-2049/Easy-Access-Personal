@@ -29,14 +29,14 @@ const useAuth = () =>{
             appToast.error("No se pudo actualizar tu nombre de usuario.", error.code)
         });
     }
-    const updateUserDoc = async(name, lastname) => {
-        await setDoc(doc(db, "users", firebaseAuth.currentUser.uid),{name, lastname})
+    const updateUserDoc = async(data) => {
+        await setDoc(doc(db, "users", firebaseAuth.currentUser.uid),data, {merge: true})
     }
     const signUp = async(name, lastname, email, password)=>{
         appLoader.register()
         return createUserWithEmailAndPassword(firebaseAuth, email, password).then(async()=>{
             sendEmailToVerify()
-            updateUserDoc(name, lastname)
+            updateUserDoc({name, lastname, email})
         }).finally(()=>{
             appLoader.clearLoader()
         });
@@ -44,21 +44,45 @@ const useAuth = () =>{
     const loginWithGoogle = async() => {
         appLoader.login()
         const googleProvider = new GoogleAuthProvider()
-        return signInWithPopup(firebaseAuth, googleProvider).finally(()=>{
+        return signInWithPopup(firebaseAuth, googleProvider).then((UserCredential) => {
+            const name = UserCredential.user.displayName.split(" ", 4)
+            updateUserDoc({
+                email: UserCredential.user.email, 
+                photo: UserCredential.user.photoURL,
+                name: name[0] + " " + name[1],
+                lastname: name[2] + " " + name[3]
+            })
+        }).finally(()=>{
             appLoader.clearLoader()
         });
     }
     const loginWithFacebook = async() => {
         appLoader.login()
         const facebookProvider = new FacebookAuthProvider()
-        return signInWithPopup(firebaseAuth, facebookProvider).finally(()=>{
+        return signInWithPopup(firebaseAuth, facebookProvider).then((UserCredential) => {
+            const name = UserCredential.user.displayName.split(" ", 4)
+            updateUserDoc({
+                email: UserCredential.user.email, 
+                photo: UserCredential.user.photoURL,
+                name: name[0] + " " + name[1],
+                lastname: name[2] + " " + name[3]
+            })
+        }).finally(()=>{
             appLoader.clearLoader()
         });
     }
     const loginWithMicrosoft = async() => {
         appLoader.login()
         const microsoftProvider = new OAuthProvider('microsoft.com')
-        return signInWithPopup(firebaseAuth, microsoftProvider).finally(()=>{
+        return signInWithPopup(firebaseAuth, microsoftProvider).then((UserCredential) => {
+            const name = UserCredential.user.displayName.split(" ", 4)
+            updateUserDoc({
+                email: UserCredential.user.email, 
+                photo: UserCredential.user.photoURL,
+                name: name[0] + " " + name[1],
+                lastname: name[2] + " " + name[3]
+            })
+        }).finally(()=>{
             appLoader.clearLoader()
         });
     }

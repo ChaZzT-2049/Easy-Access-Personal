@@ -7,6 +7,40 @@ const SkeletonBtn = styled(BaseBtn)`
     &:hover{background: none; outline: none;}
     &.only-icon{width: 24px; height: 24px; padding: 1rem;}
 `;
+const SkeletonUsers = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 1rem 0;
+    & li{
+        position: relative;
+        padding: 1rem;
+        background: ${({theme})=>theme.surfacev};
+        border-radius: .25rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        & img{
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: ${({theme})=>theme.outline};
+        }
+        & div{
+            padding-left: 1rem;
+            border-left: 2px solid ${({theme})=>theme.primary};
+            & h4, & span, & small{
+                background: ${({theme})=>theme.outline};
+            }
+            & h4{width: 8rem; height: 1.25rem; margin-bottom: .25rem;}
+            & span{width: 5rem; height: 1rem; display: inline-flex;}
+            & small{width: 4rem; height: .75rem; display: inline-flex;}
+        }
+        & button{
+            align-self: flex-start;
+        }
+    }
+`;
 export const SkeletonPlans = () => {
     const SkeletonPlan = () => {
         return <Plan className="skeleton">
@@ -66,4 +100,20 @@ export const SkeletonInstalations = () => {
             </ul>
         </div>
     </Instalations>
+}
+export const SkeletonInscriptions = () => {
+    const User = () => {
+        return <li>
+            <img src="" alt="" />
+            <div>
+                <h4> </h4>
+                <span> </span><br />
+                <small> </small>
+            </div> 
+            <SkeletonBtn className="only-icon primary oncont"/>
+        </li>
+    }
+    return <SkeletonUsers className="skeleton">
+        <User/><User/><User/><User/>
+    </SkeletonUsers>
 }

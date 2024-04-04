@@ -58,7 +58,12 @@ const ModalStyled = styled.dialog`
 const Modal = ({controls, children, modalFunction, confirm, title, clean, type}) => {
     const {closeOutside, trigger, ref} = controls
     return <ModalStyled className={type || ""} onClick={(e) =>{closeOutside(e);}} ref={ref}>
-        <h2>{title} <Icon onClick={()=>{trigger()}} icon="close"/></h2>
+        <h2>{title} <Icon onClick={()=>{
+            trigger()
+            if(clean){
+                clean()
+            }
+        }} icon="close"/></h2>
         <section>
             {children}
         </section>

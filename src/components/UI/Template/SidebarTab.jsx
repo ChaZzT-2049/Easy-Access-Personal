@@ -14,9 +14,10 @@ const NavTab = styled(NavLink)`
     transition: all 300ms ease-in;
     cursor: pointer;
 
-    &:hover{
+    &:hover, &:focus{
         background: ${({theme}) => theme.primarycont};
         padding-left: .5rem;
+        outline: 2px solid ${({theme}) => theme.primary};
     }
     &.active{
         padding-left: .5rem;

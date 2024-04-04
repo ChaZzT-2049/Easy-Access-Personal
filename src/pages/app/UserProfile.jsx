@@ -118,8 +118,8 @@ const UserProfile = () =>{
                 loading={loadingDoc}
                 noData={{message: "No haz ingresado tus datos personales.", content: <Btn action="Agregar mis datos" colors="primary"/>}}
             >
-                <p><b>Nombre:</b> {document?.name}</p>
-                <p><b>Apellidos:</b> {document?.lastname}</p>
+                <p><b>Nombre:</b> {document?.name || "Sin nombre agregado"}</p>
+                <p><b>Apellidos:</b> {document?.lastname || "Sin apellidos agregados"}</p>
             </DisplayData>
         </UserData>
     </>

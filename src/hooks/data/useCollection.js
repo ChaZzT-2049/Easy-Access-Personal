@@ -41,7 +41,7 @@ const useCollection = (path, options, realTime = false) => {
 
     const createCollDoc = async(newData) => {
         return crud.create(newData).then(()=>{
-            if(!realTime){getCollection()}
+            if(realTime === false){getCollection()}
         }).catch((error)=>{
             setErrorColl(error)
         });
@@ -49,7 +49,7 @@ const useCollection = (path, options, realTime = false) => {
     
     const updateCollDoc = async (id, newData) => {
         return crud.update(id, newData).then(()=>{
-            if(!realTime){getCollection()}
+            if(realTime === false){getCollection()}
         }).catch((error)=>{
             setErrorColl(error)
         });
@@ -57,7 +57,7 @@ const useCollection = (path, options, realTime = false) => {
     
     const deleteCollDoc = async (id) => {
         return crud.destroy(id).then(()=>{
-            if(!realTime){getCollection()}
+            if(realTime === false){getCollection()}
         }).catch((error)=>{
             setErrorColl(error)
         });

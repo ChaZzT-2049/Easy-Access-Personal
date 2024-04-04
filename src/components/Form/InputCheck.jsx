@@ -8,13 +8,16 @@ const FieldCheck = styled(Field)`
 `;
 
 const InputCheck = ({label,placeholder,id,value, validate, error, message}) => {
-    return <FieldCheck>
-        <label htmlFor={id}><small>{label}</small></label>
-        <FieldInput className={error && "error"} id={id} type="checkbox" placeholder={placeholder} checked={value}
-            onChange={(e) => {validate(e.target.checked)}}
-            onBlur={(e)=>{validate(e.target.checked)}} 
-        />
-        {error && <small>{message}</small>}
-    </FieldCheck>
+    return <>
+        <FieldCheck>
+            <label htmlFor={id}>{label}</label>
+            <FieldInput className={error && "error"} id={id} type="checkbox" checked={value}
+                onChange={(e) => {validate(e.target.checked)}}
+                onBlur={(e)=>{validate(e.target.checked)}} 
+            />
+            {error && <small>{message}</small>}
+        </FieldCheck>
+        <small>{placeholder}</small>
+    </>
 }
 export default InputCheck

@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import useAppContext from "../../../hooks/app/useAppContext";
 import useAuth from "../../../hooks/app/useAuth";
 import SidebarTab from "./SidebarTab";
+import Btn from "../Button/Index";
 const AsideContainer = styled.dialog`
     background: ${({theme}) => theme.bg};
     transition: all 300ms ease-in-out;
@@ -72,11 +73,6 @@ const Head = styled.section`
     background: ${({theme}) => theme.primary};
     border-bottom: 3px solid ${({theme}) => theme.primary};
     color: ${({theme}) => theme.onprimary};
-
-    & i:hover{
-        background: ${({theme}) => theme.primary};
-        outline-style: solid;
-    }
     & h2{line-height: normal;}
 
     @media screen and (min-width: 0px) and (max-width: 480px) {
@@ -114,9 +110,10 @@ const NavBtn = styled.button`
     padding-right: .125rem;
     transition: all 300ms ease-in;
     cursor: pointer;
-    &:hover{
+    &:hover, &:focus{
         background: ${({theme}) => theme.primarycont};
         padding-left: .5rem;
+        outline: 2px solid ${({theme}) => theme.primary}
     }
 `;
 
@@ -161,7 +158,7 @@ const Sidebar = ({controls}) => {
     return <AsideContainer onClick={(e) =>{closeOutside(e)}} ref={ref}>
         <Aside>
             <Head>
-                <Icon onClick={()=>{trigger()}} icon="close" />
+                <Btn onClick={()=>{trigger()}} icon="close" type="only-icon" colors="primary" />
                 <h2>Menú</h2>
             </Head>
             <Content>
