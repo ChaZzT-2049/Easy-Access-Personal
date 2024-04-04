@@ -12,6 +12,7 @@ import Suscription from "../../pages/app/Suscription";
 import Panel from "../../pages/app/admin/Panel";
 import Instalation from "../../pages/app/admin/instalation/Dashboard";
 import InstalationUsers from "../../pages/app/admin/instalation/InstalationUsers";
+import AccessPoints from "../../pages/app/admin/instalation/AccessPoints";
 import NotFound from "../../pages/NotFound";
 
 import Loader from "../UI/Loader/Index";
@@ -24,6 +25,7 @@ import AuthContainer from "../Middleware/AuthContainer";
 import AppContainer from "../Middleware/AppContainer";
 import AdminContainer from "../Middleware/AdminContainer";
 import InstalationContainer from "../Middleware/InstalationContainer";
+
 
 
 const RouteList = () => {
@@ -50,6 +52,7 @@ const RouteList = () => {
             <Route path="instalation/:id/" element={<InstalationContainer/>}>
               <Route path="dashboard" element={<Instalation/>} />
               <Route path="users" element={<InstalationUsers/>} />
+              <Route path="access-points" element={<AccessPoints/>} />
             </Route>
           </Route>
         </Route>

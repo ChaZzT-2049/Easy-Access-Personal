@@ -51,6 +51,7 @@ export const AppProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
             setUser(currentUser)
             if(currentUser === null){
+                localStorage.setItem("uid","")
                 setAuth(false)
             }else{
                 localStorage.setItem("uid", currentUser.uid)
