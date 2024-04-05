@@ -19,9 +19,8 @@ const Actions = styled.section`
     gap: .5rem;
     flex-wrap: wrap;
     & h3{
-        flex: 0 1 170px;
+        flex: 0 1 150px;
         text-align: center;
-        white-space: pre-wrap;
     }
 `;
 const InstalationUsers = () => {

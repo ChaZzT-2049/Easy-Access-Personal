@@ -14,6 +14,7 @@ const UsersContainer = styled.ul`
     gap: .5rem;
     margin: 1rem 0;
     & li{
+        flex: 1 1 225px;
         position: relative;
         padding: 1rem;
         background: ${({theme})=>theme.surfacev};
@@ -21,12 +22,17 @@ const UsersContainer = styled.ul`
         display: flex;
         gap: 1rem;
         align-items: center;
+        max-width: 450px;
         & img{
             border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: ${({theme})=>theme.outline};
         }
         & div{
             padding-left: 1rem;
             border-left: 2px solid ${({theme})=>theme.primary};
+            flex-grow: 1;
         }
         & button{
             align-self: flex-start;

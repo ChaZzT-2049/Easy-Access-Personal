@@ -15,6 +15,7 @@ const ContextMenu = styled.dialog`
     border: none;
     padding: 0;
     z-index: 1;
+    box-shadow: -8px 8px 15px #0000004e;
     & button{
         padding: 1rem;
         width: 100%;
@@ -25,6 +26,11 @@ const ContextMenu = styled.dialog`
         border-top: 2px solid ${({theme}) => theme.outline};
         margin: 0;
     }
+    animation: scale-in 250ms ease forwards;
+    @keyframes scale-in {
+        from{scale: .5;} to{scale: 1;}
+    }
+
 `
 const Menu = ({children, cleanRef}) => {
     const menuRef = useRef(null)

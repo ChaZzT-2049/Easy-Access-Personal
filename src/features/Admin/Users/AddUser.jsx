@@ -67,7 +67,7 @@ const AddUser = ({instalation, action, id}) => {
                     <b>Nombres: </b>{newUser?.name || "Sin un nombre añadido"} .<br />
                     <b>Apellidos: </b>{newUser?.lastname || "Sin apellidos añadidos"} .
                 </div></>}
-            </UserResult>}label="Usuario" placeholder="Escribe el correo de un usuario" id="user" />
+            </UserResult>}label="Usuario" placeholder="Escribe el correo de un usuario" id="user" /><br />
             <Input disabled={true} value={instalation?.name} id="inst" label="Instalación" /><br />
             <Input {...type} label="Tipo de inscripción" id="type" 
             placeholder="Estudiante, personal, servicios, residente, etc."  /> <br />

@@ -12,16 +12,6 @@ const ModalStyled = styled.dialog`
     &::backdrop{
         background: #00000065;
     }
-    transition: all 300ms ease-in-out;
-
-    &[open]{
-        opacity: 1;
-        transform: translateY(0);
-    }
-    &[close]{
-        opacity: 0;
-        transform: translateY(-10rem);
-    }
     & h2{
         background: ${({theme}) => theme.primary};
         padding: 1rem;
@@ -52,6 +42,12 @@ const ModalStyled = styled.dialog`
         flex-wrap: wrap;
         padding: 1rem;
         border-top: 2px solid ${({theme}) => theme.outline};
+    }
+    &[open]{
+        animation: scale-in 250ms ease forwards;
+    }
+    @keyframes scale-in {
+        from{scale: .5;} to{scale: 1;}
     }
 `;
 

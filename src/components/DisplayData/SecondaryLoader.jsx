@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Loader = styled.div`
     color: ${({theme}) => theme.primarycont};
-    width: 90vw;
+    width: 92.5vw;
     height: 100%;
     margin: 0 auto;
     max-height: 650px;

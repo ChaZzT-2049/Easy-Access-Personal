@@ -63,7 +63,7 @@ const Instalation = () => {
     const navigate = useNavigate()
     const {id} = useParams()
     const {document, loadingDoc, errorDoc} = useDocument("instalations", id)
-    const {name, active, icon, city, users} = document || {name: "", active: true, icon: "villa", city: "", users: 0}
+    const {name, active, icon, city, users, points} = document || {name: "", active: true, icon: "villa", city: "", users: 0, points: 0}
     return <>
         <PageTitle>Administrar Instalación</PageTitle>
         <MainInfo>
@@ -81,14 +81,16 @@ const Instalation = () => {
                 </InfoCard>
                 <InfoCard>
                     <div className="info">
-                        <h1><b>3</b></h1>
+                        <h1><b>{points}</b></h1>
                         <span>Puntos de Acceso</span>
                     </div>
                     <div className="action">
-                        <Link to="/access-points">
+                        <button onClick={()=>{
+                            navigate(`/admin/instalation/${id}/access-points`, {state: {instalation: document}})
+                        }}>
                             Administrar <i className="material-icons">fact_check</i>
-                        </Link>
-                    </div>
+                        </button>
+                   </div>
                 </InfoCard>
                 <InfoCard>
                     <div className="info">

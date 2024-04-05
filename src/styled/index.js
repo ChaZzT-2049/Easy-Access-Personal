@@ -287,7 +287,7 @@ export const BaseBtn = styled.button`
         outline-width: 1px;
         outline-style: solid;
     }
-    @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem 1rem;}
+    @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem;}
     &.primary{
         background: ${({theme}) => theme.primary};
         color: ${({theme}) => theme.onprimary};
@@ -324,7 +324,6 @@ export const BaseBtn = styled.button`
             background: ${({theme}) => theme.secondarycont};
         }
     }
-    
     &.icon{
         display: flex;
         align-items: center;
@@ -341,7 +340,6 @@ export const BaseBtn = styled.button`
         font-size: 0px;
         width: min-content;
     }
-
     &:disabled{
         background: ${({theme}) => theme.outline};
         color: ${({theme}) => theme.surfacev};
@@ -507,6 +505,7 @@ export const Instalation = styled.li`
     color: ${({theme}) => theme.onsecondarycont};
     display: flex;
     flex: 1 1 250px;
+    max-width: 425px;
     justify-content: space-between;
     align-items: center;
     border-radius: .5rem;

@@ -12,6 +12,6 @@ export const authErrors = {
     defaulError: "Lo sentimos, hubo algun error. Intentalo mas tarde."
 }
 export const firestoreErrors = {
-    "Missing or insufficient permissions.": "La informacion no se encuentra disponible o no tienes los permisos suficientes.",
+    "Missing or insufficient permissions": "La informacion no se encuentra disponible o no tienes los permisos suficientes.",
     defaulError: "Lo sentimos, hubo algun error. Intentalo mas tarde."
 }
