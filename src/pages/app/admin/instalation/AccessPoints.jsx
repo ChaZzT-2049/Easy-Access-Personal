@@ -7,8 +7,9 @@ import { db } from "../../../../firebase/firebase"
 import useAppContext from "../../../../hooks/app/useAppContext"
 import useCollection from "../../../../hooks/data/useCollection"
 import {PageTitle} from "../../../../styled/index"
-import {useLocation, useParams, useNavigate} from "react-router-dom"
+import { useParams, useNavigate} from "react-router-dom"
 import styled from "styled-components"
+import useInstalationContex from "../../../../hooks/app/useInstalationContext"
 const Actions = styled.section`
     display: flex;
     align-items: center;
@@ -18,7 +19,7 @@ const Actions = styled.section`
 const AccessPoints = () => {
     const {appToast} = useAppContext()
     const navigate = useNavigate()
-    const {state} = useLocation()
+    const {instalation} = useInstalationContex()
     const {id} = useParams()
     const {collData, loadingColl, errorColl, createCollDoc, updateCollDoc} = useCollection("access-points", {whereParams: [
         {wField: "instID", op: "==", value: id}
@@ -26,7 +27,7 @@ const AccessPoints = () => {
     const addAction = async(data) =>{
         createCollDoc(data).then(()=>{
             appToast.success("Nuevo punto de acceso", "Acceso creado exitosamente")
-            setDoc(doc(db, "instalations", id), {points: state.instalation?.points + 1}, {merge: true})
+            setDoc(doc(db, "instalations", id), {points: instalation?.points + 1}, {merge: true})
         }).catch((e)=>{
             appToast.error("Hubo algun error", e.code)
         })
@@ -42,7 +43,7 @@ const AccessPoints = () => {
         <PageTitle>Puntos de Acceso</PageTitle>
         <Actions>
             <Btn onClick={()=>{navigate(`/admin/instalation/${id}/dashboard`)}} action="Panel" colors="primary" type="icon inverted" icon="arrow_back" />
-            <h3>Puntos de acceso {state?.instalation.name}</h3>
+            <h3>Puntos de acceso {instalation?.name}</h3>
         </Actions>
         <AddAccessPoint action={addAction} id={id} />
         <DisplayData data={collData} loading={loadingColl} error={errorColl} loader={<>Cargando</>} 

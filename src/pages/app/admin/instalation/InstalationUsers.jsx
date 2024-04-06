@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { PageTitle } from "../../../../styled";
 import Btn from "../../../../components/UI/Button/Index";
 import useCollection from "../../../../hooks/data/useCollection";
@@ -10,6 +10,7 @@ import useAppContext from "../../../../hooks/app/useAppContext";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 import { SkeletonInscriptions } from "../../../../components/UI/Skeletons/Index";
+import useInstalationContex from "../../../../hooks/app/useInstalationContext";
 
 const Actions = styled.section`
     & a{text-decoration: none;}
@@ -25,15 +26,15 @@ const Actions = styled.section`
 `;
 const InstalationUsers = () => {
     const {appToast} = useAppContext()
-    const {state} = useLocation()
+    const {instalation} = useInstalationContex()
     const {id} = useParams()
     const {collData, loadingColl, errorColl, createCollDoc, updateCollDoc} = useCollection("inscriptions", {whereParams: [
         {wField: "instID", op: "==", value: id}
     ]})
     const addUserAction = async(data) => {
         createCollDoc(data).then(()=>{
-            appToast.success("Usuario Agregado", `Se ha agregado el usuario a ${state.instalation.name}`)
-            setDoc(doc(db, "instalations", id), {users: state.instalation?.users + 1}, {merge: true})
+            appToast.success("Usuario Agregado", `Se ha agregado el usuario a ${instalation.name}`)
+            setDoc(doc(db, "instalations", id), {users: instalation?.users + 1}, {merge: true})
         }).catch((e)=>{
             appToast.error("Hubo algun error", e.code)
         })
@@ -56,8 +57,8 @@ const InstalationUsers = () => {
         <PageTitle>Administrar Usuarios</PageTitle>
         <Actions>
             <Link to={`/admin/instalation/${id}/dashboard`}><Btn action="Panel" colors="primary" type="icon inverted" icon="arrow_back" /></Link>
-            <h3>Usuarios de {state?.instalation.name}</h3>
-            <AddUser id={id} instalation={state?.instalation} action={addUserAction} />
+            <h3>Usuarios de {instalation?.name}</h3>
+            <AddUser id={id} instalation={instalation} action={addUserAction} />
         </Actions>
         <DisplayData data={collData} loading={loadingColl} error={errorColl} loader={<SkeletonInscriptions/>}
             noData={{message: "Sin usuarios.", content: "Agrega usuarios a la instalación"}}

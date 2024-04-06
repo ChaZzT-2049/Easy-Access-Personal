@@ -7,6 +7,7 @@ import {useParams, useNavigate} from "react-router-dom"
 import useAppContext from "../../../../hooks/app/useAppContext";
 import { addDoc, collection, doc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
+import useInstalationContex from "../../../../hooks/app/useInstalationContext";
 const ScannerWrapper = styled.section`
     box-sizing: border-box;
     position: relative;
@@ -33,7 +34,8 @@ const ScannerWrapper = styled.section`
 const AccessScanner = () => {
     const navigate = useNavigate()
     const {appLoader, appToast} = useAppContext()
-    const {id, point, state} = useParams()
+    const {instalation} = useInstalationContex()
+    const {id, point} = useParams()
     const colors = useTheme()
     const [cam, setCam] = useState("environment")
     const validateAccess = async(value) => {
@@ -59,8 +61,8 @@ const AccessScanner = () => {
             }
             addDoc(collection(db, "records"),newAccess).then(()=>{
                 appToast.success("Registro exitoso", "Se ha registrado el acceso")
-                setDoc(doc(db, "instalations", id), {points: state.instalation?.records + 1}, {merge: true})
-            }).catch(e=>appToast.error("Hubo algún error.", e.code))
+                setDoc(doc(db, "instalations", id), {points: instalation?.records + 1}, {merge: true})
+            }).catch((e)=>{appToast.error("Hubo algún error.", e.message)})
         }else{
             appToast.warning("Acceso no Autorizado", "El usuario no tiene permitido acceder a la instalación")
         }

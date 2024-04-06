@@ -86,7 +86,7 @@ const Instalation = () => {
                     </div>
                     <div className="action">
                         <button onClick={()=>{
-                            navigate(`/admin/instalation/${id}/access-points`, {state: {instalation: document}})
+                            navigate(`/admin/instalation/${id}/access-points`)
                         }}>
                             Administrar <i className="material-icons">fact_check</i>
                         </button>
@@ -99,7 +99,7 @@ const Instalation = () => {
                     </div>
                     <div className="action">
                         <button onClick={()=>{
-                            navigate(`/admin/instalation/${id}/users`, {state: {instalation: document}})
+                            navigate(`/admin/instalation/${id}/users`)
                         }}>
                             Administrar <i className="material-icons">fact_check</i>
                         </button>
@@ -113,7 +113,7 @@ const Instalation = () => {
                     </div>
                     <div className="action">
                         <button onClick={()=>{
-                            navigate(`/admin/instalation/${id}/records`, {state: {instalation: document}})
+                            navigate(`/admin/instalation/${id}/records`)
                         }}>
                             Ver más <i className="material-icons">open_in_new</i>
                         </button>

@@ -5,6 +5,7 @@ import { collection, doc, getDoc, getDocs, query, where } from "firebase/firesto
 import { db } from "../../firebase/firebase"
 import { useState, useLayoutEffect } from "react"
 import SecondaryLoader from "../DisplayData/SecondaryLoader"
+import { InstalationProvider } from "../../contexts/instalation"
 const getInstalation = async(id) => {
     let instalation
     await getDoc(doc(db, "instalations", id)).then((snap)=>{
@@ -57,12 +58,14 @@ const InstalationContainer = () => {
     if(loading){
         return <SecondaryLoader>Validando permisos</SecondaryLoader>
     }
-    return <Middleware redirect="/admin/panel" 
-        validacion={(id) && ((isNotOwner && (isNotMonitor || isMonitorInactive)) || isSuscriptionInactive)}
-        alert={appToast.warning}
-        message={isSuscriptionInactive ? "La suscripcion del dueño debe estar activa" : "No tienes permisos para administrar esta instalación"}
-    >
-        <Outlet />
-    </Middleware>
+    return <InstalationProvider>
+        <Middleware redirect="/admin/panel" 
+            validacion={(id) && ((isNotOwner && (isNotMonitor || isMonitorInactive)) || isSuscriptionInactive)}
+            alert={appToast.warning}
+            message={isSuscriptionInactive ? "La suscripcion del dueño debe estar activa" : "No tienes permisos para administrar esta instalación"}
+        >
+            <Outlet />
+        </Middleware>
+    </InstalationProvider>
 }
 export default InstalationContainer
