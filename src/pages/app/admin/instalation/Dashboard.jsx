@@ -81,7 +81,7 @@ const Instalation = () => {
                 </InfoCard>
                 <InfoCard>
                     <div className="info">
-                        <h1><b>{points}</b></h1>
+                        <h1><b>{points > 0 ? points : "0"}</b></h1>
                         <span>Puntos de Acceso</span>
                     </div>
                     <div className="action">
