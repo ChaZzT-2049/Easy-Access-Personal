@@ -112,9 +112,11 @@ const Instalation = () => {
                         <small>Hoy</small>
                     </div>
                     <div className="action">
-                        <Link to="/registers">
+                        <button onClick={()=>{
+                            navigate(`/admin/instalation/${id}/records`, {state: {instalation: document}})
+                        }}>
                             Ver más <i className="material-icons">open_in_new</i>
-                        </Link>
+                        </button>
                     </div>
                 </InfoCard>
                 <InfoCard>

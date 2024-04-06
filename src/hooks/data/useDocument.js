@@ -17,6 +17,13 @@ const useDocument = (path, id, realTime = false) => {
         });
         setDocument(fetchedData);
     },[crud])
+    const getRealtime = useCallback(()=>{
+        const ref = crud.getRef()
+        const unsubscribe = onSnapshot(ref, (snapshot) => {
+            setDocument(snapshot.data());
+        });
+        return () => unsubscribe();
+    },[crud])
     useEffect(()=>{
         if(document === null){
             getDocument()
@@ -24,13 +31,9 @@ const useDocument = (path, id, realTime = false) => {
     },[document, getDocument])
     useEffect(() => {
         if (realTime) {
-            const ref = crud.getRef()
-            const unsubscribe = onSnapshot(ref, (snapshot) => {
-                setDocument(snapshot.data());
-            });
-            return () => unsubscribe();
+            getRealtime()
         }
-    }, [realTime, crud]);
+    }, [realTime, getRealtime]);
     const updateDoc = async (newData) => {
         return crud.update(newData).then(()=>{
             if(!realTime) {getDocument()}

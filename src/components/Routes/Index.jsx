@@ -15,6 +15,7 @@ import InstalationUsers from "../../pages/app/admin/instalation/InstalationUsers
 import AccessPoints from "../../pages/app/admin/instalation/AccessPoints";
 import Inscription from "../../pages/app/user/Inscription";
 import AccessScanner from "../../pages/app/admin/instalation/AccessScaner";
+import Records from "../../pages/app/admin/instalation/Records";
 import NotFound from "../../pages/NotFound";
 
 import Loader from "../UI/Loader/Index";
@@ -27,9 +28,6 @@ import AuthContainer from "../Middleware/AuthContainer";
 import AppContainer from "../Middleware/AppContainer";
 import AdminContainer from "../Middleware/AdminContainer";
 import InstalationContainer from "../Middleware/InstalationContainer";
-
-
-
 
 const RouteList = () => {
   const {tema} = useAppContext();
@@ -59,7 +57,8 @@ const RouteList = () => {
               <Route path="dashboard" element={<Instalation/>} />
               <Route path="users" element={<InstalationUsers/>} />
               <Route path="access-points" element={<AccessPoints/>} />
-              <Route path="scanner" element={<AccessScanner/>} />
+              <Route path=":point/scanner" element={<AccessScanner/>} />
+              <Route path="records" element={<Records/>} />
             </Route>
           </Route>
         </Route>

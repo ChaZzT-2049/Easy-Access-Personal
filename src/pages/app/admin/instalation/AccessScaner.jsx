@@ -3,20 +3,23 @@ import Btn from "../../../../components/UI/Button/Index";
 import { PageTitle } from "../../../../styled";
 import { useState } from "react";
 import styled, {useTheme} from "styled-components"
-import {useParams} from "react-router-dom"
+import {useParams, useNavigate} from "react-router-dom"
 import useAppContext from "../../../../hooks/app/useAppContext";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, serverTimestamp, where } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 const ScannerWrapper = styled.section`
     box-sizing: border-box;
     position: relative;
-    & button{
+    & section{
+        width: 80%;
         position: absolute;
         top: 0;
         left: 50%;
         margin-top: 1rem;
         translate: -50%;
         z-index: 1;
+        display: flex;
+        justify-content: space-between;
     }
     @media screen and (min-width: 0px) and (max-width: 480px) {
         height: 70vh;
@@ -28,8 +31,9 @@ const ScannerWrapper = styled.section`
     
 `;
 const AccessScanner = () => {
-    const {appLoader} = useAppContext()
-    const {id} = useParams()
+    const navigate = useNavigate()
+    const {appLoader, appToast} = useAppContext()
+    const {id, point} = useParams()
     const colors = useTheme()
     const [cam, setCam] = useState("environment")
     const validateAccess = async(value) => {
@@ -43,19 +47,35 @@ const AccessScanner = () => {
             }))
             inscription = results[0]
         })
-        if(inscription){
-            console.log(inscription)
+        if(inscription && inscription.active){
+            const newAccess = {
+                userDisplay: inscription.userDisplay,
+                pointDisplay: inscription.instDisplay,
+                date: serverTimestamp(),
+                type: "Entrada",
+                userID: inscription.userID,
+                instID: id,
+                pointID: point,
+            }
+            addDoc(collection(db, "records"),newAccess).then(()=>{
+                appToast.success("Registro exitoso", "Se ha registrado el acceso")
+            }).catch(e=>appToast.error("Hubo algún error.", e.code))
         }else{
-            console.log("No tiene inscripcion")
+            appToast.warning("Acceso no Autorizado", "El usuario no tiene permitido acceder a la instalación")
         }
         appLoader.clearLoader()
     }
     return <>
         <PageTitle>Escanear Codigo QR</PageTitle>
         <ScannerWrapper>
-            <Btn colors="primary cont" type="icon" icon="camera" action={cam === "environment" ? "Trasera" : "Frontal"} onClick={()=>{
-                setCam((e)=> e === "environment" ? "face" : "environment")
-            }} />
+            <section>
+                <Btn colors="primary cont" type="icon inverted" icon="arrow_back" action="Volver" onClick={()=>{
+                    navigate(`/admin/instalation/${id}/access-points`)
+                }}/>
+                <Btn colors="primary" type="icon" icon="camera" action={cam === "environment" ? "Trasera" : "Frontal"} onClick={()=>{
+                    setCam((e)=> e === "environment" ? "face" : "environment")
+                }} />
+            </section>
             <QrScanner 
             resolution={800} 
             delay={3000} 

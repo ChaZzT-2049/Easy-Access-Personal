@@ -58,7 +58,7 @@ const InstalationContainer = () => {
         return <SecondaryLoader>Validando permisos</SecondaryLoader>
     }
     return <Middleware redirect="/admin/panel" 
-        validacion={(id) && ((isNotOwner && isNotMonitor) || isMonitorInactive || isSuscriptionInactive)}
+        validacion={(id) && ((isNotOwner && (isNotMonitor || isMonitorInactive)) || isSuscriptionInactive)}
         alert={appToast.warning}
         message={isSuscriptionInactive ? "La suscripcion del dueño debe estar activa" : "No tienes permisos para administrar esta instalación"}
     >

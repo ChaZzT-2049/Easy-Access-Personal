@@ -18,6 +18,19 @@ const useCollection = (path, options, realTime = false) => {
         setCollData(fetchedData);
     },[crud])
 
+    const getRealtime = useCallback(()=>{
+        const query = crud.getQuery();
+        const unsubscribe = onSnapshot(query, (snapshot) => {
+            const updatedCollection = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setCollData(updatedCollection);
+        });
+
+        return () => unsubscribe();
+    },[crud])
+
     useEffect(()=>{
         if(collData === null){
             getCollection()
@@ -26,18 +39,9 @@ const useCollection = (path, options, realTime = false) => {
 
     useEffect(() => {
         if (realTime) {
-            const query = crud.getQuery();
-            const unsubscribe = onSnapshot(query, (snapshot) => {
-                const updatedCollection = snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                setCollData(updatedCollection);
-            });
-
-            return () => unsubscribe();
+            getRealtime()
         }
-    }, [realTime, crud]);
+    }, [realTime, getRealtime]);
 
     const createCollDoc = async(newData) => {
         return crud.create(newData).then(()=>{

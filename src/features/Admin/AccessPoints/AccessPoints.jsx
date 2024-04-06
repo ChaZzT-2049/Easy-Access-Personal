@@ -38,7 +38,7 @@ const AccessPointsInstalation = ({data, editAction}) => {
                 <Btn action="Desactivar" colors="primary oncont" type="icon" icon="create" />
             </div>
             <div>
-                <Btn onClick={()=>{navigate(`/admin/instalation/${id}/scanner`)}} action="Escanear" colors="primary" type="icon" icon="qr_code" />
+                <Btn onClick={()=>{navigate(`/admin/instalation/${id}/${accesspoint.id}/scanner`)}} action="Escanear" colors="primary" type="icon" icon="qr_code" />
                 <Btn action="Registros" colors="primary oncont" type="icon" icon="create" />
             </div>
         </li>)}
