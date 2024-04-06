@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { PageTitle } from "../../styled/index"
-import Btn from "../../components/UI/Button/Index"
-import DisplayData from "../../components/DisplayData/Index"
-import useAppContext from "../../hooks/app/useAppContext"
-import Icon from "../../components/UI/Icon/Index"
-import useAuth from "../../hooks/app/useAuth"
-import useDocument from "../../hooks/data/useDocument"
+import { PageTitle } from "../../../styled/index"
+import Btn from "../../../components/UI/Button/Index"
+import DisplayData from "../../../components/DisplayData/Index"
+import useAppContext from "../../../hooks/app/useAppContext"
+import Icon from "../../../components/UI/Icon/Index"
+import useAuth from "../../../hooks/app/useAuth"
+import useDocument from "../../../hooks/data/useDocument"
 const AccountData = styled.section`
     display: flex;
     gap: 1rem;
@@ -89,7 +89,7 @@ const UserData = styled.section`
         }
     }
 `;
-const UserProfile = () =>{
+const Profile = () =>{
     const {user} = useAppContext()
     const {sendEmailToVerify} = useAuth()
     const {document, loadingDoc, errorDoc} = useDocument("users", localStorage.getItem("uid") || null)
@@ -124,4 +124,4 @@ const UserProfile = () =>{
         </UserData>
     </>
 }
-export default UserProfile
+export default Profile

@@ -54,16 +54,16 @@ const ModalStyled = styled.dialog`
 const Modal = ({controls, children, modalFunction, confirm, title, clean, type}) => {
     const {closeOutside, trigger, ref} = controls
     return <ModalStyled className={type || ""} onClick={(e) =>{closeOutside(e);}} ref={ref}>
-        <h2>{title} <Icon onClick={()=>{
+        {title && <h2>{title} <Icon onClick={()=>{
             trigger()
             if(clean){
                 clean()
             }
-        }} icon="close"/></h2>
+        }} icon="close"/></h2>}
         <section>
             {children}
         </section>
-        <div className="actions">
+        {modalFunction && confirm && <div className="actions">
             <Btn action="Cancelar" colors="primary" onClick={() => {
                 trigger()
                 if(clean){
@@ -71,7 +71,7 @@ const Modal = ({controls, children, modalFunction, confirm, title, clean, type})
                 }
             }} />
             <Btn action={confirm} colors="primary oncont" onClick={modalFunction} />
-        </div>
+        </div>}
     </ModalStyled>
 }
 export default Modal

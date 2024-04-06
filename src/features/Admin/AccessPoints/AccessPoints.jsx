@@ -1,6 +1,7 @@
 import Btn from "../../../components/UI/Button/Index";
 import isActive from "../../../utils/isActive";
 import styled from "styled-components"
+import {useNavigate, useParams} from "react-router-dom"
 const AccessContainer = styled.ul`
     display: flex;
     flex-wrap: wrap;
@@ -27,6 +28,8 @@ const AccessContainer = styled.ul`
     }
 `;
 const AccessPointsInstalation = ({data, editAction}) => {
+    const {id} = useParams()
+    const navigate = useNavigate()
     return <AccessContainer>{data && data.map(accesspoint => <li key={accesspoint.id}>
             <h4>{accesspoint.name} </h4>
             <b>{isActive(accesspoint.active, "Activo", "Inactivo")}</b>
@@ -35,7 +38,7 @@ const AccessPointsInstalation = ({data, editAction}) => {
                 <Btn action="Desactivar" colors="primary oncont" type="icon" icon="create" />
             </div>
             <div>
-                <Btn action="Escanear" colors="primary" type="icon" icon="qr_code" />
+                <Btn onClick={()=>{navigate(`/admin/instalation/${id}/scanner`)}} action="Escanear" colors="primary" type="icon" icon="qr_code" />
                 <Btn action="Registros" colors="primary oncont" type="icon" icon="create" />
             </div>
         </li>)}

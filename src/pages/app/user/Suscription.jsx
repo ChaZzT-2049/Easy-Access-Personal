@@ -1,13 +1,13 @@
-import { PageTitle, Plan, Plans, SuscriptionInfo } from "../../styled/index";
-import { SkeletonPlans, SkeletonSuscription } from "../../components/UI/Skeletons/Index";
-import DisplayData from "../../components/DisplayData/Index";
-import Btn from "../../components/UI/Button/Index"
-import useAppContext from "../../hooks/app/useAppContext";
-import useToggle from "../../hooks/useToggle";
-import useCollection from "../../hooks/data/useCollection";
-import useDocument from "../../hooks/data/useDocument";
-import isActive from "../../utils/isActive";
-import formatPrice from "../../utils/formatPrice";
+import { PageTitle, Plan, Plans, SuscriptionInfo } from "../../../styled/index";
+import { SkeletonPlans, SkeletonSuscription } from "../../../components/UI/Skeletons/Index";
+import DisplayData from "../../../components/DisplayData/Index";
+import Btn from "../../../components/UI/Button/Index"
+import useAppContext from "../../../hooks/app/useAppContext";
+import useToggle from "../../../hooks/useToggle";
+import useCollection from "../../../hooks/data/useCollection";
+import useDocument from "../../../hooks/data/useDocument";
+import isActive from "../../../utils/isActive";
+import formatPrice from "../../../utils/formatPrice";
 const Suscription = () =>{
     const {appToast} = useAppContext()
     const {toggle, trigger} = useToggle()

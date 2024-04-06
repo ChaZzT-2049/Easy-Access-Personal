@@ -175,8 +175,8 @@ const Sidebar = ({controls}) => {
                     <SidebarTab link="/" title="Notificaciones" icon="notifications" handleSidebar={trigger} />
                 </Section>
                 <Section>
-                    <SidebarTab link="/perfil" title="Perfil de Usuario" icon="account_circle" handleSidebar={trigger} />
-                    <SidebarTab link="/suscription" title="Suscripción" icon="credit_card" handleSidebar={trigger} />
+                    <SidebarTab link="/user/perfil" title="Perfil de Usuario" icon="account_circle" handleSidebar={trigger} />
+                    <SidebarTab link="/user/suscription" title="Suscripción" icon="credit_card" handleSidebar={trigger} />
                     <NavBtn onClick={() => {
                         localStorage.setItem("previous", location.pathname)
                         trigger()
