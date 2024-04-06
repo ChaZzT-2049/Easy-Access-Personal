@@ -5,7 +5,7 @@ import { useState } from "react";
 import styled, {useTheme} from "styled-components"
 import {useParams, useNavigate} from "react-router-dom"
 import useAppContext from "../../../../hooks/app/useAppContext";
-import { addDoc, collection, getDocs, query, serverTimestamp, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 const ScannerWrapper = styled.section`
     box-sizing: border-box;
