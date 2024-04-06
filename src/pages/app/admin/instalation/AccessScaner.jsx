@@ -33,7 +33,7 @@ const ScannerWrapper = styled.section`
 const AccessScanner = () => {
     const navigate = useNavigate()
     const {appLoader, appToast} = useAppContext()
-    const {id, point} = useParams()
+    const {id, point, state} = useParams()
     const colors = useTheme()
     const [cam, setCam] = useState("environment")
     const validateAccess = async(value) => {
@@ -59,6 +59,7 @@ const AccessScanner = () => {
             }
             addDoc(collection(db, "records"),newAccess).then(()=>{
                 appToast.success("Registro exitoso", "Se ha registrado el acceso")
+                setDoc(doc(db, "instalations", id), {points: state.instalation?.records + 1}, {merge: true})
             }).catch(e=>appToast.error("Hubo algún error.", e.code))
         }else{
             appToast.warning("Acceso no Autorizado", "El usuario no tiene permitido acceder a la instalación")

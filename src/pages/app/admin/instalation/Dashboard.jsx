@@ -63,7 +63,7 @@ const Instalation = () => {
     const navigate = useNavigate()
     const {id} = useParams()
     const {document, loadingDoc, errorDoc} = useDocument("instalations", id)
-    const {name, active, icon, city, users, points} = document || {name: "", active: true, icon: "villa", city: "", users: 0, points: 0}
+    const {name, active, icon, city, users, points, records} = document || {name: "", active: true, icon: "villa", city: "", users: 0, points: 0, records: 0}
     return <>
         <PageTitle>Administrar Instalación</PageTitle>
         <MainInfo>
@@ -107,7 +107,7 @@ const Instalation = () => {
                 </InfoCard>
                 <InfoCard>
                     <div className="info">
-                        <h1><b>600</b></h1>
+                        <h1><b>{records > 0 ? records : "0"}</b></h1>
                         <span>Registros</span>
                         <small>Hoy</small>
                     </div>
