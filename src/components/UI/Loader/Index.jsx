@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useRef, useLayoutEffect } from "react";
-import useAppContext from "../../../hooks/app/useAppContext";
 
 const Loading = styled.dialog`
     background: ${({theme}) => theme.onprimarycont};
