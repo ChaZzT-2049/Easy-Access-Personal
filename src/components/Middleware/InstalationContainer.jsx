@@ -4,8 +4,8 @@ import useAppContext from "../../hooks/app/useAppContext"
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
 import { db } from "../../firebase/firebase"
 import { useState, useLayoutEffect } from "react"
-import SecondaryLoader from "../DisplayData/SecondaryLoader"
 import { InstalationProvider } from "../../contexts/instalation"
+import Loader from "../UI/Loader/Index"
 const getInstalation = async(id) => {
     let instalation
     await getDoc(doc(db, "instalations", id)).then((snap)=>{
@@ -45,22 +45,20 @@ const InstalationContainer = () => {
         getInstalation(id).then((inst)=>{
             setIsnotO(inst.user !== localStorage.getItem("uid"))
             getSuscription(inst.user).then((sus) => {
-                setIsSuscriptionI(sus?.active !== true)
+                setIsSuscriptionI(sus !== undefined && sus?.active !== true)
             })
             getInscription(id, localStorage.getItem("uid")).then((insc) =>{
-                setIsnotM(insc !== undefined && insc.monitor !== true)
-                setIsMonitorI(insc !== undefined && insc.active !== true)
+                setIsnotM(insc === undefined ? true : insc?.monitor !== true)
+                setIsMonitorI(insc === undefined ? true : insc?.active !== true)
             }).finally(()=>{
                 setLoading(false)
             })
         })
     },[id])
-    if(loading){
-        return <SecondaryLoader>Validando permisos</SecondaryLoader>
-    }
-    return <InstalationProvider>
+    if(loading){ return <Loader message= "Validando Permisos"/>}
+    return <InstalationProvider> 
         <Middleware redirect="/admin/panel" 
-            validacion={(id) && ((isNotOwner && (isNotMonitor || isMonitorInactive)) || isSuscriptionInactive)}
+            validacion={((isNotOwner && (isNotMonitor || isMonitorInactive)) || isSuscriptionInactive)}
             alert={appToast.warning}
             message={isSuscriptionInactive ? "La suscripcion del dueño debe estar activa" : "No tienes permisos para administrar esta instalación"}
         >

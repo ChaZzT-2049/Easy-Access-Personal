@@ -30,9 +30,9 @@ import AdminContainer from "../Middleware/AdminContainer";
 import InstalationContainer from "../Middleware/InstalationContainer";
 
 const RouteList = () => {
-  const {tema} = useAppContext();
+  const {tema, loader} = useAppContext();
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
-    <Loader/>
+    <Loader message={loader}/>
     <Alerts/>
     <Router>
       <Routes>

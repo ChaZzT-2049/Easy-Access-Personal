@@ -7,7 +7,7 @@ import {useParams, useNavigate} from "react-router-dom"
 import useAppContext from "../../../../hooks/app/useAppContext";
 import { addDoc, collection, doc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
-import useInstalationContex from "../../../../hooks/app/useInstalationContext";
+import useInstalationContext from "../../../../hooks/app/useInstalationContext";
 const ScannerWrapper = styled.section`
     box-sizing: border-box;
     position: relative;
@@ -34,7 +34,7 @@ const ScannerWrapper = styled.section`
 const AccessScanner = () => {
     const navigate = useNavigate()
     const {appLoader, appToast} = useAppContext()
-    const {instalation} = useInstalationContex()
+    const {instalation} = useInstalationContext()
     const {id, point} = useParams()
     const colors = useTheme()
     const [cam, setCam] = useState("environment")

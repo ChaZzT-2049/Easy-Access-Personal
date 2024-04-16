@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { InstalationContext } from "../../contexts/instalation";
 
-const useInstalationContex = () => {
+const useInstalationContext = () => {
     const instContext = useContext(InstalationContext);
     return instContext
 }
 
-export default useInstalationContex;
+export default useInstalationContext;

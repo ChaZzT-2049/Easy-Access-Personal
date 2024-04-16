@@ -72,13 +72,12 @@ const Spinner = styled.section`
     }
 `;
 
-const Loader = () => {
-    const {loader} = useAppContext()
+const Loader = ({message}) => {
     const loaderRef = useRef(null)
 
     useLayoutEffect(() => {
         const handleLoad = () =>{
-            loader.length > 0 ? loaderRef.current.showModal() : loaderRef.current.close();
+            message.length > 0 ? loaderRef.current.showModal() : loaderRef.current.close();
             loaderRef.current.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape') {
                   event.preventDefault();
@@ -87,10 +86,10 @@ const Loader = () => {
         }
         handleLoad();
         loaderRef.current.removeEventListener("keydown", handleLoad)
-    },[loader])
+    },[message])
     return <Loading ref={loaderRef} >
         <Spinner />
-        <h4>{loader}</h4>
+        <h4>{message}</h4>
     </Loading>
 }
 
