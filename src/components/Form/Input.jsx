@@ -1,4 +1,4 @@
-import { Field, FieldInput } from "../../styled/index"
+import { Field, FieldInput } from "../../styled/form"
 const Input = ({label,type,placeholder,id,value, validate, error, message, confirm, disabled}) => {
     return <Field>
         <label htmlFor={id}>{label}</label>

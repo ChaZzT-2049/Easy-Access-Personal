@@ -1,4 +1,6 @@
-import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, FormResponse } from "../../styled/index";
+import { Header, NavHeader } from "../../styled/index";
+import {SignIUContainer, SignIUCard, SignIUCardLeft, SignIUCardRight, SignIUFooter} from "../../styled/signInUp";
+import { FormFields, FormResponse} from "../../styled/form";
 import Logo from "../../components/UI/Logo/Index";
 import Input from "../../components/Form/Input";
 import InputPass from "../../components/Form/InputPass";

@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import styled, { useTheme } from "styled-components";
 import { Header, NavHeader, Banner, SectionBg, Container } from "../styled/index";
 import Logo from "../components/UI/Logo/Index";
@@ -6,13 +7,13 @@ import banner from "../assets/img/landing/places-cover-min.webp"
 import logo from "../assets/img/logo.png"
 import Icon from "../components/UI/Icon/Index";
 import Btn from "../components/UI/Button/Index";
-import Slider from "../components/UI/Slider/Index";
 
 import { clients, features, planes } from "../datoswelcome";
 import { Link, useNavigate } from "react-router-dom";
 
 import useToggle from "../hooks/useToggle";
 import useAppContext from "../hooks/app/useAppContext";
+const Slider = lazy(()=> import("../components/UI/Slider/Index"))
 
 const PageContainer = styled(Container)`
     & .center{
@@ -271,7 +272,7 @@ const Welcome = () => {
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
                         <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Aditum Delta el acceso es facil y seguro.</h3>
                         <div>
-                            <Btn onClick={() => {navigate("/register")}} colors="primary" action="Comenzar" />
+                            <Btn onClick={() => {navigate("/auth/register")}} colors="primary" action="Comenzar" />
                         </div>
                     </div>
                     <div className="img">
@@ -320,7 +321,9 @@ const Welcome = () => {
                         <p>Crea ahora una cuenta en Aditum Delta y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
                     </div>
                 </section>
-                <Slider datos={features}/>
+                <Suspense fallback={<h2>Cargando Features...</h2>}>
+                    <Slider datos={features}/>
+                </Suspense>
             </section>
             <section>
                 <section className="center">
@@ -347,7 +350,7 @@ const Welcome = () => {
                                     <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
                                 )}
                             </ul>
-                            <Btn onClick={() => {navigate("/suscription")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
+                            <Btn onClick={() => {navigate("/user/suscription")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
                         </li>
                     )}
                 </Planes>

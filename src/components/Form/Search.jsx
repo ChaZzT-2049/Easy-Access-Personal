@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Field, FieldInput } from "../../styled"
+import { Field, FieldInput } from "../../styled/form"
 import Icon from "../UI/Icon/Index";
 const SearchContainer = styled.div`
     display: flex;

@@ -1,22 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
-
-import Welcome from "../../pages/Welcome"
-import AccountVerifyReset from "../../pages/AccountVerifyReset";
-import Login from "../../pages/auth/Login";
-import Register from "../../pages/auth/Register";
-import ForgotPassword from "../../pages/auth/ForgotPassword";
-import Home from "../../pages/app/Home";
-import Asignaciones from "../../pages/app/Asignaciones";
-import Profile from "../../pages/app/user/Profile";
-import Suscription from "../../pages/app/user/Suscription";
-import Panel from "../../pages/app/admin/Panel";
-import Instalation from "../../pages/app/admin/instalation/Dashboard";
-import InstalationUsers from "../../pages/app/admin/instalation/InstalationUsers";
-import AccessPoints from "../../pages/app/admin/instalation/AccessPoints";
-import Inscription from "../../pages/app/user/Inscription";
-import AccessScanner from "../../pages/app/admin/instalation/AccessScaner";
-import Records from "../../pages/app/admin/instalation/Records";
-import NotFound from "../../pages/NotFound";
+import {lazy, Suspense} from "react"
 
 import Loader from "../UI/Loader/Index";
 import Alerts from "../UI/Alerts/Index";
@@ -29,6 +12,25 @@ import AppContainer from "../Middleware/AppContainer";
 import AdminContainer from "../Middleware/AdminContainer";
 import InstalationContainer from "../Middleware/InstalationContainer";
 
+const Welcome = lazy(() => import("../../pages/Welcome"))
+const Login = lazy(() => import("../../pages/auth/Login"))
+const Register = lazy(() => import("../../pages/auth/Register"))
+const ForgotPassword = lazy(() => import("../../pages/auth/ForgotPassword"))
+const Terms = lazy(() => import("../../pages/Terms"))
+const AccountVerifyReset = lazy(() => import("../../pages/auth/Login"))
+const Home = lazy(() => import("../../pages/app/Home"))
+const Asignaciones = lazy(() => import("../../pages/app/Asignaciones"))
+const Profile = lazy(() => import("../../pages/app/user/Profile"))
+const Suscription = lazy(() => import("../../pages/app/user/Suscription"))
+const Inscription = lazy(() => import("../../pages/app/user/Inscription"))
+const Panel = lazy(() => import("../../pages/app/admin/Panel"))
+const Instalation = lazy(() => import("../../pages/app/admin/instalation/Dashboard"))
+const InstUsers = lazy(() => import("../../pages/app/admin/instalation/InstUsers"))
+const AccessPoints = lazy(() => import("../../pages/app/admin/instalation/AccessPoints"))
+const AccessScanner = lazy(() => import("../../pages/app/admin/instalation/AccessScaner"))
+const Records = lazy(() => import("../../pages/app/admin/instalation/Records"))
+const NotFound = lazy(() => import("../../pages/NotFound"))
+
 const RouteList = () => {
   const {tema, loader} = useAppContext();
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
@@ -36,13 +38,14 @@ const RouteList = () => {
     <Alerts/>
     <Router>
       <Routes>
-        <Route path="/welcome" element={ <Welcome/> }/>
+        <Route path="/welcome" element={<Suspense fallback={<h1>Cargando...</h1>}><Welcome/></Suspense>}/>
         <Route path="/auth/" element={<AuthContainer/>}>
           <Route path="login" element={<Login/>} />
           <Route path="register" element={<Register/>}/>
           <Route path="forgot-password" element={ <ForgotPassword/> }/>
         </Route>
-        <Route path="/account-verify-reset" element={<AccountVerifyReset/>}/>
+        <Route path="/terms" element={<Suspense fallback={<h1>Cargando...</h1>}><Terms/></Suspense>}/>
+        <Route path="/account-verify-reset" element={<Suspense fallback={<h1>Cargando...</h1>}><AccountVerifyReset/></Suspense>}/>
         <Route path="/" element={<AppContainer />}>
           <Route path="home" element={<Home/>}/>
           <Route path="asignaciones" element={<Asignaciones/>}/>
@@ -55,14 +58,14 @@ const RouteList = () => {
             <Route path="panel" element={<Panel />}/>
             <Route path="instalation/:id/" element={<InstalationContainer/>}>
               <Route path="dashboard" element={<Instalation/>} />
-              <Route path="users" element={<InstalationUsers/>} />
+              <Route path="users" element={<InstUsers/>} />
               <Route path="access-points" element={<AccessPoints/>} />
               <Route path=":point/scanner" element={<AccessScanner/>} />
               <Route path="records" element={<Records/>} />
             </Route>
           </Route>
         </Route>
-        <Route path="*" element={<NotFound />}/> 
+        <Route path="*" element={<Suspense fallback={<h1>Cargando...</h1>}><NotFound /></Suspense>}/> 
       </Routes>
     </Router>
   </ThemeProvider>

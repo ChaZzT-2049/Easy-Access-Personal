@@ -1,4 +1,4 @@
-import { PageTitle, Plan, Plans, SuscriptionInfo } from "../../../styled/index";
+import { PageTitle } from "../../../styled/index";
 import { SkeletonPlans, SkeletonSuscription } from "../../../components/UI/Skeletons/Index";
 import DisplayData from "../../../components/DisplayData/Index";
 import Btn from "../../../components/UI/Button/Index"
@@ -8,6 +8,131 @@ import useCollection from "../../../hooks/data/useCollection";
 import useDocument from "../../../hooks/data/useDocument";
 import isActive from "../../../utils/isActive";
 import formatPrice from "../../../utils/formatPrice";
+import styled from "styled-components";
+export const Plans = styled.section`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    & :nth-child(1){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.onsurfv};
+            color: ${({theme}) => theme.surfacev};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.outline};
+            color: ${({theme}) => theme.surfacev};
+        }
+        &.skeleton{transition-delay: 200ms;}
+    }
+    & :nth-child(2){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.secondary};
+            color: ${({theme}) => theme.onsecondary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.secondarycont};
+            color: ${({theme}) => theme.onsecondarycont};
+        }
+        &.skeleton{transition-delay: 400ms;}
+    }
+    & :nth-child(3){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.primary};
+            color: ${({theme}) => theme.onprimary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.primarycont};
+            color: ${({theme}) => theme.onprimarycont};
+        }
+        &.skeleton{transition-delay: 600ms;}
+    }
+    & :nth-child(4){
+        & h4, .selector li.selected{
+            background-color: ${({theme}) => theme.onprimarycont};
+            color: ${({theme}) => theme.onprimary};
+        }
+        & .selector li{
+            background-color: ${({theme}) => theme.primarycont};
+            color: ${({theme}) => theme.onprimarycont};
+        }
+        &.skeleton{transition-delay: 800ms;}
+    }
+`;
+export const Plan = styled.div`
+    flex: 0 1 325px;
+    background-color: ${({theme}) => theme.surfacev};
+    text-align: center;
+    & h4{
+        padding: .5rem;
+        border-radius: .25rem;
+        margin-bottom: .5rem;
+    }
+    & .selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .5rem 0;
+        & li{
+            padding: .5rem 2rem;
+            transition: all 200ms ease-in;
+            cursor: pointer;
+        }
+    }
+    & .discount{
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        font-weight: 300;
+        transition: opacity 300ms ease, font-weight 300ms ease;
+        color: ${({theme}) => theme.onprimarycont};
+        &.visible{
+            opacity: 1;
+            font-weight: 700;
+        }
+    }
+    & .features{
+        padding: .5rem 1rem;
+    }
+    & .features li{
+        text-align: left;
+        margin-bottom: .5rem;
+        &::first-letter{text-transform: uppercase;}
+        &::after{content:"."}
+    }
+    & button{
+        margin-bottom: 1rem;
+    }
+    &.skeleton{
+        & h4{height: 1.125rem;}& h2{height: 1.25rem; width: 50%; margin-inline: auto;}
+        & h2, .features li{
+            background-color: ${({theme}) => theme.onsurfv};
+        }
+        .selector li{height: 1rem;width: 2rem;}
+        & .features li{height: 1rem;width: 60%; &:last-child{width: 40%;}}
+    }
+`;
+export const SuscriptionInfo = styled.div`
+    padding: 1rem;
+    border-radius: .5rem;
+    transition: background-color 200ms ease;
+    margin: 1rem auto;
+    max-width: 600px;
+    &.active{
+        background: ${({theme}) => theme.primarycont};
+        color: ${({theme}) => theme.onprimarycont};
+    }
+    &.inactive{
+        background: ${({theme}) => theme.outline};
+        color: ${({theme}) => theme.surfacev};
+    }
+    &.skeleton{
+        background: ${({theme}) => theme.surfacev};
+        & h3, p{width: 25%; height: 1rem; background: ${({theme}) => theme.onsurfv}; margin-bottom: .5rem;}
+    }
+`;
 const Suscription = () =>{
     const {appToast} = useAppContext()
     const {toggle, trigger} = useToggle()

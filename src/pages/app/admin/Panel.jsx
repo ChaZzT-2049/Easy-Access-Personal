@@ -1,4 +1,5 @@
-import { Instalations, PageTitle } from "../../../styled"
+import { PageTitle } from "../../../styled"
+import { Instalations } from "../../../styled/instalation"
 import { SkeletonInstalations } from "../../../components/UI/Skeletons/Index"
 import DisplayData from "../../../components/DisplayData/Index"
 import useAppContext from "../../../hooks/app/useAppContext"

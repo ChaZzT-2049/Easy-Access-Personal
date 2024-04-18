@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Instalation } from "../../styled/index"
+import { Instalation } from "../../styled/instalation"
 import useDialog from "../../hooks/useDialog"
 import InstalationEdit from "./InstalationEdit"
 import InstalationContext from "../../components/Menu/ContextMenu"

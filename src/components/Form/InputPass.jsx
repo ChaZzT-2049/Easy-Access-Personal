@@ -1,4 +1,4 @@
-import { Field, FieldInput } from "../../styled/index"
+import { Field, FieldInput } from "../../styled/form"
 import Icon from "../UI/Icon/Index"
 import styled from "styled-components"
 import useToggle from "../../hooks/useToggle";

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Instalation } from "../../../styled/index"
+import { Instalation } from "../../../styled/instalation"
 import useDialog from "../../../hooks/useDialog"
 import useInput from "../../../hooks/form/useInput"
 import useSelect from "../../../hooks/form/useSelect"

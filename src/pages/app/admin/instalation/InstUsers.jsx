@@ -24,7 +24,7 @@ const Actions = styled.section`
         text-align: center;
     }
 `;
-const InstalationUsers = () => {
+const InstUsers = () => {
     const {appToast} = useAppContext()
     const {instalation} = useInstalationContex()
     const {id} = useParams()
@@ -67,4 +67,4 @@ const InstalationUsers = () => {
         </DisplayData>
     </>
 }
-export default InstalationUsers; 
+export default InstUsers; 

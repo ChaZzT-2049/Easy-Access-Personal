@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Field } from "../../styled/index";
+import { Field } from "../../styled/form";
 import Icon from "../UI/Icon/Index";
 
 const InputSelect = styled.button`

@@ -2,22 +2,22 @@ import Topbar from "./Topbar"
 import Sidebar from "./Sidebar";
 import Bottombar from "./Bottombar";
 import Options from "./Options";
-import {MainContainer} from "../../../styled/index"
+import { MainContainer} from "../../../styled/index"
 import useDialog from "../../../hooks/useDialog";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
+import Loader from "../Loader/Index";
 const AppTemplate = () => {
     const options = useDialog()
     const sidebar = useDialog()
-    const location = useLocation()
-    if(location.pathname === "/"){
-        return <Navigate to="/home" />
-    }
     return <>
         <Topbar handleSidebar={sidebar.trigger} handleOptions={options.trigger}/>
         <Options controls={options}/>
         <Sidebar controls={sidebar}/>
         <MainContainer>
-            <Outlet/>
+            <Suspense fallback={<Loader message="Cargando" />}>
+                <Outlet/>
+            </Suspense>
         </MainContainer>
         <Bottombar/>
     </>

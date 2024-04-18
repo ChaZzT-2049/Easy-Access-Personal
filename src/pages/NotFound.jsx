@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Header, MainContainer, SignIUFooter } from "../styled/index";
+import { Header, MainContainer } from "../styled/index";
+import {SignIUFooter} from "../styled/signInUp";
 import Logo from "../components/UI/Logo/Index";
 import styled from "styled-components";
 import Btn from "../components/UI/Button/Index";

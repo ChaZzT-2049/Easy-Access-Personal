@@ -1,4 +1,6 @@
-import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, InputColum, FormResponse } from "../../styled/index";
+import { Header, NavHeader } from "../../styled/index";
+import {SignIUContainer, SignIUCard, SignIUCardLeft, SignIUCardRight, SignIUFooter} from "../../styled/signInUp";
+import { FormFields, FormResponse, InputColum} from "../../styled/form";
 import Logo from "../../components/UI/Logo/Index";
 import Input from "../../components/Form/Input";
 import InputPass from "../../components/Form/InputPass";
@@ -67,7 +69,7 @@ const Register = () => {
                             <Input {...email} label="Correo" id="correo" placeholder="Escribe tu correo electronico" />
                             <InputPass {...pass} label="Contraseña" id="contra" placeholder="Escribe una contraseña"/>
                             <InputPass confirm={pass.value} {...passconf} label="Confirmar Contraseña" id="contraC" placeholder="Confirma la contraseña"/>
-                            <InputCheck {...terms} id="terms" label="He leído y acepto los términos y condiciones."/>
+                            <InputCheck {...terms} id="terms" placeholder={<Link to="/terms">Ver terminos y Condiciones</Link>} label="He leído y acepto los términos y condiciones."/>
                         </FormFields>
                         <Btn colors="primary" action="Crear Cuenta" />
                         <span>¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>.</span>

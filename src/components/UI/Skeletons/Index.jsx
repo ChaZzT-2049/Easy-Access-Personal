@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { Instalation, Instalations, Plan, Plans, SuscriptionInfo, BaseBtn } from "../../../styled/index";
+import { Instalation, Instalations } from "../../../styled/instalation";
+import {Plan, Plans, SuscriptionInfo} from "../../../pages/app/user/Suscription"
+import { BaseBtn } from "../Button/Index";
 const SkeletonBtn = styled(BaseBtn)`
     width: 5rem;
     height: 1rem;

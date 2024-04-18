@@ -1,4 +1,6 @@
-import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../styled/index";
+import { Header, Container} from "../styled/index";
+import {SignIUCard, CardContent, SignIUFooter} from "../styled/form";
+import {FormResponse} from "../styled/form";
 import InputPass from "../components/Form/InputPass";
 import { validatePass } from "../utils/validations";
 import Btn from "../components/UI/Button/Index";
