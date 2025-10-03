@@ -2,6 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## 🆕 Nuevas Funcionalidades
+
+Este proyecto ha sido mejorado con nuevas funcionalidades para el control de acceso:
+
+- ✅ **Sistema de Entrada/Salida** - Registra tanto entradas como salidas
+- ✅ **Cálculo de Duración** - Calcula tiempo de permanencia automáticamente
+- ✅ **Exportación a CSV** - Exporta reportes para análisis
+- ✅ **Historial Personal** - Los usuarios pueden ver su historial de accesos
+- ✅ **Estadísticas Mejoradas** - Dashboard con métricas en tiempo real
+
+**📖 Documentación:**
+- [Guía de Uso](./GUIA_USO.md) - Cómo usar las nuevas funcionalidades
+- [Documentación Técnica](./NUEVAS_FUNCIONALIDADES.md) - Detalles técnicos de implementación
+
 ## Available Scripts
 
 In the project directory, you can run:
