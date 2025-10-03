@@ -59,8 +59,8 @@ export const features = [
     {
         id: 2,
         img: buildaccess,
-        titulo: "Registra los accesos de una instalación.",
-        descripcion: "La gestión de accesos es eficaz y facil de integrar en tus instalaciones, si no deseas invertir en infraestructura, realiza escaneos en cualquier dispositivo."
+        titulo: "Registra entradas y salidas de una instalación.",
+        descripcion: "La gestión de accesos es eficaz y facil de integrar. Registra tanto entradas como salidas para calcular el tiempo de permanencia en las instalaciones."
     },
     {
         id: 3,
@@ -77,8 +77,8 @@ export const features = [
     {
         id: 5,
         img: analitics,
-        titulo: "Revisa estadisticas sobre tus instalaciones.",
-        descripcion: "Brindamos herramientas e información de interés que facilita la gestión de instalaciones de manera rápida."
+        titulo: "Revisa estadisticas sobre tus instalaciones con análisis de duración.",
+        descripcion: "Brindamos herramientas e información de interés que facilita la gestión de instalaciones. Exporta reportes y analiza tiempos de permanencia."
     }
 ]
 
@@ -95,6 +95,7 @@ export const planes = [
             {feature: "obtenen QRs de acceso"},
             {feature: "agrega vehiculos"},
             {feature: "recibe alertas"},
+            {feature: "consulta historial de accesos"},
         ],
         action: "Crear Cuenta",
         icon: "account_box"
@@ -109,8 +110,9 @@ export const planes = [
         features: [
             {feature: "administra una instalacion"},
             {feature: "gestiona hasta 200 usuarios"},
-            {feature: "escaneo de QRs"},
+            {feature: "escaneo de QRs con entrada/salida"},
             {feature: "filtra Registros"},
+            {feature: "exporta reportes a CSV"},
         ],
         action: "Contratar Ahora",
         icon: "add_card"
@@ -126,7 +128,8 @@ export const planes = [
             {feature: "administra hasta 4 instalaciones"},
             {feature: "gestiona hasta 800 usuarios"},
             {feature: "maneja 400 invitados/clientes"},
-            {feature: "obten estadísticas"},
+            {feature: "obten estadísticas con duración"},
+            {feature: "exporta reportes avanzados"},
         ],
         action: "Contratar Ahora",
         icon: "add_card"
@@ -143,6 +146,7 @@ export const planes = [
             {feature: "gestion ilimitada de usuarios"},
             {feature: "invitados/clientes ilimitados"},
             {feature: "integración con tecnologías"},
+            {feature: "análisis avanzado de permanencia"},
         ],
         action: "Contratar Ahora",
         icon: "add_card"
