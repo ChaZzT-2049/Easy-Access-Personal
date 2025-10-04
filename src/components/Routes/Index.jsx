@@ -23,6 +23,7 @@ const Asignaciones = lazy(() => import("../../pages/app/Asignaciones"))
 const Profile = lazy(() => import("../../pages/app/user/Profile"))
 const Suscription = lazy(() => import("../../pages/app/user/Suscription"))
 const Inscription = lazy(() => import("../../pages/app/user/Inscription"))
+const AccessHistory = lazy(() => import("../../pages/app/user/AccessHistory"))
 const Panel = lazy(() => import("../../pages/app/admin/Panel"))
 const Instalation = lazy(() => import("../../pages/app/admin/instalation/Dashboard"))
 const InstUsers = lazy(() => import("../../pages/app/admin/instalation/InstUsers"))
@@ -53,6 +54,7 @@ const RouteList = () => {
             <Route path="perfil" element={<Profile/>}/>
             <Route path="suscription" element={<Suscription/>}/>
             <Route path="inscription/:id/" element={<Inscription/>}/>
+            <Route path="historial" element={<AccessHistory/>}/>
           </Route>
           <Route path="admin/" element={<AdminContainer/>}>
             <Route path="panel" element={<Panel />}/>
